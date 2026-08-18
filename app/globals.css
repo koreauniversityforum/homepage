@@ -8,3 +8,92 @@ footer{background:#0c1c32;color:white;padding:64px max(24px,calc((100vw - 1180px
 @media(max-width:900px){.desktop-nav,.desktop-search{display:none}.menu-button{display:grid}.mobile-nav{display:flex;position:absolute;top:70px;left:16px;right:16px;padding:12px;flex-direction:column;background:white;border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 50px rgba(24,53,94,.15)}.mobile-nav a{padding:13px 12px;font-size:14px;font-weight:800}.hero{min-height:auto;padding-top:74px;padding-bottom:72px;grid-template-columns:1fr}.hero-visual{height:390px;margin-top:30px}.card-main{right:8%}.club-grid{grid-template-columns:1fr 1fr}.two-column{grid-template-columns:1fr;gap:38px}.about-content{grid-template-columns:.6fr 1.4fr;padding:46px}.about-number{font-size:130px}.footer-links{gap:35px}}
 @media(max-width:620px){.site-header{height:68px;padding:0 18px}.brand-mark{width:34px;height:34px;font-size:17px}.brand strong{font-size:17px}.login-button{width:40px;padding:0;justify-content:center;font-size:0}.mobile-nav{top:62px}.hero{padding:62px 20px 56px}.eyebrow{font-size:10px}.hero h1{font-size:42px}.hero-copy{font-size:15px}.desktop-break{display:none}.hero-actions{flex-direction:column}.primary-button,.secondary-button{width:100%}.trust-row{gap:15px;justify-content:space-between}.trust-row span{flex-direction:column;gap:2px}.trust-row strong{font-size:16px}.hero-visual{height:330px}.card-main{height:250px;width:88%;right:4%;top:38px;padding:26px;border-radius:27px}.card-main h3{margin:31px 0 38px;font-size:24px}.card-note{top:16px;left:-2px;padding:12px}.card-date{bottom:20px;padding:12px}.card-note small,.card-date small{display:none}.section{padding:76px 20px}.section-heading{align-items:flex-start}.section-heading .text-link{display:none}.section h2,.about-section h2{font-size:30px}.club-grid{grid-template-columns:1fr}.club-cover{height:145px}.club-card p{min-height:auto}.two-column{gap:32px}.post-list{padding:13px 18px}.post-item{grid-template-columns:40px 1fr 16px;gap:9px}.post-item strong{font-size:12px}.event-item{grid-template-columns:65px 1fr 38px;gap:12px;padding:20px 0}.event-date strong{font-size:29px}.event-info h3{font-size:15px}.event-item button{width:36px;height:36px}.about-section{padding:0 20px 76px}.about-content{min-height:400px;padding:38px 28px;display:block}.about-number{display:block;font-size:105px;margin-bottom:30px}.about-content div>p:last-child{font-size:13px}.cta-section{margin:0 20px 60px;padding:34px 24px;align-items:flex-start;flex-direction:column;gap:26px}.cta-section h2{font-size:23px}.white-button{width:100%}footer{padding-top:48px}.footer-main{flex-direction:column}.footer-links{display:grid;grid-template-columns:1fr 1fr;gap:30px}.footer-bottom{flex-direction:column;gap:8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* ══ 소식(공지·목록·상세) · 뉴보대 줄 · 로고 ══════════════════════════════ */
+
+/* 로고 — 기존 '한' 글자 마크 자리를 실제 심벌로 바꾼다.
+   🔴 심벌이 남색이라 어두운 바닥에서는 묻힌다. 그때만 흰 판을 깔아 준다. */
+img.brand-mark{width:38px;height:38px;border-radius:0;background:none;box-shadow:none;transform:none;object-fit:contain;display:block}
+img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.desktop-nav a[aria-current="page"]{color:var(--blue)}
+
+/* 소식 머리 — 소식 화면 전용 */
+.page-head{max-width:1180px;margin:0 auto;padding:64px 24px 10px}
+.page-head h1{margin:0;font-size:clamp(31px,3.8vw,46px);line-height:1.22;letter-spacing:-.055em}
+.page-head>p:last-child{margin:16px 0 0;max-width:52ch;color:var(--muted);font-size:14px;line-height:1.8}
+
+/* 공지 한 건 + 최근 글 목록 */
+.notice-band{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:start}
+.notice-card{
+  display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:center;
+  padding:22px;border:1px solid var(--line);border-radius:24px;background:white;
+  transition:transform .2s,box-shadow .2s;
+}
+.notice-card:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(30,61,102,.12)}
+/* 🔴 격자 칸은 기본이 min-width:auto 라, 안에 든 사진의 원래 가로폭(포스터 1319px)이
+   칸을 밀어내 화면 밖으로 넘친다. 폭이 1fr 로 풀리는 좁은 화면에서만 드러났다. */
+.notice-band>*,.notice-card>*,.nb-inner>*,.post-line>*{min-width:0}
+.notice-card>img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:16px;display:block;background:var(--sky)}
+.notice-badge{display:inline-block;padding:6px 11px;border-radius:999px;background:var(--blue);color:white;font-size:10px;font-weight:900;letter-spacing:.04em}
+.notice-copy h2,.notice-copy h3{margin:14px 0 10px;font-size:clamp(19px,2vw,26px);line-height:1.36;letter-spacing:-.04em}
+.notice-copy p{margin:0;color:var(--muted);font-size:13px;line-height:1.75}
+.notice-date{display:block;margin-top:16px;color:#9099a8;font-size:11px;font-weight:700}
+
+/* 글 한 줄 목록 — 커뮤니티 카드와 같은 문법 */
+.post-lines{display:flex;flex-direction:column;padding:6px 22px;border:1px solid var(--line);border-radius:24px;background:white}
+.post-line{display:grid;grid-template-columns:52px 1fr 20px;gap:12px;align-items:center;padding:17px 0;border-bottom:1px solid #eef1f5}
+.post-line:last-child{border-bottom:0}
+.post-line div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.post-line strong{font-size:13.5px;line-height:1.5}
+.post-line small{color:#8b94a2;font-size:10px}
+.post-line>svg{color:#9ca8b6}
+.post-line:hover strong{color:var(--blue)}
+.board-tag{height:25px;padding:0 8px;display:grid;place-items:center;border-radius:7px;background:var(--sky);color:var(--blue);font-size:10px;font-weight:900;white-space:nowrap}
+.board-tag.solo{display:inline-grid;height:27px}
+
+.empty{margin:0;padding:34px 0;color:var(--muted);font-size:13.5px}
+.empty.light{color:rgba(255,255,255,.55)}
+
+/* 글 상세 */
+.post{max-width:760px;margin:0 auto;padding:38px 24px 90px}
+/* 🔴 inline-flex 로 두면 뒤따르는 '공지' 배지가 같은 줄에 붙어 버린다. 줄을 차지하게 한다. */
+.post-back{display:flex;width:max-content;align-items:center;gap:6px;margin-bottom:26px;color:var(--muted);font-size:12.5px;font-weight:800}
+.post-back:hover{color:var(--blue)}
+.post h1{margin:14px 0 12px;font-size:clamp(25px,3.4vw,38px);line-height:1.32;letter-spacing:-.05em}
+.post-meta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding-bottom:24px;border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
+.post-meta a{border-bottom:1px solid var(--line)}
+.post-meta a:hover{color:var(--blue)}
+.post-img{width:100%;display:block;margin:28px 0;border-radius:20px}
+.post-body{font-size:15.5px;line-height:1.95;color:#39424f}
+.post-body p{margin:0 0 1.5em}
+.post .primary-button{margin-top:12px}
+
+/* 뉴보대 줄 — 어두운 바탕으로 한 번 눌러 준다 */
+.newbodae{background:#0f2647;color:white}
+.nb-inner{display:grid;grid-template-columns:.72fr 1.28fr;gap:60px;align-items:start}
+.nb-intro h2{margin:0 0 18px;font-size:clamp(26px,3vw,38px);line-height:1.25;letter-spacing:-.05em}
+.nb-intro>p{margin:0 0 24px;max-width:36ch;color:#c9d8ec;font-size:14px;line-height:1.8}
+.nb-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px}
+.nb-list .empty{grid-column:1/-1}
+.nb-card{display:block;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);transition:transform .2s,border-color .2s}
+.nb-card:hover{transform:translateY(-5px);border-color:#6c9dff}
+.nb-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.nb-noimg{display:grid;place-items:center;aspect-ratio:4/5;color:rgba(255,255,255,.4);font-size:11px}
+.nb-body{padding:12px 13px 15px}
+.nb-date{color:#93baff;font-size:10px;font-weight:900}
+.nb-body p{margin:7px 0 0;color:rgba(255,255,255,.84);font-size:12px;line-height:1.55}
+
+/* 행사 줄의 화살표는 누를 곳이 아직 없으므로 단추가 아닌 표시로 둔다 */
+.event-go{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:white;display:grid;place-items:center;color:var(--ink)}
+
+@media(max-width:900px){
+  .notice-band,.nb-inner{grid-template-columns:1fr;gap:20px}
+  .nb-inner{gap:34px}
+}
+@media(max-width:620px){
+  .notice-card{grid-template-columns:1fr;gap:16px}
+  .notice-card>img{aspect-ratio:16/10}
+  .page-head{padding:44px 20px 4px}
+  .post{padding:28px 20px 70px}
+  .nb-list{grid-template-columns:1fr 1fr;gap:11px}
+}

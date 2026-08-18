@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>소식 등록 | 한국대학생포럼</title>
+  <link rel="icon" href="/logo-mark.png">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-left">
+    <strong>소식 등록</strong>
+    <span class="hint">한국대학생포럼 홈페이지 관리 화면</span>
+  </div>
+  <div class="bar-right">
+    <a class="ghost" href="/news" target="_blank" rel="noreferrer">소식 화면 보기 ↗</a>
+    <button type="button" class="ghost" id="btn-settings">저장소 설정</button>
+  </div>
+</header>
+
+<!-- 저장소 설정 -->
+<section class="panel" id="settings" hidden>
+  <h2>GitHub 저장소 설정</h2>
+  <p class="note">
+    아래를 채우면 <b>「GitHub에 올리기」</b> 단추가 켜집니다. 채우지 않아도 등록은 되며,
+    그때는 <b>「파일로 내려받기」</b>로 받아 GitHub 웹에 직접 올리면 됩니다.
+  </p>
+  <div class="grid4">
+    <label>소유자(owner)<input id="cfg-owner" placeholder="koreauniversityforum" value=""></label>
+    <label>저장소(repo)<input id="cfg-repo" placeholder="homepage"></label>
+    <label>브랜치<input id="cfg-branch" placeholder="main"></label>
+    <label>토큰(PAT)<input id="cfg-token" type="password" placeholder="github_pat_..."></label>
+  </div>
+  <p class="warn">
+    🔴 토큰은 <b>이 브라우저에만</b> 저장됩니다(localStorage). 공용 PC에서는 넣지 마세요.
+    권한은 <b>Fine-grained token → 이 저장소 하나 → Contents: Read and write</b> 만 주면 충분합니다.
+  </p>
+  <div class="row">
+    <button type="button" id="btn-cfg-save">설정 저장</button>
+    <button type="button" class="ghost" id="btn-cfg-clear">토큰 지우기</button>
+    <span class="status" id="cfg-status"></span>
+  </div>
+</section>
+
+<nav class="tabs">
+  <button type="button" class="tab on" data-kind="posts">한대포 소식</button>
+  <button type="button" class="tab" data-kind="newbodae">뉴보대 피드</button>
+  <span class="tab-note" id="tab-note"></span>
+</nav>
+
+<main class="layout">
+  <!-- 왼쪽: 등록된 글 -->
+  <aside class="side">
+    <div class="side-head">
+      <h2 id="side-title">등록된 글</h2>
+      <button type="button" id="btn-new">+ 새 글</button>
+    </div>
+    <ul class="items" id="items"></ul>
+  </aside>
+
+  <!-- 오른쪽: 편집기 -->
+  <section class="editor">
+    <form id="form" autocomplete="off">
+      <div class="f-row">
+        <label class="grow">제목
+          <input id="f-title" required placeholder="예) 한국대학생포럼 17기 모집">
+        </label>
+        <label>날짜
+          <input id="f-date" type="date" required>
+        </label>
+      </div>
+
+      <div class="f-row" id="row-category">
+        <label>분류
+          <select id="f-category">
+            <option>공지</option><option>모집</option><option>포럼</option>
+            <option>강연</option><option>탐방</option><option>보도</option><option>소식</option>
+          </select>
+        </label>
+        <label class="grow">인스타그램 게시물 주소
+          <input id="f-permalink" placeholder="https://www.instagram.com/p/…">
+        </label>
+      </div>
+
+      <label id="row-summary">목록에 보일 한 줄
+        <input id="f-summary" placeholder="비워두면 본문 앞부분을 씁니다">
+      </label>
+
+      <label>본문
+        <textarea id="f-body" rows="11" placeholder="인스타 캡션을 그대로 붙여넣어도 됩니다. 빈 줄로 문단이 나뉩니다."></textarea>
+      </label>
+
+      <div class="f-row">
+        <label class="grow">카드 이미지
+          <input id="f-files" type="file" accept="image/*" multiple>
+        </label>
+        <label class="check" title="끄면 원본 파일을 그대로 올립니다(용량이 큽니다)">
+          <input id="f-shrink" type="checkbox" checked> 가로 1080px·JPEG로 줄이기
+        </label>
+      </div>
+      <ul class="thumbs" id="thumbs"></ul>
+
+      <label class="check big" id="row-pin">
+        <input id="f-pinned" type="checkbox" checked>
+        <span><b>이 글을 공지로 올리기</b><small>지금 공지인 글은 자동으로 일반글이 됩니다.</small></span>
+      </label>
+
+      <div class="f-actions">
+        <button type="submit" id="btn-save">글 저장</button>
+        <button type="button" class="ghost danger" id="btn-delete" hidden>이 글 지우기</button>
+        <span class="status" id="form-status"></span>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="dock">
+  <span class="dock-state" id="dock-state">바뀐 내용 없음</span>
+  <div class="dock-actions">
+    <button type="button" class="ghost" id="btn-download">파일로 내려받기</button>
+    <button type="button" id="btn-commit" disabled>GitHub에 올리기</button>
+  </div>
+</footer>
+
+<div class="log" id="log" hidden></div>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>

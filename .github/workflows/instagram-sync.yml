@@ -1,0 +1,48 @@
+name: 인스타 새 글 가져오기
+
+# 30분마다 인스타를 확인해, 새 게시물이 있으면 data/*.json 을 고쳐 커밋한다.
+# 커밋이 생기면 Vercel 이 알아서 홈페이지를 다시 띄운다.
+#
+# 🔴 Secrets(IG_TOKEN 등)를 넣기 전에는 아무 일도 하지 않고 정상 종료한다.
+#    "켜져 있는데 조용한 것"과 "고장난 것"을 구분하려고 일부러 실패시키지 않았다.
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:        # 저장소 Actions 화면에서 손으로도 돌릴 수 있다
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram-sync     # 겹쳐 돌면 같은 글이 두 번 들어간다
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 인스타 확인
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_KUF: ${{ secrets.IG_USER_KUF }}
+          IG_USER_NBD: ${{ secrets.IG_USER_NBD }}
+        run: node scripts/sync-instagram.mjs
+
+      - name: 바뀐 것이 있으면 커밋
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "바뀐 것이 없습니다."
+            exit 0
+          fi
+          git config user.name  "kuf-bot"
+          git config user.email "koreauniversityforum@gmail.com"
+          git add public/data public/media
+          git commit -m "인스타 새 글 자동 등록 ($(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M'))"
+          git push
