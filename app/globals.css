@@ -97,3 +97,35 @@ img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shado
   .post{padding:28px 20px 70px}
   .nb-list{grid-template-columns:1fr 1fr;gap:11px}
 }
+
+/* ══ 후원 계좌 배지 — 옛 로그인 단추 자리 ═══════════════════════════════════
+   누르면 계좌번호가 복사된다. 은행 심벌 파일(DONATION.mark)이 없으면
+   은행 이름을 글자 배지로 대신 보여 준다. */
+.donate-badge{height:42px;padding:0 13px 0 8px;display:inline-flex;align-items:center;gap:9px;
+  border:1px solid var(--line);border-radius:13px;background:white;color:var(--ink);
+  cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
+.donate-badge:hover{border-color:#bcd5ff;background:var(--sky);transform:translateY(-1px)}
+.donate-badge:active{transform:translateY(0)}
+.donate-mark{width:26px;height:26px;flex:none;display:grid;place-items:center;border-radius:8px;
+  color:white;font-size:11px;font-weight:900;letter-spacing:-.03em}
+.donate-mark-img{width:26px;height:26px;flex:none;object-fit:contain;border-radius:6px}
+.donate-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;text-align:left}
+.donate-text small{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:.02em}
+.donate-text strong{margin-top:3px;font-size:13px;font-weight:800;letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums}
+.donate-text em{margin-top:2px;font-style:normal;font-size:9px;color:var(--muted)}
+.donate-check{flex:none;color:#18a16a}
+
+@media(max-width:620px){
+  /* 좁은 화면에서는 「후원 계좌」 라벨과 브랜드 부제를 접어 자리를 만든다.
+     숫자는 남겨 둔다 — 눌러서 복사하는 것보다 눈으로 보는 쪽이 먼저다. */
+  .donate-badge{height:38px;padding:0 9px 0 7px;gap:6px;border-radius:11px}
+  .donate-mark,.donate-mark-img{width:22px;height:22px;font-size:10px}
+  .donate-text small{display:none}
+  .donate-text strong{margin-top:0;font-size:11px}
+  .brand small{display:none}
+}
+@media(max-width:360px){
+  /* 아주 좁은 화면에서만 숫자를 접는다. 배지를 누르면 여전히 복사된다. */
+  .donate-text{display:none}
+}

@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { CircleUserRound, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Check, Menu, X } from "lucide-react";
+import { DONATION } from "@/lib/site";
 
 const NAV = [
   { label: "동아리", href: "/#clubs", key: "clubs" },
@@ -11,6 +12,56 @@ const NAV = [
   { label: "소식", href: "/news", key: "news" },
   { label: "한대포 소개", href: "/#about", key: "about" },
 ];
+
+/**
+ * 후원 계좌 배지 — 옛 로그인 단추가 있던 자리.
+ * 누르면 계좌번호만 클립보드로 복사된다(은행 이름은 빼고 숫자만 — 붙여넣어 쓰기 좋게).
+ */
+function DonateBadge() {
+  const [copied, setCopied] = useState(false);
+
+  /* 복사됨 표시를 2초 뒤에 되돌린다. 컴포넌트가 사라지면 타이머도 치운다. */
+  useEffect(() => {
+    if (!copied) return;
+    const t = setTimeout(() => setCopied(false), 2000);
+    return () => clearTimeout(t);
+  }, [copied]);
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(DONATION.account);
+      setCopied(true);
+    } catch {
+      /* 클립보드를 막아 둔 환경(구형 브라우저·http)에서는 조용히 넘긴다.
+         숫자가 화면에 그대로 보이므로 눈으로 옮겨 적을 수 있다. */
+    }
+  }
+
+  return (
+    <button
+      className="donate-badge"
+      type="button"
+      onClick={copy}
+      title="계좌번호 복사"
+      aria-label={`후원 계좌 ${DONATION.bank} ${DONATION.account} 복사`}
+    >
+      {DONATION.mark ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img className="donate-mark-img" src={DONATION.mark} alt={`${DONATION.bank}은행`} />
+      ) : (
+        <span className="donate-mark" style={{ background: DONATION.markColor }}>
+          {DONATION.bank}
+        </span>
+      )}
+      <span className="donate-text">
+        <small>{copied ? "복사했어요" : "후원 계좌"}</small>
+        <strong>{DONATION.account}</strong>
+        {DONATION.holder && <em>예금주 {DONATION.holder}</em>}
+      </span>
+      {copied && <Check className="donate-check" size={15} />}
+    </button>
+  );
+}
 
 export default function SiteHeader({ current }: { current?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,9 +86,7 @@ export default function SiteHeader({ current }: { current?: string }) {
       </nav>
 
       <div className="header-actions">
-        <button className="login-button" type="button">
-          <CircleUserRound size={18} /> 로그인
-        </button>
+        <DonateBadge />
         <button
           className="icon-button menu-button"
           type="button"

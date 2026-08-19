@@ -29,3 +29,18 @@ export const STATS: { value: string; label: string }[] = [
 
 /** 소개 영역의 큰 숫자. STATS 와 같은 이유로 여기 모아 둔다. */
 export const ABOUT_NUMBER = "42";
+
+/**
+ * 후원 계좌 — 머리말 오른쪽(옛 로그인 단추 자리)에 뜬다.
+ *
+ * 누르면 계좌번호가 클립보드에 복사된다. 숫자만 고치면 화면이 따라온다.
+ * `holder` 를 빈 문자열로 두면 예금주 줄이 통째로 사라진다.
+ * `mark` 는 `public/` 안의 은행 심벌 파일 경로. 파일이 없으면 은행 이름이 글자 배지로 대신 나온다.
+ */
+export const DONATION = {
+  bank: "신한",
+  account: "140-012-402064",
+  holder: "",
+  mark: "",
+  markColor: "#0046ff",
+};
