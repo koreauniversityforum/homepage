@@ -106,11 +106,13 @@ img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shado
   cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
 .donate-badge:hover{border-color:#bcd5ff;background:var(--sky);transform:translateY(-1px)}
 .donate-badge:active{transform:translateY(0)}
-.donate-mark{width:26px;height:26px;flex:none;display:grid;place-items:center;border-radius:8px;
-  color:white;font-size:11px;font-weight:900;letter-spacing:-.03em}
-.donate-mark-img{width:26px;height:26px;flex:none;object-fit:contain;border-radius:6px}
+/* 은행 심벌 자리 — 신한금융그룹 심벌이 구(球) 모양이라 원형으로 잡았다. */
+.donate-mark{width:26px;height:26px;flex:none;border-radius:50%;
+  background:var(--blue);box-shadow:inset -3px -4px 8px rgba(0,0,0,.18)}
+.donate-mark-img{width:26px;height:26px;flex:none;object-fit:contain}
 .donate-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;text-align:left}
 .donate-text small{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:.02em}
+.donate-text small b{margin-left:4px;color:var(--ink);font-weight:900}
 .donate-text strong{margin-top:3px;font-size:13px;font-weight:800;letter-spacing:-.01em;
   font-variant-numeric:tabular-nums}
 .donate-text em{margin-top:2px;font-style:normal;font-size:9px;color:var(--muted)}
@@ -121,8 +123,8 @@ img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shado
      숫자는 남겨 둔다 — 눌러서 복사하는 것보다 눈으로 보는 쪽이 먼저다. */
   .donate-badge{height:38px;padding:0 9px 0 7px;gap:6px;border-radius:11px}
   .donate-mark,.donate-mark-img{width:22px;height:22px;font-size:10px}
-  .donate-text small{display:none}
-  .donate-text strong{margin-top:0;font-size:11px}
+  .donate-text small{font-size:8px}
+  .donate-text strong{margin-top:1px;font-size:11px}
   .brand small{display:none}
 }
 @media(max-width:360px){

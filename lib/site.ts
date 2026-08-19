@@ -38,9 +38,15 @@ export const ABOUT_NUMBER = "42";
  * `mark` 는 `public/` 안의 은행 심벌 파일 경로. 파일이 없으면 은행 이름이 글자 배지로 대신 나온다.
  */
 export const DONATION = {
+  /** 배지에 보이는 짧은 이름. */
   bank: "신한",
+  /** 눌렀을 때 복사되는 문구는 `bankFull + 공백 + account` 다 — 「신한은행 140-012-402064」. */
+  bankFull: "신한은행",
   account: "140-012-402064",
   holder: "",
-  mark: "",
+  /* 신한은행 공식 심벌(구 모양). shinhan.com CI 자료에서 심벌만 잘라 온 것으로,
+     원 바깥은 투명해 어떤 바닥색에도 얹힌다.
+     평면판을 쓰고 싶으면 "/shinhan-mark-flat.png" 로 바꾼다. 비우면 민무늬 원. */
+  mark: "/shinhan-mark.png",
   markColor: "#0046ff",
 };

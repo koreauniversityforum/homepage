@@ -15,8 +15,10 @@ const NAV = [
 
 /**
  * 후원 계좌 배지 — 옛 로그인 단추가 있던 자리.
- * 누르면 계좌번호만 클립보드로 복사된다(은행 이름은 빼고 숫자만 — 붙여넣어 쓰기 좋게).
+ * 누르면 「신한은행 140-012-402064」처럼 은행 이름까지 통째로 복사된다.
  */
+const COPY_TEXT = `${DONATION.bankFull} ${DONATION.account}`;
+
 function DonateBadge() {
   const [copied, setCopied] = useState(false);
 
@@ -29,7 +31,7 @@ function DonateBadge() {
 
   async function copy() {
     try {
-      await navigator.clipboard.writeText(DONATION.account);
+      await navigator.clipboard.writeText(COPY_TEXT);
       setCopied(true);
     } catch {
       /* 클립보드를 막아 둔 환경(구형 브라우저·http)에서는 조용히 넘긴다.
@@ -42,19 +44,21 @@ function DonateBadge() {
       className="donate-badge"
       type="button"
       onClick={copy}
-      title="계좌번호 복사"
-      aria-label={`후원 계좌 ${DONATION.bank} ${DONATION.account} 복사`}
+      title={`${COPY_TEXT} 복사`}
+      aria-label={`후원 계좌 ${COPY_TEXT} 복사`}
     >
       {DONATION.mark ? (
         /* eslint-disable-next-line @next/next/no-img-element */
         <img className="donate-mark-img" src={DONATION.mark} alt={`${DONATION.bank}은행`} />
       ) : (
-        <span className="donate-mark" style={{ background: DONATION.markColor }}>
-          {DONATION.bank}
-        </span>
+        /* 공식 심벌 파일이 아직 없을 때의 임시 표시.
+           은행 로고를 흉내 내지 않고, 자리만 잡아 두는 민무늬 원이다. */
+        <span className="donate-mark" style={{ background: DONATION.markColor }} aria-hidden="true" />
       )}
       <span className="donate-text">
-        <small>{copied ? "복사했어요" : "후원 계좌"}</small>
+        <small>
+          {copied ? "복사했어요" : "후원 계좌"} <b>{DONATION.bank}</b>
+        </small>
         <strong>{DONATION.account}</strong>
         {DONATION.holder && <em>예금주 {DONATION.holder}</em>}
       </span>
