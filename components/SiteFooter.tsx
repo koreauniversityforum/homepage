@@ -18,7 +18,7 @@ export default function SiteFooter() {
           <div>
             <strong>서비스</strong>
             <Link href="/#clubs">동아리</Link>
-            <Link href="/#community">커뮤니티</Link>
+            <Link href="/board">커뮤니티</Link>
             <Link href="/#events">행사</Link>
           </div>
           <div>

@@ -131,3 +131,74 @@ img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shado
   /* 아주 좁은 화면에서만 숫자를 접는다. 배지를 누르면 여전히 복사된다. */
   .donate-text{display:none}
 }
+
+/* ══ 한글 줄바꿈 — 낱말이 가운데서 끊기지 않게 ═══════════════════════════
+   브라우저 기본값은 한글을 글자 단위로 끊는다("대학생포" / "럼" 처럼).
+   keep-all 로 두면 띄어쓰기 자리에서만 줄이 바뀐다.
+   🔴 다만 그러면 띄어쓰기 없는 아주 긴 것(주소·계좌번호)이 칸 밖으로 삐져
+      나가므로, 그때만 예외로 끊게 anywhere 를 함께 준다. */
+body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
+
+/* ══ 게시판(커뮤니티) ═══════════════════════════════════════════════════
+   승인 대기 글은 서버가 본문을 110자로 잘라서 내려 준다(docs/게시판_supabase.sql).
+   여기서는 그 잘린 글이 두 줄을 넘지 않게만 눌러 준다. */
+.board-section{padding-top:38px}
+.bd{max-width:760px;margin:0 auto}
+
+/* 글쓰기 */
+.bd-writer-shut{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+.bd-done{color:#18a16a;font-size:12.5px;font-weight:800}
+.bd-writer{margin-bottom:26px;padding:22px;border:1px solid var(--line);border-radius:22px;background:white;box-shadow:0 14px 40px rgba(31,59,97,.07)}
+.bd-writer label{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;font-size:12px;font-weight:800;color:var(--muted)}
+.bd-writer input,.bd-writer textarea{padding:12px 13px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;font-size:14px;font-weight:400}
+.bd-writer textarea{resize:vertical;line-height:1.75}
+.bd-writer input:focus,.bd-writer textarea:focus{outline:2px solid #bcd5ff;outline-offset:-1px;background:white}
+.bd-w-row{display:flex;gap:14px}
+.bd-w-row label{flex:none;width:160px}
+.bd-w-row label.grow{flex:1;width:auto}
+.bd-note{margin:2px 0 0;padding:12px 14px;border-radius:12px;background:var(--sky);color:#2f5388;font-size:12px;line-height:1.7}
+.bd-error{margin:12px 0 0;color:#d13b3b;font-size:12.5px;font-weight:700;line-height:1.6}
+.bd-w-actions{display:flex;gap:9px;margin-top:16px}
+.bd-w-actions .compact{min-height:44px}
+.secondary-button.compact{min-height:44px;padding:0 16px;font-size:12px}
+.spin{animation:bd-spin .9s linear infinite}
+@keyframes bd-spin{to{transform:rotate(360deg)}}
+
+/* 목록 머리 */
+.bd-list-head{display:flex;align-items:center;justify-content:space-between;padding:0 4px 12px;border-bottom:2px solid var(--ink)}
+.bd-list-head strong{display:flex;align-items:center;gap:9px;font-size:13px}
+.bd-waiting{padding:4px 9px;border-radius:999px;background:#fff3e3;color:#b5651d;font-size:10px;font-weight:900}
+.bd-refresh{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--muted);display:grid;place-items:center;cursor:pointer}
+.bd-refresh:hover{color:var(--blue);border-color:#bcd5ff}
+
+/* 글 한 건 */
+.bd-rows{display:flex;flex-direction:column}
+.bd-row{padding:20px 4px;border-bottom:1px solid #eef1f5}
+.bd-head{width:100%;display:flex;align-items:center;gap:10px;padding:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer}
+.bd-row.is-pending .bd-head{cursor:default}
+.bd-title{font-size:15px;line-height:1.5;letter-spacing:-.02em;min-width:0}
+.bd-head:hover .bd-title{color:var(--blue)}
+.bd-row.is-pending .bd-head:hover .bd-title{color:inherit}
+.bd-badge{flex:none;height:24px;padding:0 9px;display:inline-flex;align-items:center;gap:4px;border-radius:7px;background:var(--sky);color:var(--blue);font-size:10px;font-weight:900;white-space:nowrap}
+.bd-badge.wait{background:#fff3e3;color:#b5651d}
+
+/* 미리보기 — 딱 두 줄에서 끊는다 */
+.bd-peek{margin:9px 0 0;color:var(--muted);font-size:13px;line-height:1.75;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.bd-body{margin:12px 0 0;color:#39424f;font-size:14.5px;line-height:1.9}
+.bd-body p{margin:0 0 1em}
+.bd-body p:last-child{margin-bottom:0}
+.bd-meta{margin:10px 0 0;display:flex;align-items:center;gap:9px;flex-wrap:wrap;color:#9099a8;font-size:11px;font-weight:700}
+.bd-meta em{font-style:normal;color:#b5651d;font-weight:800}
+
+/* 승인 대기 글은 한 단계 눌러서, 아직 확정된 글이 아님을 눈으로 알게 한다 */
+.bd-row.is-pending{background:linear-gradient(90deg,rgba(255,243,227,.55),rgba(255,243,227,0));border-radius:14px;padding-inline:12px}
+.bd-row.is-pending .bd-title{color:#5c6473}
+
+@media(max-width:620px){
+  .bd-w-row{flex-direction:column;gap:0}
+  .bd-w-row label{width:auto}
+  .bd-writer{padding:17px}
+  .bd-title{font-size:14px}
+  .bd-w-actions .primary-button,.bd-w-actions .secondary-button{width:auto;flex:1}
+}

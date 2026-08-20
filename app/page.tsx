@@ -6,22 +6,15 @@ import {
   Clock3,
   MapPin,
   MessageCircle,
-  Sparkles,
   UsersRound,
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import NewbodaeRow from "@/components/NewbodaeRow";
 import ClubFilter from "@/components/ClubFilter";
-import { STATS, ABOUT_NUMBER } from "@/lib/site";
+import Board from "@/components/Board";
+import { STATS, ABOUT_NUMBER, JOIN_FORM } from "@/lib/site";
 import { getPosts, pickNotice, firstImage, fmtDate, excerpt } from "@/lib/posts";
-
-const posts_placeholder = [
-  { board: "자유", title: "연합동아리 첫 모임 장소 추천해주세요", meta: "12분 전", comments: 8 },
-  { board: "진로", title: "학기 중 인턴과 수업, 다들 어떻게 병행하나요?", meta: "38분 전", comments: 15 },
-  { board: "정보", title: "이번 달 대학생 공모전·대외활동 일정 모음", meta: "1시간 전", comments: 21 },
-  { board: "협업", title: "학교별 축제 지도를 함께 만들 분을 찾습니다", meta: "2시간 전", comments: 6 },
-];
 
 const events = [
   { day: "24", month: "AUG", title: "대학생 네트워킹 나이트", place: "서울 성수", time: "18:30" },
@@ -43,9 +36,6 @@ export default function Home() {
         <div className="hero-orb orb-one" />
         <div className="hero-orb orb-two" />
         <div className="hero-content">
-          <p className="eyebrow">
-            <Sparkles size={15} /> 학교 밖에서 시작되는 새로운 연결
-          </p>
           <h1>
             대학생의 연결이,
             <br />
@@ -112,7 +102,6 @@ export default function Home() {
       <section className="section" id="notice">
         <div className="section-heading">
           <div>
-            <p className="section-kicker">NOTICE</p>
             <h2>지금 알아두실 것</h2>
           </div>
           <Link className="text-link" href="/news">
@@ -160,7 +149,6 @@ export default function Home() {
       <section className="section" id="clubs">
         <div className="section-heading">
           <div>
-            <p className="section-kicker">JOIN &amp; GROW</p>
             <h2>지금 함께할 활동을 찾아보세요</h2>
           </div>
         </div>
@@ -170,7 +158,6 @@ export default function Home() {
       <section className="community-section" id="community">
         <div className="section two-column">
           <div className="community-intro">
-            <p className="section-kicker">TALK TOGETHER</p>
             <h2>
               대학생의 진짜 이야기가
               <br />
@@ -180,27 +167,14 @@ export default function Home() {
               궁금했던 것을 묻고, 먼저 경험한 사람의 답을 만나보세요. 학교가 달라도 고민은 닮아
               있습니다.
             </p>
-            <a className="primary-button compact" href="#community">
+            <Link className="primary-button compact" href="/board">
               이야기 참여하기 <ArrowRight size={17} />
-            </a>
+            </Link>
           </div>
+          {/* 진짜 게시판에서 최근 몇 건만 끌어다 보여 준다.
+              compact 라서 글쓰기 칸은 나오지 않는다 — 쓰기는 /board 에서. */}
           <div className="post-list">
-            <div className="post-list-head">
-              <strong>지금 인기 있는 이야기</strong>
-              <span>실시간</span>
-            </div>
-            {posts_placeholder.map((post) => (
-              <a className="post-item" href="#community" key={post.title}>
-                <span className="board-tag">{post.board}</span>
-                <div>
-                  <strong>{post.title}</strong>
-                  <small>
-                    {post.meta} · 댓글 {post.comments}
-                  </small>
-                </div>
-                <ChevronRight size={18} />
-              </a>
-            ))}
+            <Board limit={5} compact />
           </div>
         </div>
       </section>
@@ -208,7 +182,6 @@ export default function Home() {
       <section className="section" id="events">
         <div className="section-heading">
           <div>
-            <p className="section-kicker">UPCOMING EVENTS</p>
             <h2>곧 만날 수 있는 자리</h2>
           </div>
         </div>
@@ -241,15 +214,14 @@ export default function Home() {
         <div className="about-content">
           <span className="about-number">{ABOUT_NUMBER}</span>
           <div>
-            <p className="section-kicker light">OUR NETWORK</p>
             <h2>
-              한 학교의 경험을
+              2009년 연세대학교에서 시작된
               <br />
-              모든 대학생의 기회로.
+              대학생 경제·시사 연합 동아리
             </h2>
             <p>
-              한대포는 대학생이 서로의 경험과 정보를 나누며 더 넓은 선택지를 발견하도록 돕는 열린
-              네트워크입니다.
+              한대포는 대학생들이 서로의 경험과 정보를 나누며 더 넓은 선택지를 발견하도록 돕는 열린
+              네트워크를 만들고, 현업에 계신 분들과 꾸준히 만남을 이어 갑니다.
             </p>
           </div>
         </div>
@@ -257,10 +229,10 @@ export default function Home() {
 
       <section className="cta-section">
         <div>
-          <p>YOUR NEXT CHAPTER</p>
           <h2>새로운 연결을 시작할 준비가 되었나요?</h2>
         </div>
-        <a className="white-button" href="#clubs">
+        {/* 가입 신청은 구글 폼으로 받는다. 주소가 바뀌면 lib/site.ts 의 JOIN_FORM 만 고치면 된다. */}
+        <a className="white-button" href={JOIN_FORM} target="_blank" rel="noreferrer">
           한대포 시작하기 <ArrowRight size={18} />
         </a>
       </section>

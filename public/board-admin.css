@@ -1,0 +1,25 @@
+/* 게시판 승인 화면 — admin.css 를 그대로 쓰고 여기서 목록 모양만 더한다. */
+.board-head { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:10px; }
+.board-head h2 { margin:0; }
+
+.posts { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+.posts .none { padding:34px 4px; color:var(--muted); font-size:13.5px; }
+
+.post-card { border:1px solid var(--line); border-radius:12px; padding:16px 18px; background:white; }
+.post-card.wait { background:#fffdf7; border-color:#f0d79a; }
+.post-card.flag { box-shadow:inset 4px 0 0 var(--danger); }
+.post-card.gone { opacity:.55; }
+
+.pc-top { display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-bottom:8px; }
+.pc-state { padding:4px 9px; border-radius:999px; font-size:10.5px; font-weight:900; }
+.pc-state.pending { background:#fff3e3; color:#b5651d; }
+.pc-state.approved { background:#e6f7ef; color:#07684f; }
+.pc-state.rejected { background:#f1f2f5; color:#6b7488; }
+.pc-flag { padding:4px 9px; border-radius:999px; background:#fdeaee; color:var(--danger); font-size:10.5px; font-weight:900; }
+.pc-title { font-size:15px; font-weight:800; line-height:1.5; word-break:keep-all; overflow-wrap:anywhere; }
+
+.pc-body { margin:0 0 12px; font-size:13.5px; line-height:1.85; color:#39424f; white-space:pre-wrap; word-break:keep-all; overflow-wrap:anywhere; }
+.pc-meta { display:flex; gap:12px; flex-wrap:wrap; font-size:11px; color:var(--muted); margin-bottom:12px; }
+.pc-actions { display:flex; gap:8px; flex-wrap:wrap; padding-top:12px; border-top:1px solid var(--line); }
+.pc-actions button { padding:8px 14px; font-size:12px; }
+.ok { background:#07684f; }

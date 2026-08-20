@@ -7,6 +7,12 @@ export const CONTACT = {
   email: "koreauniversityforum@gmail.com",
 };
 
+/**
+ * 「한대포 시작하기」 단추가 여는 곳 — 가입 신청 구글 폼.
+ * 폼을 새로 만들면 이 한 줄만 고치면 화면이 따라온다.
+ */
+export const JOIN_FORM = "https://forms.gle/2UkdBcGhrdZiSGde7";
+
 export const INSTAGRAM = {
   /* 🔴 자료마다 두 갈래로 적혀 있었다(forum / fourm).
      뉴보대 워터마크·설명서에 쓰인 fourm 쪽을 따랐다. 실제 계정이 다르면 이 줄만 고치면 된다. */

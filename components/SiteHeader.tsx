@@ -7,7 +7,7 @@ import { DONATION } from "@/lib/site";
 
 const NAV = [
   { label: "동아리", href: "/#clubs", key: "clubs" },
-  { label: "커뮤니티", href: "/#community", key: "community" },
+  { label: "커뮤니티", href: "/board", key: "community" },
   { label: "행사", href: "/#events", key: "events" },
   { label: "소식", href: "/news", key: "news" },
   { label: "한대포 소개", href: "/#about", key: "about" },

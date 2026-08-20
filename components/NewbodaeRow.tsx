@@ -14,7 +14,6 @@ export default function NewbodaeRow({ limit = 6 }: { limit?: number }) {
     <section className="newbodae" id="newbodae">
       <div className="section nb-inner">
         <div className="nb-intro">
-          <p className="section-kicker light">NEWS FOR STUDENTS</p>
           <h2>뉴스 보는 대학생</h2>
           <p>
             한대포가 운영하는 대학생 뉴스 계정입니다. 시사·경제·정치에서 오늘 챙길 몇 건을 골라

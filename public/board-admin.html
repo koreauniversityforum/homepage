@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>게시판 승인 | 한국대학생포럼</title>
+  <link rel="icon" href="/logo-mark.png">
+  <link rel="stylesheet" href="/admin.css">
+  <link rel="stylesheet" href="/board-admin.css">
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-left">
+    <strong>게시판 승인</strong>
+    <span class="hint">방문자가 올린 글을 확인하고 공개합니다</span>
+  </div>
+  <div class="bar-right">
+    <a class="ghost" href="/board" target="_blank" rel="noreferrer">게시판 보기 ↗</a>
+    <a class="ghost" href="/admin.html">소식 등록 →</a>
+    <button type="button" class="ghost" id="btn-logout" hidden>로그아웃</button>
+  </div>
+</header>
+
+<!-- 로그인 -->
+<section class="panel" id="login">
+  <h2>관리자 로그인</h2>
+  <p class="note">
+    Supabase 에 만들어 둔 관리자 계정으로 들어옵니다.
+    <b>이 화면에서만</b> 글을 승인·삭제할 수 있고, 방문자는 어떤 글도 지우거나 고칠 수 없습니다.
+  </p>
+  <div class="row" id="login-row">
+    <label class="grow">이메일<input id="in-email" type="email" autocomplete="username" placeholder="koreauniversityforum@gmail.com"></label>
+    <label class="grow">비밀번호<input id="in-pw" type="password" autocomplete="current-password"></label>
+    <button type="button" id="btn-login">로그인</button>
+  </div>
+  <p class="status" id="login-status"></p>
+</section>
+
+<!-- 목록 -->
+<section class="panel" id="board" hidden>
+  <div class="board-head">
+    <h2 id="board-title">글</h2>
+    <div class="row">
+      <select id="filter">
+        <option value="pending">승인 대기</option>
+        <option value="all">전체</option>
+        <option value="approved">승인됨</option>
+        <option value="rejected">반려됨</option>
+      </select>
+      <button type="button" class="ghost" id="btn-reload">새로 고침</button>
+      <button type="button" class="ghost danger" id="btn-purge">표시된 대기글 모두 반려</button>
+    </div>
+  </div>
+  <p class="note" id="board-note"></p>
+  <ul class="posts" id="posts"></ul>
+</section>
+
+<script src="/js/board-admin.js"></script>
+</body>
+</html>

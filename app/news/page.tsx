@@ -21,7 +21,6 @@ export default function NewsPage() {
       <SiteHeader current="news" />
 
       <section className="page-head">
-        <p className="section-kicker">NOTICE &amp; NEWS</p>
         <h1>포럼의 새로운 움직임</h1>
         <p>가장 최근 소식이 공지로 올라가고, 지난 소식은 아래 목록에 차례로 쌓입니다.</p>
       </section>
@@ -48,7 +47,6 @@ export default function NewsPage() {
       <section className="section">
         <div className="section-heading">
           <div>
-            <p className="section-kicker">ARCHIVE</p>
             <h2>지난 소식</h2>
           </div>
         </div>
