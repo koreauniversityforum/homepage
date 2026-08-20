@@ -451,3 +451,5 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
 .club-card{display:flex;flex-direction:column}
 .club-body{display:flex;flex-direction:column;flex:1}
 .club-body .club-meta{margin-top:auto}
+/* 분야가 둘 이상인 활동 - 표지의 분야 딱지가 나란히 선다 */
+.club-cover{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
