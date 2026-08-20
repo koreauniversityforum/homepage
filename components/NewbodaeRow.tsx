@@ -1,15 +1,20 @@
 import { ArrowUpRight } from "lucide-react";
 import { getCards, fmtDate, excerpt, firstImage } from "@/lib/posts";
 import { INSTAGRAM } from "@/lib/site";
+import NbScroller from "./NbScroller";
 
 /**
  * 뉴보대(@news_univ) 카드뉴스 줄.
  *
  * 홈페이지에 상세 글을 따로 두지 않고, 누르면 인스타 게시물로 보낸다.
  * 카드는 날짜 내림차순이라 **왼쪽이 가장 새 것**이고, 새 글이 들어오면
- * 옛 카드가 오른쪽으로 밀려난다. 넘치면 옆으로 밀어서 본다.
+ * 옛 카드가 오른쪽으로 밀려난다.
+ *
+ * `limit` 은 **한눈에 보일 장수**가 아니라 줄에 담아 둘 장수다.
+ * 화면에는 대여섯 장이 보이고, 지난 피드는 오른쪽 단추로 밀어서 본다.
+ * 🔴 여기서 5장만 담으면 단추를 눌러도 밀 것이 없다 - 넉넉히 담아 두고 화면이 자른다.
  */
-export default function NewbodaeRow({ limit = 5 }: { limit?: number }) {
+export default function NewbodaeRow({ limit = 24 }: { limit?: number }) {
   const cards = getCards().slice(0, limit);
   const accountUrl = `https://www.instagram.com/${INSTAGRAM.newbodae}/`;
 
@@ -27,11 +32,13 @@ export default function NewbodaeRow({ limit = 5 }: { limit?: number }) {
           </a>
         </div>
 
-        <div className="nb-list">
-          {cards.length === 0 ? (
+        {cards.length === 0 ? (
+          <div className="nb-list">
             <p className="empty light">카드뉴스가 곧 올라옵니다.</p>
-          ) : (
-            cards.map((c) => (
+          </div>
+        ) : (
+          <NbScroller>
+            {cards.map((c) => (
               <a
                 className="nb-card"
                 key={c.id}
@@ -50,9 +57,9 @@ export default function NewbodaeRow({ limit = 5 }: { limit?: number }) {
                   <p>{excerpt(c.title || c.caption, 46)}</p>
                 </div>
               </a>
-            ))
-          )}
-        </div>
+            ))}
+          </NbScroller>
+        )}
       </div>
     </section>
   );

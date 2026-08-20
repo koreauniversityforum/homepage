@@ -453,3 +453,58 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
 .club-body .club-meta{margin-top:auto}
 /* 분야가 둘 이상인 활동 - 표지의 분야 딱지가 나란히 선다 */
 .club-cover{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
+
+/* ── 일정: 목록 / 달력 ─────────────────────────────────── */
+/* 보는 방법 고르개. 필터 알약(.filters)과 같은 말씨를 쓰되 둘만 붙어 있다. */
+.view-switch{display:flex;gap:6px;padding:4px;border:1px solid var(--line);border-radius:999px;background:white}
+.view-switch button{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border:0;border-radius:999px;background:transparent;color:var(--muted);font-size:12px;font-weight:800;cursor:pointer}
+.view-switch button.on{background:var(--ink);color:white}
+/* 지난 자리는 흐리게 - 다가오는 것과 섞여 보이면 안 된다 */
+.event-item.past{opacity:.55}
+.event-item.past .event-info>span{color:var(--muted)}
+.cal{border-top:2px solid var(--ink);padding-top:20px}
+.cal-head{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:16px}
+.cal-head strong{font-size:17px;letter-spacing:-.03em}
+.cal-head button{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;background:white;display:grid;place-items:center;color:var(--ink);cursor:pointer}
+.cal-head button:hover{border-color:var(--blue);color:var(--blue)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal-wd{padding-bottom:6px;text-align:center;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.08em}
+.cal-cell{position:relative;min-height:72px;padding:9px;border:1px solid var(--line);border-radius:14px;background:white;text-align:left;color:var(--ink);font:inherit;cursor:default}
+.cal-cell.empty{border:0;background:transparent}
+.cal-cell.has{cursor:pointer}
+.cal-cell.has:hover{border-color:var(--blue)}
+.cal-cell.today{background:var(--sky);border-color:#bcd7ff}
+.cal-cell.on{background:var(--ink);border-color:var(--ink);color:white}
+.cal-day{font-size:12px;font-weight:800}
+/* 점 하나가 일정 하나. 숫자를 쓰면 칸이 시끄러워진다 */
+.cal-dots{position:absolute;left:9px;bottom:10px;display:flex;gap:4px}
+.cal-dots i{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.cal-cell.on .cal-dots i{background:white}
+.cal-more{position:absolute;left:9px;bottom:8px;color:var(--blue);font-size:10px;font-weight:900}
+.cal-cell.on .cal-more{color:white}
+.cal-detail{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--line)}
+.cal-detail li{display:grid;grid-template-columns:96px 1fr;gap:16px;padding:15px 4px;border-bottom:1px solid var(--line)}
+.cal-detail li.none{display:block;color:var(--muted);font-size:12px}
+.cal-when{color:var(--blue);font-size:12px;font-weight:900}
+.cal-what b{font-size:15px;letter-spacing:-.03em}
+.cal-what em{margin-left:8px;color:var(--muted);font-size:11px;font-style:normal}
+.cal-what small{display:block;margin-top:5px;color:var(--muted);font-size:11px;line-height:1.6}
+
+/* ── 뉴보대 줄: 오른쪽 단추로 지난 피드 ────────────────── */
+.nb-scroller{position:relative}
+/* 단추가 카드 위에 겹치므로, 줄 안쪽에 그만큼 자리를 비워 둔다 */
+.nb-scroller .nb-list{scroll-behavior:smooth}
+.nb-arrow{position:absolute;top:38%;width:40px;height:40px;border:1px solid rgba(255,255,255,.28);border-radius:50%;background:rgba(15,38,71,.82);color:white;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(6px);transition:opacity .18s,border-color .18s}
+.nb-arrow:hover{border-color:#6c9dff}
+.nb-arrow.left{left:-14px}
+.nb-arrow.right{right:-14px}
+/* 더 밀 데가 없으면 흐려만 둔다 - 숨기면 누르려던 자리가 도망간다 */
+.nb-arrow:disabled{opacity:.25;cursor:default}
+@media(max-width:900px){.nb-arrow.left{left:-4px}.nb-arrow.right{right:-4px}}
+@media(max-width:620px){
+  .view-switch button{padding:7px 11px;font-size:11px}
+  .cal-cell{min-height:56px;padding:6px;border-radius:11px}
+  .cal-grid{gap:4px}
+  .cal-detail li{grid-template-columns:74px 1fr;gap:10px}
+  .nb-arrow{width:34px;height:34px}
+}

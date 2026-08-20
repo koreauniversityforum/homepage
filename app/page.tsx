@@ -3,8 +3,6 @@ import {
   ArrowRight,
   CalendarDays,
   ChevronRight,
-  Clock3,
-  MapPin,
   MessageCircle,
   UsersRound,
 } from "lucide-react";
@@ -12,21 +10,18 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import NewbodaeRow from "@/components/NewbodaeRow";
 import ClubFilter from "@/components/ClubFilter";
+import EventBoard from "@/components/EventBoard";
 import Board from "@/components/Board";
 import IgGlyph from "@/components/IgGlyph";
 import { ABOUT_MORE, INSTAGRAM, JOIN_FORM } from "@/lib/site";
 import { getPosts, pickNotice, firstImage, fmtDate, excerpt } from "@/lib/posts";
-
-const events = [
-  { day: "24", month: "AUG", title: "대학생 네트워킹 나이트", place: "서울 성수", time: "18:30" },
-  { day: "31", month: "AUG", title: "프로젝트 쇼케이스 데이", place: "온라인", time: "14:00" },
-  { day: "07", month: "SEP", title: "신입 운영진 오리엔테이션", place: "서울 신촌", time: "16:00" },
-];
+import { getEvents } from "@/lib/events";
 
 export default function Home() {
   const allPosts = getPosts();
   const notice = pickNotice(allPosts);
   const recent = allPosts.filter((p) => p !== notice).slice(0, 3);
+  const events = getEvents();
 
   return (
     <main>
@@ -172,35 +167,10 @@ export default function Home() {
       </section>
 
       <section className="section" id="events">
-        <div className="section-heading">
-          <div>
-            <h2>곧 만날 수 있는 자리</h2>
-          </div>
-        </div>
-        <div className="event-list">
-          {events.map((event) => (
-            <article className="event-item" key={event.title}>
-              <div className="event-date">
-                <strong>{event.day}</strong>
-                <span>{event.month}</span>
-              </div>
-              <div className="event-info">
-                <span>한대포 공식 행사</span>
-                <h3>{event.title}</h3>
-                <p>
-                  <MapPin size={15} /> {event.place}
-                  <Clock3 size={15} /> {event.time}
-                </p>
-              </div>
-              <span className="event-go" aria-hidden="true">
-                <ArrowRight size={19} />
-              </span>
-            </article>
-          ))}
-        </div>
+        <EventBoard events={events} />
       </section>
 
-      <NewbodaeRow limit={5} />
+      <NewbodaeRow />
 
       <section className="about-section" id="about">
         <div className="about-content">

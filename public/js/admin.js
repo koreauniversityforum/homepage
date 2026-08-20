@@ -11,12 +11,14 @@ const CFG_KEY = 'kuf_admin_cfg';
      저장소 public/data/posts.json  ↔  주소 /data/posts.json
      저장소 public/media/사진.jpg    ↔  주소 /media/사진.jpg
    JSON 안에는 '주소' 를 적고, 커밋할 때만 앞에 public 을 붙인다. */
-const PATHS = { posts: 'data/posts.json', newbodae: 'data/newbodae.json' };
+const PATHS = { posts: 'data/posts.json', newbodae: 'data/newbodae.json', events: 'data/events.json' };
 const repoPath = (webPath) => 'public/' + String(webPath).replace(/^\//, '');
 
 const S = {
   kind: 'posts',
-  data: { posts: null, newbodae: null },
+  data: { posts: null, newbodae: null, events: null },
+  /** 일정 탭 달력이 보고 있는 달 */
+  cal: null,
   /** 이번에 새로 얹을 이미지: [{path, base64, dataUrl, name}] */
   blobs: [],
   editingId: null,
@@ -128,15 +130,18 @@ async function commitFiles(files, message) {
 const EMPTY = {
   posts: { updated: '', posts: [] },
   newbodae: { updated: '', items: [] },
+  events: { updated: '', events: [] },
 };
 
+/* 파일마다 목록이 담긴 열쇠 이름이 다르다. 한 곳에만 적어 둔다. */
+const KEY = { posts: 'posts', newbodae: 'items', events: 'events' };
+const KINDS = ['posts', 'newbodae', 'events'];
+
 function listOf(kind) {
-  const d = S.data[kind];
-  return kind === 'posts' ? d.posts : d.items;
+  return S.data[kind][KEY[kind]];
 }
 function setListOf(kind, arr) {
-  const d = S.data[kind];
-  if (kind === 'posts') d.posts = arr; else d.items = arr;
+  S.data[kind][KEY[kind]] = arr;
 }
 
 async function loadOne(kind) {
@@ -162,17 +167,21 @@ async function loadOne(kind) {
 }
 
 async function loadAll() {
-  S.data.posts = await loadOne('posts');
-  S.data.newbodae = await loadOne('newbodae');
-  if (!Array.isArray(S.data.posts.posts)) S.data.posts.posts = [];
-  if (!Array.isArray(S.data.newbodae.items)) S.data.newbodae.items = [];
+  for (const kind of KINDS) {
+    S.data[kind] = await loadOne(kind);
+    if (!Array.isArray(listOf(kind))) setListOf(kind, []);
+  }
   sortAll();
   renderList();
 }
 
 function sortAll() {
-  for (const kind of ['posts', 'newbodae']) {
-    setListOf(kind, listOf(kind).slice().sort((a, b) => String(b.date || '').localeCompare(String(a.date || ''))));
+  for (const kind of KINDS) {
+    /* 소식·카드는 새 것이 위로(내림차순), 일정은 달력 순서 그대로 오름차순이 읽기 쉽다. */
+    const dir = kind === 'events' ? 1 : -1;
+    setListOf(kind, listOf(kind).slice().sort(
+      (a, b) => dir * String(a.date || '').localeCompare(String(b.date || ''))
+    ));
   }
 }
 
@@ -182,7 +191,13 @@ function renderList() {
   const ul = $('#items');
   ul.textContent = '';
   const arr = listOf(S.kind);
-  $('#side-title').textContent = S.kind === 'posts' ? `등록된 글 ${arr.length}건` : `등록된 카드 ${arr.length}건`;
+  $('#side-title').textContent =
+    S.kind === 'posts' ? `등록된 글 ${arr.length}건`
+    : S.kind === 'newbodae' ? `등록된 카드 ${arr.length}건`
+    : `등록된 일정 ${arr.length}건`;
+
+  /* 일정은 목록보다 달력이 읽기 쉽다 - 언제 비어 있는지가 한눈에 보인다. */
+  if (S.kind === 'events') { renderCal(); return; }
 
   if (!arr.length) {
     const li = document.createElement('li');
@@ -225,6 +240,93 @@ function renderList() {
   });
 }
 
+/* ── 달력 (일정 탭) ───────────────────────────────────── */
+
+const WEEK = ['일', '월', '화', '수', '목', '금', '토'];
+
+/** '2026-08-24' → {y,m,d} */
+function ymd(date) {
+  const [y, m, d] = String(date || '').split('-').map(Number);
+  return { y, m, d };
+}
+function dateStr(y, m, d) {
+  const p = (n) => String(n).padStart(2, '0');
+  return `${y}-${p(m)}-${p(d)}`;
+}
+
+function calCursor() {
+  if (S.cal) return S.cal;
+  /* 처음 열면 오늘이 있는 달. 일정이 한 건도 없어도 자리는 보여야 한다. */
+  const t = ymd(todayStr());
+  S.cal = { y: t.y, m: t.m };
+  return S.cal;
+}
+
+function renderCal() {
+  const { y, m } = calCursor();
+  $('#cal-title').textContent = `${y}년 ${m}월`;
+
+  const grid = $('#cal-grid');
+  grid.textContent = '';
+
+  WEEK.forEach((w) => {
+    const s = document.createElement('span');
+    s.className = 'cal-wd';
+    s.textContent = w;
+    grid.appendChild(s);
+  });
+
+  const lead = new Date(y, m - 1, 1).getDay();
+  const days = new Date(y, m, 0).getDate();
+  const today = todayStr();
+
+  for (let i = 0; i < lead; i++) {
+    const cell = document.createElement('span');
+    cell.className = 'cal-cell blank';
+    grid.appendChild(cell);
+  }
+
+  for (let d = 1; d <= days; d++) {
+    const date = dateStr(y, m, d);
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell' + (date === today ? ' today' : '');
+
+    /* 빈 곳을 누르면 그 날짜로 새 일정. 「+ 새 일정」을 누르고 날짜를 다시 고르는 수고를 던다. */
+    const num = document.createElement('button');
+    num.type = 'button';
+    num.className = 'cal-day';
+    num.textContent = d;
+    num.title = `${m}월 ${d}일에 새 일정`;
+    num.addEventListener('click', () => openEditor(null, date));
+    cell.appendChild(num);
+
+    listOf('events')
+      .filter((e) => e.date === date)
+      .forEach((e) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'cal-chip' + (e.id === S.editingId ? ' on' : '');
+        chip.textContent = (e.time ? e.time + ' ' : '') + (e.title || '(제목 없음)');
+        chip.title = '이 일정 고치기';
+        chip.addEventListener('click', () => openEditor(e.id));
+        cell.appendChild(chip);
+      });
+
+    grid.appendChild(cell);
+  }
+}
+
+function moveCal(step) {
+  const { y, m } = calCursor();
+  const d = new Date(y, m - 1 + step, 1);
+  S.cal = { y: d.getFullYear(), m: d.getMonth() + 1 };
+  renderCal();
+}
+
+$('#cal-prev').addEventListener('click', () => moveCal(-1));
+$('#cal-next').addEventListener('click', () => moveCal(1));
+$('#cal-today').addEventListener('click', () => { S.cal = null; renderCal(); });
+
 /* ── 편집기 ───────────────────────────────────────────── */
 
 function todayStr() {
@@ -233,44 +335,70 @@ function todayStr() {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
 }
 
-/** 화면 위쪽 칸들 중 뉴보대에 없는 것들을 숨긴다. */
+/** 화면 위쪽 칸들 중 지금 탭에 없는 것들을 숨긴다. */
 function applyKindUi() {
   const isPost = S.kind === 'posts';
+  const isEvent = S.kind === 'events';
+
   $('#row-category').hidden = !isPost;
   $('#row-summary').hidden = !isPost;
   $('#row-pin').hidden = !isPost;
+  $('#row-when').hidden = !isEvent;   // 시간·장소는 일정에만
+  $('#row-images').hidden = isEvent;  // 일정에는 사진을 안 받는다
+  $('#thumbs').hidden = isEvent;
+
+  /* 일정 탭에서는 왼쪽이 목록이 아니라 달력이다 - 달력이 주인공이라 칸도 넓어진다. */
+  $('#items').hidden = isEvent;
+  $('#cal').hidden = !isEvent;
+  $('.layout').classList.toggle('events', isEvent);
+  $('#btn-new').textContent = isEvent ? '+ 새 일정' : '+ 새 글';
+  $('#side-hint').innerHTML = isEvent
+    ? '달력에서 <b>날짜</b>를 누르면 그 날 새 일정, <b>일정 이름</b>을 누르면 그 일정을 고칩니다.'
+    : '지난 소식을 <b>누르면</b> 오른쪽에서 고칠 수 있습니다.';
+
   $('#f-body').placeholder = isPost
     ? '인스타 캡션을 그대로 붙여넣어도 됩니다. 빈 줄로 문단이 나뉩니다.'
-    : '카드 설명(캡션). 홈페이지 목록에는 앞부분만 보입니다.';
+    : isEvent
+      ? '한 줄 안내(선택). 예) 사전 신청 없이 오셔도 됩니다.'
+      : '카드 설명(캡션). 홈페이지 목록에는 앞부분만 보입니다.';
   $('#tab-note').textContent = isPost
     ? '새 글을 공지로 올리면 이전 공지는 자동으로 일반글이 됩니다.'
-    : '뉴보대 카드는 홈페이지에서 인스타 게시물로 바로 이어집니다.';
+    : isEvent
+      ? '홈페이지는 지난 일정 1건과 다가오는 일정 2건을 보여 주고, 「달력」으로도 볼 수 있습니다.'
+      : '뉴보대 카드는 홈페이지에서 인스타 게시물로 바로 이어집니다.';
 }
 
 let pending = []; // 현재 편집 중인 글의 이미지 경로 목록
 
-function openEditor(id) {
+function openEditor(id, presetDate) {
   S.editingId = id;
   const it = listOf(S.kind).find((x) => x.id === id) || null;
 
   $('#f-title').value = it?.title || '';
-  $('#f-date').value = it?.date || todayStr();
+  $('#f-date').value = it?.date || presetDate || todayStr();
+  $('#f-time').value = it?.time || '';
+  $('#f-place').value = it?.place || '';
   $('#f-category').value = it?.category || (S.kind === 'posts' ? '공지' : '');
   $('#f-permalink').value = it?.permalink || '';
   $('#f-summary').value = it?.summary || '';
-  $('#f-body').value = (S.kind === 'posts' ? it?.body : it?.caption) || '';
+  $('#f-body').value =
+    (S.kind === 'posts' ? it?.body : S.kind === 'events' ? it?.note : it?.caption) || '';
   $('#f-pinned').checked = it ? !!it.pinned : true;
   $('#btn-delete').hidden = !it;
   $('#form-status').textContent = '';
 
   /* 지금 새 글을 쓰는 중인지, 있던 글을 고치는 중인지 위에 적어 둔다.
      목록을 눌러야 고쳐진다는 걸 알 방법이 없어 기능이 없는 줄 알았던 자리다. */
-  const what = S.kind === 'posts' ? '소식' : '카드';
+  const what = S.kind === 'posts' ? '소식' : S.kind === 'events' ? '일정' : '카드';
   $('.editor-head').classList.toggle('editing', !!it);
   $('#editor-mode').textContent = it ? `고치는 중: ${it.title || '(제목 없음)'}` : `새 ${what} 쓰기`;
   $('#editor-what').textContent = it
-    ? `${it.date || ''} 에 올린 글입니다. 고친 뒤 「저장」을 누르세요.`
-    : '왼쪽에서 글을 고르면 그 글을 고칩니다.';
+    ? S.kind === 'events'
+      ? `${it.date || ''} 일정입니다. 고친 뒤 「저장」을 누르세요.`
+      : `${it.date || ''} 에 올린 글입니다. 고친 뒤 「저장」을 누르세요.`
+    : S.kind === 'events'
+      ? '달력에서 날짜를 누르면 그 날짜로 시작합니다.'
+      : '왼쪽에서 글을 고르면 그 글을 고칩니다.';
   $('#btn-save').textContent = it ? '고친 내용 저장' : `${what} 저장`;
 
   pending = (it?.images || []).slice();
@@ -328,7 +456,7 @@ function extOf(dataUrl) {
 }
 
 function makeId(kind, date) {
-  const base = kind === 'posts' ? date : `nb-${date}`;
+  const base = kind === 'newbodae' ? `nb-${date}` : date;
   const used = new Set(listOf(kind).map((x) => x.id));
   let n = 1;
   while (used.has(`${base}-${n}`)) n++;
@@ -376,8 +504,15 @@ $('#form').addEventListener('submit', (ev) => {
 
   it.title = $('#f-title').value.trim();
   it.date = date;
-  it.permalink = $('#f-permalink').value.trim();
-  it.images = pending.slice();
+
+  if (S.kind === 'events') {
+    it.time = $('#f-time').value.trim();
+    it.place = $('#f-place').value.trim();
+    it.note = $('#f-body').value.trim();
+  } else {
+    it.permalink = $('#f-permalink').value.trim();
+    it.images = pending.slice();
+  }
 
   if (S.kind === 'posts') {
     it.category = $('#f-category').value;
@@ -393,7 +528,7 @@ $('#form').addEventListener('submit', (ev) => {
     } else {
       it.pinned = false;
     }
-  } else {
+  } else if (S.kind === 'newbodae') {
     it.caption = $('#f-body').value;
   }
 
@@ -402,8 +537,9 @@ $('#form').addEventListener('submit', (ev) => {
   sortAll();
   renderList();
   markDirty();
+  const what = S.kind === 'events' ? '일정' : '글';
   $('#form-status').textContent = isNew
-    ? `새 글로 담았습니다 (${it.id}). 아래 「GitHub에 올리기」를 눌러야 홈페이지에 나옵니다.`
+    ? `새 ${what}으로 담았습니다 (${it.id}). 아래 「GitHub에 올리기」를 눌러야 홈페이지에 나옵니다.`
     : '고친 내용을 담았습니다. 아래에서 올리면 홈페이지에 반영됩니다.';
 });
 
@@ -412,6 +548,7 @@ $('#btn-delete').addEventListener('click', () => {
   if (!it) return;
   if (!confirm(`「${it.title || it.id}」 을(를) 목록에서 지웁니다.\n올린 뒤에는 홈페이지에서도 사라집니다. 계속할까요?`)) return;
   setListOf(S.kind, listOf(S.kind).filter((x) => x.id !== it.id));
+  S.data[S.kind].updated = todayStr();
   S.editingId = null;
   renderList();
   openEditor(null);
@@ -441,7 +578,7 @@ function markDirty() {
   const st = $('#dock-state');
   st.classList.add('dirty');
   const imgs = S.blobs.length;
-  st.textContent = `올릴 것 있음 - 목록 파일 2개${imgs ? ` + 사진 ${imgs}장` : ''}`;
+  st.textContent = `올릴 것 있음 - 목록 파일 ${KINDS.length}개${imgs ? ` + 사진 ${imgs}장` : ''}`;
   $('#btn-commit').disabled = !hasRepo();
 }
 
@@ -462,9 +599,10 @@ function download(name, blob) {
 
 $('#btn-download').addEventListener('click', async () => {
   log('── 파일로 내려받기 ──', false);
-  download('posts.json', new Blob([jsonText('posts')], { type: 'application/json' }));
-  download('newbodae.json', new Blob([jsonText('newbodae')], { type: 'application/json' }));
-  log('· posts.json / newbodae.json 을 받았습니다 → 저장소의 public/data/ 폴더에 덮어쓰세요.');
+  for (const kind of KINDS) {
+    download(kind + '.json', new Blob([jsonText(kind)], { type: 'application/json' }));
+  }
+  log('· posts.json / newbodae.json / events.json 을 받았습니다 → 저장소의 public/data/ 폴더에 덮어쓰세요.');
   for (const b of S.blobs) {
     await new Promise((r) => setTimeout(r, 350)); // 브라우저가 연속 내려받기를 막지 않도록 띄운다
     const bin = Uint8Array.from(atob(b.base64), (ch) => ch.charCodeAt(0));
@@ -481,8 +619,7 @@ $('#btn-commit').addEventListener('click', async () => {
   log('── GitHub에 올리기 ──', false);
   try {
     const files = [
-      { path: repoPath(PATHS.posts), content: jsonText('posts') },
-      { path: repoPath(PATHS.newbodae), content: jsonText('newbodae') },
+      ...KINDS.map((kind) => ({ path: repoPath(PATHS[kind]), content: jsonText(kind) })),
       ...S.blobs.map((b) => ({ path: repoPath(b.path), base64: b.base64 })),
     ];
     const sha = await commitFiles(files, `소식 갱신 (${todayStr()})`);

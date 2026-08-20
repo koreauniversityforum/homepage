@@ -49,6 +49,7 @@
 <nav class="tabs">
   <button type="button" class="tab on" data-kind="posts">한대포 소식</button>
   <button type="button" class="tab" data-kind="newbodae">뉴보대 피드</button>
+  <button type="button" class="tab" data-kind="events">일정</button>
   <span class="tab-note" id="tab-note"></span>
 </nav>
 
@@ -59,8 +60,21 @@
       <h2 id="side-title">등록된 글</h2>
       <button type="button" id="btn-new">+ 새 글</button>
     </div>
-    <p class="side-hint">지난 소식을 <b>누르면</b> 오른쪽에서 고칠 수 있습니다.</p>
+    <p class="side-hint" id="side-hint">지난 소식을 <b>누르면</b> 오른쪽에서 고칠 수 있습니다.</p>
     <ul class="items" id="items"></ul>
+
+    <!-- 일정 탭에서만 보이는 달력. 날짜를 누르면 그 날로 새 일정을 시작하고,
+         일정 이름을 누르면 그 일정을 고친다. -->
+    <div class="cal" id="cal" hidden>
+      <div class="cal-head">
+        <button type="button" id="cal-prev" aria-label="이전 달">‹</button>
+        <strong id="cal-title">-</strong>
+        <button type="button" id="cal-next" aria-label="다음 달">›</button>
+        <button type="button" class="ghost" id="cal-today">오늘</button>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+      <p class="cal-tip">날짜를 누르면 그 날짜로 <b>새 일정</b>을 시작합니다. 일정 이름을 누르면 <b>그 일정</b>을 고칩니다.</p>
+    </div>
   </aside>
 
   <!-- 오른쪽: 편집기 -->
@@ -91,6 +105,15 @@
         </label>
       </div>
 
+      <div class="f-row" id="row-when">
+        <label>시작 시간
+          <input id="f-time" type="time">
+        </label>
+        <label class="grow">장소
+          <input id="f-place" placeholder="예) 서울 신촌 · 온라인(줌)">
+        </label>
+      </div>
+
       <label id="row-summary">목록에 보일 한 줄
         <input id="f-summary" placeholder="비워두면 본문 앞부분을 씁니다">
       </label>
@@ -99,7 +122,7 @@
         <textarea id="f-body" rows="11" placeholder="인스타 캡션을 그대로 붙여넣어도 됩니다. 빈 줄로 문단이 나뉩니다."></textarea>
       </label>
 
-      <div class="f-row">
+      <div class="f-row" id="row-images">
         <label class="grow">카드 이미지
           <input id="f-files" type="file" accept="image/*" multiple>
         </label>
