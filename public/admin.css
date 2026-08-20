@@ -79,3 +79,18 @@ textarea { resize:vertical; line-height:1.75; }
   .grid4 { grid-template-columns:1fr 1fr; }
   .items { max-height:none; }
 }
+
+/* 「지금 고치는 중인 글」을 눈에 보이게 - 목록을 눌러야 고쳐진다는 걸
+   알 방법이 없어서, 기능은 있는데 없는 줄 알았던 자리다. */
+.side-hint { margin:0; padding:0 18px 12px; font-size:11.5px; line-height:1.6; color:var(--muted); border-bottom:1px solid var(--line); }
+.side-hint b { color:#11131a; }
+
+.editor-head { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; padding:16px 24px; border-bottom:1px solid var(--line); }
+.editor-head strong { font-size:14px; }
+.editor-head .hint { margin:0; font-size:11.5px; color:var(--muted); }
+.editor-head.editing { background:#eef7f6; }
+.editor-head.editing strong { color:#07684f; }
+
+.items li { position:relative; }
+.items li:hover::after { content:'고치기'; position:absolute; right:10px; top:12px; font-size:10px; font-weight:800; color:var(--muted); }
+.items li.on:hover::after { content:''; }

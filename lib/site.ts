@@ -15,23 +15,21 @@ export const JOIN_FORM = "https://forms.gle/2UkdBcGhrdZiSGde7";
 
 export const INSTAGRAM = {
   /* 🔴 자료마다 두 갈래로 적혀 있었다(forum / fourm).
-     뉴보대 워터마크·설명서에 쓰인 fourm 쪽을 따랐다. 실제 계정이 다르면 이 줄만 고치면 된다. */
-  kuf: "universityfourm_korea",
+     2026-08-20 사용자가 직접 준 주소가 forum 쪽이라 그것으로 통일했다.
+     실제 계정이 다르면 이 줄만 고치면 화면 전체가 따라온다. */
+  kuf: "universityforum_korea",
   newbodae: "news_univ",
 };
 
 /**
- * 🔴 히어로 아래 줄에 들어가는 숫자.
+ * 「더 자세히 보기」가 여는 곳.
  *
- * 지금 값은 근거가 확인되지 않은 것이다(처음 시안에 들어 있던 값을 그대로 둔 상태).
- * 실제 값을 알게 되면 여기만 고치면 화면이 따라온다.
- * 근거를 못 찾겠으면 이 배열을 빈 배열 `[]` 로 두면 그 줄이 통째로 사라진다.
+ * 지금은 이 사이트 안의 소개 페이지(/about)다.
+ * 노션·브런치 같은 바깥 글로 바꾸고 싶으면 이 한 줄만 주소로 갈아 끼우면 된다
+ * (바깥 주소면 새 탭으로 열리게 아래 EXTERNAL 판정이 알아서 처리한다).
  */
-export const STATS: { value: string; label: string }[] = [
-  { value: "42", label: "참여 대학" },
-  { value: "128", label: "활동 모임" },
-  { value: "3,200+", label: "연결된 대학생" },
-];
+export const ABOUT_MORE = "/about";
+
 
 /**
  * 후원 계좌 - 머리말 오른쪽(옛 로그인 단추 자리)에 뜬다.

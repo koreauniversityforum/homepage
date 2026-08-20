@@ -307,3 +307,110 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
   .glass-mark{width:150px;margin-bottom:30px}
   .about-glow{left:-14%;top:-8%;width:82%;height:52%}
 }
+
+/* ══ 소개 칸의 유리 알약 두 개 ═══════════════════════════════════════════
+   유리 원판과 같은 4겹이되, 알약이라 라운드는 높이의 절반이다.
+   🔴 유리 알약은 꼬리표(계정), 색이 진한 쪽이 행동 하나 - 둘을 같은 세기로
+      두면 어느 쪽을 눌러야 하는지 알 수 없다.
+   🔴 이 칸에 filter 를 걸면 안 된다. filter 가 걸린 조상은 「배경 뿌리」가 되어
+      자식의 backdrop-filter 가 볼 배경을 끊는다(유리 원판에서 겪은 것과 같다). */
+.about-actions{position:relative;display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+/* 알약 뒤에도 흐릴 것을 조금 깔아 준다. 매끈한 그라데이션만 있으면 흐려도 티가 안 난다. */
+.about-actions::before{
+  content:"";position:absolute;left:-24px;top:-26px;width:min(460px,112%);height:150%;
+  pointer-events:none;border-radius:999px;
+  background:
+    radial-gradient(46% 60% at 22% 46%, rgba(78,252,251,.34), rgba(78,252,251,0) 72%),
+    radial-gradient(44% 58% at 68% 56%, rgba(150,170,255,.32), rgba(150,170,255,0) 74%);
+}
+
+.glass-pill{
+  position:relative;z-index:1;isolation:isolate;
+  min-height:50px;padding:0 20px;display:inline-flex;align-items:center;gap:9px;
+  border-radius:999px;color:white;font-size:13.5px;font-weight:700;letter-spacing:-.01em;
+  transition:transform .2s,box-shadow .2s;
+}
+.glass-pill b{font-weight:800}
+.glass-pill svg{flex:none}
+.glass-pill:hover{transform:translateY(-2px)}
+
+.glass-pill-plate{
+  position:absolute;inset:0;border-radius:inherit;z-index:-1;
+  -webkit-backdrop-filter:blur(14px) saturate(210%) brightness(1.08);
+  backdrop-filter:blur(14px) saturate(210%) brightness(1.08);
+  border:1.5px solid transparent;
+  background:
+    linear-gradient(165deg, rgba(255,255,255,.22), rgba(255,255,255,.08)) padding-box,
+    linear-gradient(150deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,.26) 46%, rgba(20,28,48,.26) 100%) border-box;
+  box-shadow:
+    0 10px 20px rgba(8,16,36,.34),
+    inset 4px 6px 16px -12px rgba(255,255,255,.9),
+    inset -6px -8px 20px -14px rgba(10,18,38,.6);
+}
+/* ④ 빛줄기 - 위에서 아래로 한 방향으로만 옅어지는 띠. 타원으로 그리면 얼룩이 남는다. */
+.glass-pill-sheen{
+  position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(255,255,255,.4) 0%,
+    rgba(255,255,255,.16) 8%,
+    rgba(255,255,255,.04) 14%,
+    rgba(255,255,255,0)   18%);
+}
+
+/* 행동 쪽 - 흰 막을 두 배 가까이 올려 먼저 눈에 들어오게 한다 */
+.glass-pill.solid{color:#0c2350}
+.glass-pill.solid .glass-pill-plate{
+  background:
+    linear-gradient(165deg, rgba(255,255,255,.92), rgba(255,255,255,.74)) padding-box,
+    linear-gradient(150deg, rgba(255,255,255,1) 0%, rgba(255,255,255,.5) 50%, rgba(20,28,48,.2) 100%) border-box;
+  box-shadow:
+    0 12px 24px rgba(8,16,36,.4),
+    inset 0 -8px 18px -14px rgba(10,18,38,.35);
+}
+.glass-pill.solid .glass-pill-sheen{
+  background:linear-gradient(180deg, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 18%);
+}
+
+@media(prefers-reduced-transparency:reduce){
+  .about-actions::before{display:none}
+  .glass-pill-plate{
+    -webkit-backdrop-filter:none;backdrop-filter:none;
+    background:rgba(255,255,255,.2) padding-box,
+               linear-gradient(150deg,rgba(255,255,255,.9),rgba(20,28,48,.26)) border-box;
+  }
+  .glass-pill.solid .glass-pill-plate{background:#eef4ff padding-box,#fff border-box}
+}
+@media(max-width:620px){
+  .about-actions{gap:9px;margin-top:24px}
+  .glass-pill{min-height:46px;padding:0 16px;font-size:12.5px;flex:1 1 100%;justify-content:center}
+}
+
+/* ══ 소개 페이지(/about) ════════════════════════════════════════════════ */
+.about-page h2{margin:0 0 22px;font-size:clamp(22px,2.6vw,32px);letter-spacing:-.045em}
+.about-page .about-h2{margin-top:76px}
+.about-lead{margin:0 0 16px;max-width:62ch;color:var(--muted);font-size:14.5px;line-height:1.85}
+
+.about-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.about-card{padding:26px;border:1px solid var(--line);border-radius:22px;background:white;
+  transition:transform .2s,box-shadow .2s}
+.about-card:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(30,61,102,.1)}
+.about-card h3{margin:0 0 12px;font-size:17px;letter-spacing:-.03em}
+.about-card p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.85}
+
+.about-links{display:flex;flex-direction:column;padding:6px 22px;border:1px solid var(--line);
+  border-radius:22px;background:white}
+.about-link{display:grid;grid-template-columns:1fr 20px;align-items:center;gap:6px 12px;
+  padding:18px 0;border-bottom:1px solid #eef1f5}
+.about-link:last-child{border-bottom:0}
+.about-link strong{display:inline-flex;align-items:center;gap:7px;font-size:14px;letter-spacing:-.02em}
+.about-link small{grid-column:1;color:#8b94a2;font-size:11.5px}
+.about-link>svg{grid-row:1/3;color:#9ca8b6}
+.about-link:hover strong{color:var(--blue)}
+.about-back{margin:44px 0 0}
+
+@media(max-width:900px){.about-cards{grid-template-columns:1fr}}
+@media(max-width:620px){
+  .about-page .about-h2{margin-top:56px}
+  .about-card{padding:22px}
+  .about-links{padding:6px 18px}
+}

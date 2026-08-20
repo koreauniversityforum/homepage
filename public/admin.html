@@ -59,11 +59,16 @@
       <h2 id="side-title">등록된 글</h2>
       <button type="button" id="btn-new">+ 새 글</button>
     </div>
+    <p class="side-hint">지난 소식을 <b>누르면</b> 오른쪽에서 고칠 수 있습니다.</p>
     <ul class="items" id="items"></ul>
   </aside>
 
   <!-- 오른쪽: 편집기 -->
   <section class="editor">
+    <div class="editor-head">
+      <strong id="editor-mode">새 글 쓰기</strong>
+      <span class="hint" id="editor-what">왼쪽에서 글을 고르면 그 글을 고칩니다.</span>
+    </div>
     <form id="form" autocomplete="off">
       <div class="f-row">
         <label class="grow">제목

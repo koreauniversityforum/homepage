@@ -13,7 +13,8 @@ import SiteFooter from "@/components/SiteFooter";
 import NewbodaeRow from "@/components/NewbodaeRow";
 import ClubFilter from "@/components/ClubFilter";
 import Board from "@/components/Board";
-import { STATS, JOIN_FORM } from "@/lib/site";
+import IgGlyph from "@/components/IgGlyph";
+import { ABOUT_MORE, INSTAGRAM, JOIN_FORM } from "@/lib/site";
 import { getPosts, pickNotice, firstImage, fmtDate, excerpt } from "@/lib/posts";
 
 const events = [
@@ -53,15 +54,6 @@ export default function Home() {
               소식 보기
             </Link>
           </div>
-          {STATS.length > 0 && (
-            <div className="trust-row">
-              {STATS.map((s) => (
-                <span key={s.label}>
-                  <strong>{s.value}</strong> {s.label}
-                </span>
-              ))}
-            </div>
-          )}
         </div>
         <div className="hero-visual" aria-label="한대포 활동 미리보기">
           <div className="floating-card card-main">
@@ -232,6 +224,30 @@ export default function Home() {
               <br />
               열린 네트워크를 만들고, 현업에 계신 분들과 꾸준히 만남을 이어 갑니다.
             </p>
+
+            {/* 유리 알약 두 개. 왼쪽은 꼬리표(계정), 오른쪽은 행동 하나.
+                🔴 두 겹 다 유리로 두되 흰 막 농도로 계급을 나눈다 - 같은 세기로 두면
+                   어느 쪽을 눌러야 하는지 알 수 없다. */}
+            <div className="about-actions">
+              <a
+                className="glass-pill"
+                href={`https://www.instagram.com/${INSTAGRAM.kuf}/`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="glass-pill-plate" />
+                <span className="glass-pill-sheen" />
+                <IgGlyph size={18} />
+                <b>{INSTAGRAM.kuf}</b>
+              </a>
+
+              <a className="glass-pill solid" href={ABOUT_MORE}>
+                <span className="glass-pill-plate" />
+                <span className="glass-pill-sheen" />
+                <b>더 자세히 보기</b>
+                <ArrowRight size={17} />
+              </a>
+            </div>
           </div>
         </div>
       </section>

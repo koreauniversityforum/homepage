@@ -262,6 +262,17 @@ function openEditor(id) {
   $('#f-pinned').checked = it ? !!it.pinned : true;
   $('#btn-delete').hidden = !it;
   $('#form-status').textContent = '';
+
+  /* 지금 새 글을 쓰는 중인지, 있던 글을 고치는 중인지 위에 적어 둔다.
+     목록을 눌러야 고쳐진다는 걸 알 방법이 없어 기능이 없는 줄 알았던 자리다. */
+  const what = S.kind === 'posts' ? '소식' : '카드';
+  $('.editor-head').classList.toggle('editing', !!it);
+  $('#editor-mode').textContent = it ? `고치는 중: ${it.title || '(제목 없음)'}` : `새 ${what} 쓰기`;
+  $('#editor-what').textContent = it
+    ? `${it.date || ''} 에 올린 글입니다. 고친 뒤 「저장」을 누르세요.`
+    : '왼쪽에서 글을 고르면 그 글을 고칩니다.';
+  $('#btn-save').textContent = it ? '고친 내용 저장' : `${what} 저장`;
+
   pending = (it?.images || []).slice();
   renderThumbs();
   renderList();
