@@ -13,6 +13,20 @@ export const CONTACT = {
  */
 export const JOIN_FORM = "https://forms.gle/2UkdBcGhrdZiSGde7";
 
+/**
+ * 활동별 지원 폼 - 「함께할 사람들」 카드가 여는 곳.
+ *
+ * 2026-08-20 한대포 계정(koreauniversityforum@gmail.com)으로 만든 구글 폼이다.
+ * 폼을 새로 만들면 여기 주소만 갈아 끼우면 카드가 따라온다.
+ * 주소가 없는 활동은 여기 넣지 않는다 - 카드가 안 눌리는 편이 죽은 링크보다 낫다.
+ */
+export const CLUB_FORMS = {
+  /** 현재를 기록하는 대학생 에디터 클럽 */
+  editor: "https://forms.gle/qm2jD4o62xEdS3yt6",
+  /** 아이디어를 서비스로! 브랜드를 직접 만드는 사이드 프로젝트 팀 */
+  sideProject: "https://forms.gle/4VHRHdD26Y9DA4RD7",
+};
+
 export const INSTAGRAM = {
   /* 🔴 자료마다 두 갈래로 적혀 있었다(forum / fourm).
      2026-08-20 사용자가 직접 준 주소가 forum 쪽이라 그것으로 통일했다.

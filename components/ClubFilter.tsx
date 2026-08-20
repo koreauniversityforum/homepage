@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ChevronRight, UsersRound } from "lucide-react";
-import { JOIN_FORM } from "@/lib/site";
+import { CLUB_FORMS, JOIN_FORM } from "@/lib/site";
 
 /**
  * 여기 보일 활동.
@@ -33,6 +33,7 @@ const clubs: {
     schools: "전국 대학생",
     due: "2026-09-13",
     accent: "green",
+    href: CLUB_FORMS.editor,
   },
   {
     categories: ["IT · 창업", "기획 · 마케팅"],
@@ -41,6 +42,7 @@ const clubs: {
       "기획·디자인·개발이 한 팀이 되어, 머릿속 아이디어를 실제로 굴러가는 서비스와 브랜드로 만듭니다.",
     schools: "전국 대학생",
     accent: "blue",
+    href: CLUB_FORMS.sideProject,
   },
   {
     categories: ["포럼 · 토론"],
