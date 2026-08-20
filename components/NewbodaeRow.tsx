@@ -4,9 +4,12 @@ import { INSTAGRAM } from "@/lib/site";
 
 /**
  * 뉴보대(@news_univ) 카드뉴스 줄.
+ *
  * 홈페이지에 상세 글을 따로 두지 않고, 누르면 인스타 게시물로 보낸다.
+ * 카드는 날짜 내림차순이라 **왼쪽이 가장 새 것**이고, 새 글이 들어오면
+ * 옛 카드가 오른쪽으로 밀려난다. 넘치면 옆으로 밀어서 본다.
  */
-export default function NewbodaeRow({ limit = 6 }: { limit?: number }) {
+export default function NewbodaeRow({ limit = 5 }: { limit?: number }) {
   const cards = getCards().slice(0, limit);
   const accountUrl = `https://www.instagram.com/${INSTAGRAM.newbodae}/`;
 

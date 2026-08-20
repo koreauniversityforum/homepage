@@ -384,7 +384,7 @@ $('#form').addEventListener('submit', (ev) => {
     it.summary = $('#f-summary').value.trim();
     it.body = $('#f-body').value;
     it.source = it.source || (it.permalink ? 'instagram' : 'manual');
-    it.account = it.account || 'universityfourm_korea';
+    it.account = it.account || 'universityforum_korea';
 
     /* 공지는 한 건만. 새 글을 공지로 올리면 이전 공지가 일반글로 내려간다. */
     if ($('#f-pinned').checked) {

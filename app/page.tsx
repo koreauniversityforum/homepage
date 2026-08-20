@@ -200,7 +200,7 @@ export default function Home() {
         </div>
       </section>
 
-      <NewbodaeRow limit={6} />
+      <NewbodaeRow limit={5} />
 
       <section className="about-section" id="about">
         <div className="about-content">

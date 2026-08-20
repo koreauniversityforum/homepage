@@ -38,5 +38,5 @@ Framework Preset 은 **Next.js**. Build/Output 은 기본값 그대로 두면 �
   실제 값을 알게 되면 `lib/site.ts` 의 `STATS`·`ABOUT_NUMBER` 만 고치면 된다.
   빈 배열 `[]` 로 두면 그 줄이 통째로 사라진다.
 - 동아리 3종·커뮤니티 글 4건·행사 3건도 아직 예시 내용이다. (`components/ClubFilter.tsx`, `app/page.tsx`)
-- 인스타 핸들이 자료마다 두 갈래였다(`universityfourm_korea` / `universityforum_korea`).
+- 인스타 핸들이 자료마다 두 갈래였다(`universityforum_korea` / `universityforum_korea`).
   지금은 앞쪽을 쓰며, 바꾸려면 `lib/site.ts` 의 `INSTAGRAM.kuf` 한 줄만 고치면 된다.

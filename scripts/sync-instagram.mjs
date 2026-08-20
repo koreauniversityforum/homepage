@@ -31,7 +31,7 @@ const FILES = {
 
 const TOKEN = process.env.IG_TOKEN || '';
 const ACCOUNTS = [
-  { kind: 'posts', id: process.env.IG_USER_KUF || '', handle: 'universityfourm_korea' },
+  { kind: 'posts', id: process.env.IG_USER_KUF || '', handle: 'universityforum_korea' },
   { kind: 'newbodae', id: process.env.IG_USER_NBD || '', handle: 'news_univ' },
 ];
 
