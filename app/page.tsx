@@ -13,7 +13,7 @@ import SiteFooter from "@/components/SiteFooter";
 import NewbodaeRow from "@/components/NewbodaeRow";
 import ClubFilter from "@/components/ClubFilter";
 import Board from "@/components/Board";
-import { STATS, ABOUT_NUMBER, JOIN_FORM } from "@/lib/site";
+import { STATS, JOIN_FORM } from "@/lib/site";
 import { getPosts, pickNotice, firstImage, fmtDate, excerpt } from "@/lib/posts";
 
 const events = [
@@ -212,7 +212,15 @@ export default function Home() {
 
       <section className="about-section" id="about">
         <div className="about-content">
-          <span className="about-number">{ABOUT_NUMBER}</span>
+          {/* 유리판이 흐릴 것이 있어야 유리로 보인다 — 뒤에 깔아 두는 빛 무리 */}
+          <span className="about-glow" aria-hidden="true" />
+          {/* 로고를 얹은 유리 원판. 겹 순서가 곧 효과다(그림자 → 흐린 판 → 흰 막 → 빛줄기·테두리). */}
+          <span className="glass-mark" aria-hidden="true">
+            <span className="glass-mark-plate" />
+            <span className="glass-mark-sheen" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-mark.png" alt="" />
+          </span>
           <div>
             <h2>
               2009년 연세대학교에서 시작된
@@ -220,8 +228,9 @@ export default function Home() {
               대학생 경제·시사 연합 동아리
             </h2>
             <p>
-              한대포는 대학생들이 서로의 경험과 정보를 나누며 더 넓은 선택지를 발견하도록 돕는 열린
-              네트워크를 만들고, 현업에 계신 분들과 꾸준히 만남을 이어 갑니다.
+              한대포는 대학생들이 서로의 경험과 정보를 나누며 더 넓은 선택지를 발견하도록
+              <br />
+              열린 네트워크를 만들고, 현업에 계신 분들과 꾸준히 만남을 이어 갑니다.
             </p>
           </div>
         </div>

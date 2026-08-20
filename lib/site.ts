@@ -33,9 +33,6 @@ export const STATS: { value: string; label: string }[] = [
   { value: "3,200+", label: "연결된 대학생" },
 ];
 
-/** 소개 영역의 큰 숫자. STATS 와 같은 이유로 여기 모아 둔다. */
-export const ABOUT_NUMBER = "42";
-
 /**
  * 후원 계좌 — 머리말 오른쪽(옛 로그인 단추 자리)에 뜬다.
  *

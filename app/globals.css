@@ -202,3 +202,101 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
   .bd-title{font-size:14px}
   .bd-w-actions .primary-button,.bd-w-actions .secondary-button{width:auto;flex:1}
 }
+
+/* ══ 소개 칸의 유리 로고 ═════════════════════════════════════════════════
+   옛 「42」 자리. 근거를 못 찾은 숫자였고, 로고가 그 자리를 대신한다.
+
+   유리는 네 겹이 다 있어야 유리로 보인다. 하나라도 빠지면 그냥 반투명 원이다.
+   순서가 곧 효과다 (apple style/DESIGN_ppt_poster_glass.md §6 실측 레시피).
+     ① 아래로 떨어지는 그림자      → .glass-mark 의 drop-shadow
+     ② 배경을 흐리게 뜬 판          → .glass-mark-plate 의 backdrop-filter
+     ③ 흰 막 (위 46% → 아래 31%)   → .glass-mark-plate 의 background
+     ④ 윗면 빛줄기 + 위는 밝고 아래는 어두운 테두리 → .glass-mark-sheen · border-box
+   🔴 빛줄기를 타원으로 그리면 안 된다. 아래에 웃는 입 모양 얼룩이 남는다.
+      위에서 아래로 한 방향으로만 옅어지는 띠여야 한다. */
+
+/* 유리가 흐릴 것이 있어야 한다 — 매끈한 그라데이션만 있으면 흐려도 티가 안 난다.
+   판 뒤에 빛 무리를 깔아 두면 그때부터 유리처럼 굴절돼 보인다. */
+.about-glow{
+  position:absolute;left:-6%;top:-14%;width:58%;height:128%;pointer-events:none;
+  background:
+    radial-gradient(38% 34% at 34% 30%, rgba(78,252,251,.34), rgba(78,252,251,0) 70%),
+    radial-gradient(42% 38% at 58% 66%, rgba(120,170,255,.32), rgba(120,170,255,0) 72%),
+    radial-gradient(26% 24% at 22% 70%, rgba(255,255,255,.16), rgba(255,255,255,0) 72%);
+  filter:blur(6px);
+}
+
+.glass-mark{
+  position:relative;z-index:1;display:block;
+  width:min(252px,86%);aspect-ratio:1;
+  /* 살짝 눕히고 돌려 판에 두께가 있는 것처럼 보이게 한다 */
+  transform:perspective(950px) rotateX(10deg) rotateZ(-5deg);
+  transform-style:preserve-3d;
+  /* ① 아래로만 떨어지는 그림자 */
+  filter:drop-shadow(0 16px 26px rgba(28,34,48,.44));
+  animation:glass-float 7s ease-in-out infinite;
+}
+
+.glass-mark-plate{
+  position:absolute;inset:0;border-radius:50%;
+  /* ② 뒤에 깔린 빛 무리를 흐리고 진하게 — 이 한 줄이 「유리 너머」를 만든다 */
+  -webkit-backdrop-filter:blur(17px) saturate(200%) brightness(1.06);
+  backdrop-filter:blur(17px) saturate(200%) brightness(1.06);
+  /* ③ 흰 막 + ④ 테두리(위 흰빛 91% → 아래 그늘 12%)를 한 번에.
+     padding-box 가 막, border-box 가 테두리다. */
+  border:2px solid transparent;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.46), rgba(255,255,255,.31)) padding-box,
+    linear-gradient(180deg, rgba(255,255,255,.91) 0%, rgba(255,255,255,.34) 46%, rgba(40,46,62,.12) 100%) border-box;
+  /* 두께감 — 위 안쪽은 빛을 머금고 아래 안쪽은 그늘이 진다 */
+  box-shadow:
+    inset 0 22px 40px -26px rgba(255,255,255,.85),
+    inset 0 -26px 44px -28px rgba(18,26,46,.55);
+}
+
+/* ④ 빛줄기 — alpha(t) = .41 × max(0, 1 − t×5.5)^1.8 을 눈금으로 옮긴 것.
+   t=0.18 에서 0 이 되므로 판 높이의 18% 안에서 끝난다. */
+.glass-mark-sheen{
+  position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(255,255,255,.41) 0%,
+    rgba(255,255,255,.26) 5%,
+    rgba(255,255,255,.13) 10%,
+    rgba(255,255,255,.04) 15%,
+    rgba(255,255,255,0)   18%);
+}
+
+.glass-mark img{
+  position:absolute;inset:19%;width:62%;height:62%;
+  object-fit:contain;display:block;
+  /* 로고가 판 위에 떠 있게 — 판 자체 그림자보다 짧고 진하게 */
+  filter:drop-shadow(0 7px 11px rgba(4,12,30,.42));
+}
+
+@keyframes glass-float{
+  0%,100%{transform:perspective(950px) rotateX(10deg) rotateZ(-5deg) translateY(0)}
+  50%    {transform:perspective(950px) rotateX(8deg)  rotateZ(-4deg) translateY(-9px)}
+}
+
+/* 🔴 투명 효과를 꺼 둔 사람에게는 유리가 지저분한 얼룩으로만 보인다.
+   그때는 흐림을 걷고 불투명한 면으로 바꾼다. */
+@media(prefers-reduced-transparency:reduce){
+  .about-glow{display:none}
+  .glass-mark-plate{
+    -webkit-backdrop-filter:none;backdrop-filter:none;
+    background:linear-gradient(180deg,#dceaff,#b9d3f6) padding-box,
+               linear-gradient(180deg,rgba(255,255,255,.9),rgba(40,46,62,.14)) border-box;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .glass-mark{animation:none}
+}
+
+@media(max-width:900px){
+  .glass-mark{width:min(196px,86%)}
+}
+@media(max-width:620px){
+  /* 좁은 화면에서는 소개 칸이 한 줄로 쌓인다 — 판도 같이 줄인다 */
+  .glass-mark{width:150px;margin-bottom:30px}
+  .about-glow{left:-14%;top:-8%;width:82%;height:52%}
+}
