@@ -4,7 +4,7 @@ import { ArrowRight, Mail } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import IgGlyph from "@/components/IgGlyph";
-import { CONTACT, INSTAGRAM, JOIN_FORM } from "@/lib/site";
+import { ACTIVITIES, CONTACT, INSTAGRAM, JOIN_FORM } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "한대포 소개",
@@ -12,30 +12,6 @@ export const metadata: Metadata = {
     "2009년 연세대학교에서 시작된 대학생 경제·시사 연합 동아리. 월말 포럼·전문가 초청 강연·정책 산업 현장 탐방을 이어갑니다.",
 };
 
-/**
- * 소개 페이지.
- *
- * 🔴 여기 적힌 것은 전부 실제 자료(공지 글 · 모집 안내)에서 나온 문장이다.
- *    없는 사실을 지어 넣지 않았다. 연혁·규모·수상 같은 숫자를 넣고 싶으면
- *    확인된 값을 받아서 채워야 한다.
- */
-const ACTIVITIES = [
-  {
-    title: "월말 포럼",
-    body:
-      "매월 회원이 돌아가며 의제를 발제합니다. 발제자가 자료와 근거를 정리해 먼저 관점을 내놓으면, 참석자들이 그 근거를 함께 따져 봅니다. 결론을 미리 정해 두지 않기 때문에 같은 자료를 놓고도 다른 답이 나오고, 그 차이를 확인하는 것이 포럼의 목적입니다.",
-  },
-  {
-    title: "전문가 초청 강연",
-    body:
-      "현업에 계신 분들을 모셔 이야기를 듣습니다. 책상에서 정리한 질문을 그 자리에서 직접 물어볼 수 있는 자리입니다.",
-  },
-  {
-    title: "정책·산업 현장 탐방",
-    body:
-      "정책과 산업의 현장을 직접 방문해, 자료로만 읽던 쟁점을 눈으로 확인합니다. 토론에서 나온 질문을 현장에서 다시 묻고, 돌아와 그 답을 함께 정리합니다.",
-  },
-];
 
 export default function AboutPage() {
   return (
