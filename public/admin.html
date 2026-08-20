@@ -93,14 +93,16 @@
         </label>
       </div>
 
+      <!-- 🔴 분류와 인스타 주소는 한 줄에 있지만 쓰이는 탭이 다르다.
+           줄째로 숨기면 뉴보대에서 인스타 주소까지 사라진다 - 칸마다 따로 숨긴다. -->
       <div class="f-row" id="row-category">
-        <label>분류
+        <label id="fld-category">분류
           <select id="f-category">
             <option>공지</option><option>모집</option><option>포럼</option>
             <option>강연</option><option>탐방</option><option>보도</option><option>소식</option>
           </select>
         </label>
-        <label class="grow">인스타그램 게시물 주소
+        <label class="grow" id="fld-permalink">인스타그램 게시물 주소
           <input id="f-permalink" placeholder="https://www.instagram.com/p/…">
         </label>
       </div>

@@ -340,7 +340,11 @@ function applyKindUi() {
   const isPost = S.kind === 'posts';
   const isEvent = S.kind === 'events';
 
-  $('#row-category').hidden = !isPost;
+  /* 분류는 소식에만, 인스타 주소는 소식·뉴보대 둘 다에 필요하다.
+     예전에는 줄째로 숨겨서 뉴보대 카드의 인스타 주소를 손으로 고칠 수가 없었다. */
+  $('#row-category').hidden = isEvent;
+  $('#fld-category').hidden = !isPost;
+  $('#fld-permalink').hidden = isEvent;
   $('#row-summary').hidden = !isPost;
   $('#row-pin').hidden = !isPost;
   $('#row-when').hidden = !isEvent;   // 시간·장소는 일정에만
@@ -356,6 +360,9 @@ function applyKindUi() {
     ? '달력에서 <b>날짜</b>를 누르면 그 날 새 일정, <b>일정 이름</b>을 누르면 그 일정을 고칩니다.'
     : '지난 소식을 <b>누르면</b> 오른쪽에서 고칠 수 있습니다.';
 
+  $('#f-permalink').placeholder = isPost
+    ? 'https://www.instagram.com/p/…  (비워 두면 계정 화면으로 갑니다)'
+    : 'https://www.instagram.com/p/…  (이 카드를 누르면 열릴 게시물)';
   $('#f-body').placeholder = isPost
     ? '인스타 캡션을 그대로 붙여넣어도 됩니다. 빈 줄로 문단이 나뉩니다.'
     : isEvent
