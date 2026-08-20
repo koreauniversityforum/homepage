@@ -428,17 +428,3 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
   .about-card{padding:22px}
   .about-links{padding:6px 18px}
 }
-
-/* ══ 활동 카드 - 옛 「모집 중 D-8」 자리 ═════════════════════════════════
-   지어낸 모집 공고를 실제 활동으로 바꾸면서, 마감일 줄(.deadline)이 사라졌다.
-   그 줄이 잡고 있던 자리를 제목이 이어받는다. */
-.club-card .club-body h3{margin-top:2px}
-.club-card p{min-height:auto;margin:10px 0 0}
-.club-more{display:inline-flex;align-items:center;gap:5px;margin-top:18px;
-  color:var(--blue);font-size:12px;font-weight:800}
-.club-more:hover{gap:8px}
-/* 링크가 없는 카드도 높이를 맞춰 세 장이 나란히 서게 한다 */
-.club-grid{align-items:stretch}
-.club-card{display:flex;flex-direction:column}
-.club-body{display:flex;flex-direction:column;flex:1}
-.club-body .club-more{margin-top:auto;padding-top:18px}

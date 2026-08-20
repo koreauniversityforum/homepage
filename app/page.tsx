@@ -11,7 +11,7 @@ import {
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import NewbodaeRow from "@/components/NewbodaeRow";
-import Activities from "@/components/Activities";
+import ClubFilter from "@/components/ClubFilter";
 import Board from "@/components/Board";
 import IgGlyph from "@/components/IgGlyph";
 import { ABOUT_MORE, INSTAGRAM, JOIN_FORM } from "@/lib/site";
@@ -141,10 +141,10 @@ export default function Home() {
       <section className="section" id="clubs">
         <div className="section-heading">
           <div>
-            <h2>이런 활동을 함께합니다</h2>
+            <h2>지금 함께할 활동을 찾아보세요</h2>
           </div>
         </div>
-        <Activities />
+        <ClubFilter />
       </section>
 
       <section className="community-section" id="community">
