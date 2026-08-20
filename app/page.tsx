@@ -172,7 +172,7 @@ export default function Home() {
             </Link>
           </div>
           {/* 진짜 게시판에서 최근 몇 건만 끌어다 보여 준다.
-              compact 라서 글쓰기 칸은 나오지 않는다 — 쓰기는 /board 에서. */}
+              compact 라서 글쓰기 칸은 나오지 않는다 - 쓰기는 /board 에서. */}
           <div className="post-list">
             <Board limit={5} compact />
           </div>
@@ -212,7 +212,7 @@ export default function Home() {
 
       <section className="about-section" id="about">
         <div className="about-content">
-          {/* 유리판이 흐릴 것이 있어야 유리로 보인다 — 뒤에 깔아 두는 빛 무리 */}
+          {/* 유리판이 흐릴 것이 있어야 유리로 보인다 - 뒤에 깔아 두는 빛 무리 */}
           <span className="about-glow" aria-hidden="true" />
           {/* 로고를 얹은 유리 원판. 겹 순서가 곧 효과다(그림자 → 흐린 판 → 흰 막 → 빛줄기·테두리). */}
           <span className="glass-mark" aria-hidden="true">

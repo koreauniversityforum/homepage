@@ -1,4 +1,4 @@
-/* 한국대학생포럼 홈페이지 — 소식 등록 화면
+/* 한국대학생포럼 홈페이지 - 소식 등록 화면
  *
  * 하는 일은 하나다: data/posts.json 과 data/newbodae.json 을 고쳐서 GitHub 에 올린다.
  * 토큰이 없으면 고친 결과를 파일로 내려받아 직접 올릴 수 있게 한다.
@@ -141,7 +141,7 @@ function setListOf(kind, arr) {
 
 async function loadOne(kind) {
   const path = PATHS[kind];
-  /* 토큰이 있으면 GitHub 쪽을 원본으로 본다 — 배포 캐시 때문에 옛 내용을 볼 일이 없다. */
+  /* 토큰이 있으면 GitHub 쪽을 원본으로 본다 - 배포 캐시 때문에 옛 내용을 볼 일이 없다. */
   if (hasRepo()) {
     try {
       const c = cfg();
@@ -430,7 +430,7 @@ function markDirty() {
   const st = $('#dock-state');
   st.classList.add('dirty');
   const imgs = S.blobs.length;
-  st.textContent = `올릴 것 있음 — 목록 파일 2개${imgs ? ` + 사진 ${imgs}장` : ''}`;
+  st.textContent = `올릴 것 있음 - 목록 파일 2개${imgs ? ` + 사진 ${imgs}장` : ''}`;
   $('#btn-commit').disabled = !hasRepo();
 }
 
@@ -500,7 +500,7 @@ $('#btn-cfg-save').addEventListener('click', async () => {
     branch: $('#cfg-branch').value.trim() || 'main',
     token: $('#cfg-token').value.trim(),
   });
-  $('#cfg-status').textContent = hasRepo() ? '저장했습니다. 목록을 다시 읽습니다…' : '저장했습니다(토큰 없음 — 내려받기 방식으로 씁니다).';
+  $('#cfg-status').textContent = hasRepo() ? '저장했습니다. 목록을 다시 읽습니다…' : '저장했습니다(토큰 없음 - 내려받기 방식으로 씁니다).';
   $('#btn-commit').disabled = !(hasRepo() && S.dirty);
   await loadAll();
   $('#cfg-status').textContent = '준비됐습니다.';

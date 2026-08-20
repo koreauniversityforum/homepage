@@ -155,7 +155,7 @@ async function syncAccount({ kind, id, handle }) {
     } else {
       list.push({ ...base, caption: m.caption || '' });
     }
-    log(`  + ${entryId} — ${base.title}`);
+    log(`  + ${entryId} - ${base.title}`);
   }
 
   list.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
@@ -174,7 +174,7 @@ async function syncAccount({ kind, id, handle }) {
 
 async function main() {
   if (!TOKEN) {
-    log('IG_TOKEN 이 없습니다. 자동 수집은 아직 꺼져 있습니다 — 이건 오류가 아닙니다.');
+    log('IG_TOKEN 이 없습니다. 자동 수집은 아직 꺼져 있습니다 - 이건 오류가 아닙니다.');
     log('켜는 방법은 docs/인스타_자동수집_켜기.md 를 보세요.');
     return;
   }

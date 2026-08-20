@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Clock3, Loader2, PenLine, RefreshCw } from "lucide-react";
 import { boardDate, fetchBoard, NOT_READY, submitPost, type BoardPost } from "@/lib/supabase";
 
-/* 본문을 문단으로 — 승인된 글을 펼쳤을 때만 쓴다 */
+/* 본문을 문단으로 - 승인된 글을 펼쳤을 때만 쓴다 */
 function lines(body: string): string[] {
   return body.split(/\n+/).filter((l) => l.trim());
 }
@@ -13,7 +13,7 @@ function lines(body: string): string[] {
  * 글 한 줄.
  *
  * 승인 대기 글은 열리지 않는다. 애초에 서버가 뒷부분을 보내 주지도 않는다.
- * 승인된 글만 눌러서 펼친다 — 글 하나마다 주소를 따로 두지 않은 것은,
+ * 승인된 글만 눌러서 펼친다 - 글 하나마다 주소를 따로 두지 않은 것은,
  * 목록이 브라우저에서 그때그때 불러오는 것이라 상세 주소를 만들면
  * 새로고침했을 때 빈 화면이 되기 때문이다.
  */
@@ -161,7 +161,7 @@ function Writer({ onDone }: { onDone: () => void }) {
 export default function Board({ limit = 50, compact = false }: { limit?: number; compact?: boolean }) {
   const [posts, setPosts] = useState<BoardPost[] | null>(null);
   const [error, setError] = useState("");
-  /* 저장소 설정이 아직 안 돌아간 상태 — 오류처럼 보이면 안 된다 */
+  /* 저장소 설정이 아직 안 돌아간 상태 - 오류처럼 보이면 안 된다 */
   const [notReady, setNotReady] = useState(false);
 
   const load = useCallback(() => {

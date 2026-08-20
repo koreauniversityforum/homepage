@@ -8,7 +8,7 @@ export const CONTACT = {
 };
 
 /**
- * 「한대포 시작하기」 단추가 여는 곳 — 가입 신청 구글 폼.
+ * 「한대포 시작하기」 단추가 여는 곳 - 가입 신청 구글 폼.
  * 폼을 새로 만들면 이 한 줄만 고치면 화면이 따라온다.
  */
 export const JOIN_FORM = "https://forms.gle/2UkdBcGhrdZiSGde7";
@@ -34,7 +34,7 @@ export const STATS: { value: string; label: string }[] = [
 ];
 
 /**
- * 후원 계좌 — 머리말 오른쪽(옛 로그인 단추 자리)에 뜬다.
+ * 후원 계좌 - 머리말 오른쪽(옛 로그인 단추 자리)에 뜬다.
  *
  * 누르면 계좌번호가 클립보드에 복사된다. 숫자만 고치면 화면이 따라온다.
  * `holder` 를 빈 문자열로 두면 예금주 줄이 통째로 사라진다.
@@ -43,7 +43,7 @@ export const STATS: { value: string; label: string }[] = [
 export const DONATION = {
   /** 배지에 보이는 짧은 이름. */
   bank: "신한",
-  /** 눌렀을 때 복사되는 문구는 `bankFull + 공백 + account` 다 — 「신한은행 140-012-402064」. */
+  /** 눌렀을 때 복사되는 문구는 `bankFull + 공백 + account` 다 - 「신한은행 140-012-402064」. */
   bankFull: "신한은행",
   account: "140-012-402064",
   holder: "",

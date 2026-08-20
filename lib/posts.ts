@@ -44,7 +44,7 @@ function read<T>(file: string, key: string): T[] {
     const list = json[key];
     return Array.isArray(list) ? (list as T[]) : [];
   } catch {
-    // 파일이 없거나 깨져도 화면은 살려 둔다 — 소식만 비어 보인다.
+    // 파일이 없거나 깨져도 화면은 살려 둔다 - 소식만 비어 보인다.
     return [];
   }
 }

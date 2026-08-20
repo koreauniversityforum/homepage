@@ -14,7 +14,7 @@ const NAV = [
 ];
 
 /**
- * 후원 계좌 배지 — 옛 로그인 단추가 있던 자리.
+ * 후원 계좌 배지 - 옛 로그인 단추가 있던 자리.
  * 누르면 「신한은행 140-012-402064」처럼 은행 이름까지 통째로 복사된다.
  */
 const COPY_TEXT = `${DONATION.bankFull} ${DONATION.account}`;

@@ -11,13 +11,13 @@ footer{background:#0c1c32;color:white;padding:64px max(24px,calc((100vw - 1180px
 
 /* ══ 소식(공지·목록·상세) · 뉴보대 줄 · 로고 ══════════════════════════════ */
 
-/* 로고 — 기존 '한' 글자 마크 자리를 실제 심벌로 바꾼다.
+/* 로고 - 기존 '한' 글자 마크 자리를 실제 심벌로 바꾼다.
    🔴 심벌이 남색이라 어두운 바닥에서는 묻힌다. 그때만 흰 판을 깔아 준다. */
 img.brand-mark{width:38px;height:38px;border-radius:0;background:none;box-shadow:none;transform:none;object-fit:contain;display:block}
 img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
 .desktop-nav a[aria-current="page"]{color:var(--blue)}
 
-/* 소식 머리 — 소식 화면 전용 */
+/* 소식 머리 - 소식 화면 전용 */
 .page-head{max-width:1180px;margin:0 auto;padding:64px 24px 10px}
 .page-head h1{margin:0;font-size:clamp(31px,3.8vw,46px);line-height:1.22;letter-spacing:-.055em}
 .page-head>p:last-child{margin:16px 0 0;max-width:52ch;color:var(--muted);font-size:14px;line-height:1.8}
@@ -39,7 +39,7 @@ img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shado
 .notice-copy p{margin:0;color:var(--muted);font-size:13px;line-height:1.75}
 .notice-date{display:block;margin-top:16px;color:#9099a8;font-size:11px;font-weight:700}
 
-/* 글 한 줄 목록 — 커뮤니티 카드와 같은 문법 */
+/* 글 한 줄 목록 - 커뮤니티 카드와 같은 문법 */
 .post-lines{display:flex;flex-direction:column;padding:6px 22px;border:1px solid var(--line);border-radius:24px;background:white}
 .post-line{display:grid;grid-template-columns:52px 1fr 20px;gap:12px;align-items:center;padding:17px 0;border-bottom:1px solid #eef1f5}
 .post-line:last-child{border-bottom:0}
@@ -68,7 +68,7 @@ img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shado
 .post-body p{margin:0 0 1.5em}
 .post .primary-button{margin-top:12px}
 
-/* 뉴보대 줄 — 어두운 바탕으로 한 번 눌러 준다 */
+/* 뉴보대 줄 - 어두운 바탕으로 한 번 눌러 준다 */
 .newbodae{background:#0f2647;color:white}
 .nb-inner{display:grid;grid-template-columns:.72fr 1.28fr;gap:60px;align-items:start}
 .nb-intro h2{margin:0 0 18px;font-size:clamp(26px,3vw,38px);line-height:1.25;letter-spacing:-.05em}
@@ -98,7 +98,7 @@ img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shado
   .nb-list{grid-template-columns:1fr 1fr;gap:11px}
 }
 
-/* ══ 후원 계좌 배지 — 옛 로그인 단추 자리 ═══════════════════════════════════
+/* ══ 후원 계좌 배지 - 옛 로그인 단추 자리 ═══════════════════════════════════
    누르면 계좌번호가 복사된다. 은행 심벌 파일(DONATION.mark)이 없으면
    은행 이름을 글자 배지로 대신 보여 준다. */
 .donate-badge{height:42px;padding:0 13px 0 8px;display:inline-flex;align-items:center;gap:9px;
@@ -106,7 +106,7 @@ img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shado
   cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
 .donate-badge:hover{border-color:#bcd5ff;background:var(--sky);transform:translateY(-1px)}
 .donate-badge:active{transform:translateY(0)}
-/* 은행 심벌 자리 — 신한금융그룹 심벌이 구(球) 모양이라 원형으로 잡았다. */
+/* 은행 심벌 자리 - 신한금융그룹 심벌이 구(球) 모양이라 원형으로 잡았다. */
 .donate-mark{width:26px;height:26px;flex:none;border-radius:50%;
   background:var(--blue);box-shadow:inset -3px -4px 8px rgba(0,0,0,.18)}
 .donate-mark-img{width:26px;height:26px;flex:none;object-fit:contain}
@@ -120,7 +120,7 @@ img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shado
 
 @media(max-width:620px){
   /* 좁은 화면에서는 「후원 계좌」 라벨과 브랜드 부제를 접어 자리를 만든다.
-     숫자는 남겨 둔다 — 눌러서 복사하는 것보다 눈으로 보는 쪽이 먼저다. */
+     숫자는 남겨 둔다 - 눌러서 복사하는 것보다 눈으로 보는 쪽이 먼저다. */
   .donate-badge{height:38px;padding:0 9px 0 7px;gap:6px;border-radius:11px}
   .donate-mark,.donate-mark-img{width:22px;height:22px;font-size:10px}
   .donate-text small{font-size:8px}
@@ -132,7 +132,7 @@ img.brand-mark.on-dark{background:white;border-radius:11px;padding:4px;box-shado
   .donate-text{display:none}
 }
 
-/* ══ 한글 줄바꿈 — 낱말이 가운데서 끊기지 않게 ═══════════════════════════
+/* ══ 한글 줄바꿈 - 낱말이 가운데서 끊기지 않게 ═══════════════════════════
    브라우저 기본값은 한글을 글자 단위로 끊는다("대학생포" / "럼" 처럼).
    keep-all 로 두면 띄어쓰기 자리에서만 줄이 바뀐다.
    🔴 다만 그러면 띄어쓰기 없는 아주 긴 것(주소·계좌번호)이 칸 밖으로 삐져
@@ -182,7 +182,7 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
 .bd-badge{flex:none;height:24px;padding:0 9px;display:inline-flex;align-items:center;gap:4px;border-radius:7px;background:var(--sky);color:var(--blue);font-size:10px;font-weight:900;white-space:nowrap}
 .bd-badge.wait{background:#fff3e3;color:#b5651d}
 
-/* 미리보기 — 딱 두 줄에서 끊는다 */
+/* 미리보기 - 딱 두 줄에서 끊는다 */
 .bd-peek{margin:9px 0 0;color:var(--muted);font-size:13px;line-height:1.75;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .bd-body{margin:12px 0 0;color:#39424f;font-size:14.5px;line-height:1.9}
@@ -215,7 +215,7 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
    🔴 빛줄기를 타원으로 그리면 안 된다. 아래에 웃는 입 모양 얼룩이 남는다.
       위에서 아래로 한 방향으로만 옅어지는 띠여야 한다. */
 
-/* 유리가 흐릴 것이 있어야 한다 — 매끈한 그라데이션만 있으면 흐려도 티가 안 난다.
+/* 유리가 흐릴 것이 있어야 한다 - 매끈한 그라데이션만 있으면 흐려도 티가 안 난다.
    판 뒤에 빛 무리를 깔아 두면 그때부터 유리처럼 굴절돼 보인다. */
 .about-glow{
   position:absolute;left:-10%;top:-24%;width:62%;height:148%;pointer-events:none;
@@ -237,22 +237,22 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
 }
 /* 🔴 ① 그림자를 이 칸에 filter:drop-shadow 로 주면 안 된다.
    filter 가 걸린 조상은 「배경 뿌리」가 되어 자식의 backdrop-filter 가 볼 배경을
-   끊어 버린다 — 뒤 빛이 하나도 안 비쳐 유리가 진주 구슬이 됐던 원인이 이것이다.
+   끊어 버린다 - 뒤 빛이 하나도 안 비쳐 유리가 진주 구슬이 됐던 원인이 이것이다.
    그래서 그림자는 판 자신의 box-shadow 로 준다. */
 
 .glass-mark-plate{
   position:absolute;inset:0;border-radius:50%;
-  /* ② 뒤에 깔린 빛 무리를 흐리고 진하게 — 이 한 줄이 「유리 너머」를 만든다 */
+  /* ② 뒤에 깔린 빛 무리를 흐리고 진하게 - 이 한 줄이 「유리 너머」를 만든다 */
   -webkit-backdrop-filter:blur(22px) saturate(230%) brightness(1.12) contrast(1.05);
   backdrop-filter:blur(22px) saturate(230%) brightness(1.12) contrast(1.05);
-  /* ③ 흰 막 — 🔴 실측 46%/31% 는 사진 위에 얹는 큰 판 값이다.
+  /* ③ 흰 막 - 🔴 실측 46%/31% 는 사진 위에 얹는 큰 판 값이다.
      여기처럼 작은 원판에 그대로 쓰면 뒤가 안 비쳐 진주 구슬이 된다. 절반 아래로 낮췄다.
      ④ 테두리는 빛을 왼쪽 위에서 받는 것으로 잡았다(150deg). */
   border:2px solid transparent;
   background:
     linear-gradient(165deg, rgba(255,255,255,.24), rgba(255,255,255,.07) 58%, rgba(255,255,255,.13)) padding-box,
     linear-gradient(150deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.30) 42%, rgba(20,28,48,.30) 100%) border-box;
-  /* 두께감 — 왼쪽 위는 빛을 머금고, 아래는 렌즈가 빛을 모은 자국(코스틱)이 남는다 */
+  /* 두께감 - 왼쪽 위는 빛을 머금고, 아래는 렌즈가 빛을 모은 자국(코스틱)이 남는다 */
   box-shadow:
     /* ① 아래로만 떨어지는 그림자 */
     0 16px 28px rgba(12,20,40,.46),
@@ -261,7 +261,7 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
     inset 0 -26px 30px -26px rgba(120,225,255,.55);
 }
 
-/* ④ 빛줄기 — alpha(t) = .41 × max(0, 1 − t×5.5)^1.8 을 눈금으로 옮긴 것.
+/* ④ 빛줄기 - alpha(t) = .41 × max(0, 1 − t×5.5)^1.8 을 눈금으로 옮긴 것.
    t=0.18 에서 0 이 되므로 판 높이의 18% 안에서 끝난다. */
 .glass-mark-sheen{
   position:absolute;inset:0;border-radius:50%;pointer-events:none;
@@ -276,7 +276,7 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
 .glass-mark img{
   position:absolute;inset:19%;width:62%;height:62%;
   object-fit:contain;display:block;
-  /* 로고가 판 위에 떠 있게 — 판 자체 그림자보다 짧고 진하게 */
+  /* 로고가 판 위에 떠 있게 - 판 자체 그림자보다 짧고 진하게 */
   filter:drop-shadow(0 6px 10px rgba(4,12,30,.5)) drop-shadow(0 1px 0 rgba(255,255,255,.35));
 }
 
@@ -303,7 +303,7 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
   .glass-mark{width:min(196px,86%)}
 }
 @media(max-width:620px){
-  /* 좁은 화면에서는 소개 칸이 한 줄로 쌓인다 — 판도 같이 줄인다 */
+  /* 좁은 화면에서는 소개 칸이 한 줄로 쌓인다 - 판도 같이 줄인다 */
   .glass-mark{width:150px;margin-bottom:30px}
   .about-glow{left:-14%;top:-8%;width:82%;height:52%}
 }

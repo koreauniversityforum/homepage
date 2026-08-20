@@ -1,10 +1,10 @@
-/* 한국대학생포럼 — 게시판 승인 화면
+/* 한국대학생포럼 - 게시판 승인 화면
  *
  * 방문자가 올린 글은 무조건 「승인 대기」로 들어온다(막는 일은 DB 안에서 한다).
  * 이 화면은 그것을 열어 보고 공개할지 정하는 곳이다.
  *
  * 🔴 여기서 쓰는 키도 방문자와 똑같은 anon 키다. 권한은 키가 아니라
- *    "로그인했는가" 에서 나온다 — 로그인하면 받는 access_token 이 붙어야
+ *    "로그인했는가" 에서 나온다 - 로그인하면 받는 access_token 이 붙어야
  *    DB 가 승인·삭제를 허락한다. 그래서 이 파일이 공개돼도 문제가 없다.
  *
  * 🔴 주소·키를 바꾸면 lib/supabase.ts 도 같이 고쳐야 한다(두 곳이다).
@@ -14,7 +14,7 @@ const SUPABASE_URL = 'https://nevitsamefsohuuaokdi.supabase.co';
 const SUPABASE_ANON =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ldml0c2FtZWZzb2h1dWFva2RpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcxNzIwOTQsImV4cCI6MjEwMjc0ODA5NH0.tV7qRQ--7t3ZI6vUU6dYLgOJwCRnnKZV5HxFGHFYaHo';
 
-/* 🔴 sessionStorage 다 — localStorage 가 아니다.
+/* 🔴 sessionStorage 다 - localStorage 가 아니다.
    탭을 닫으면 사라진다. 공용 PC 에서 로그인한 채로 남지 않게. */
 const TOKEN_KEY = 'kuf_board_token';
 
@@ -182,7 +182,7 @@ async function remove(id, title) {
   await load();
 }
 
-/** 링크·연락처가 붙은 대기글을 한 번에 반려한다 — 광고가 몰려 들어왔을 때 */
+/** 링크·연락처가 붙은 대기글을 한 번에 반려한다 - 광고가 몰려 들어왔을 때 */
 async function purge() {
   const targets = S.rows.filter((p) => p.status === 'pending' && p.flagged);
   if (!targets.length) {

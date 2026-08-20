@@ -1,6 +1,6 @@
 # 한대포 홈페이지
 
-`univforum.kr` — Next.js 16 (App Router). GitHub 에 커밋하면 Vercel 이 자동으로 다시 띄운다.
+`univforum.kr` - Next.js 16 (App Router). GitHub 에 커밋하면 Vercel 이 자동으로 다시 띄운다.
 
 ## 폴더
 
