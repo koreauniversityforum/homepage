@@ -1,6 +1,6 @@
 {
   "_안내": "한국대학생포럼 소식 글 모음. admin.html 에서 고치는 것이 안전합니다. pinned 가 붙은 글이 공지로 올라가며, 새 글을 공지로 등록하면 이전 공지의 pinned 가 자동으로 내려갑니다.",
-  "updated": "2026-08-18",
+  "updated": "2026-08-21",
   "posts": [
     {
       "id": "2026-08-13-industry-tour",
@@ -19,7 +19,7 @@
       "id": "2026-08-01-monthly-forum",
       "title": "시사·정치·경제를 깊이 읽는 월말 포럼",
       "category": "포럼",
-      "date": "2026-08-01",
+      "date": "2026-07-25",
       "pinned": false,
       "source": "manual",
       "account": "universityforum_korea",
