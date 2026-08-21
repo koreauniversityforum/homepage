@@ -16,6 +16,10 @@ export type SiteEvent = {
   time?: string;
   place?: string;
   note?: string;
+  /** 일정 출처. 비어 있으면 한대포가 직접 등록한 일정이다. */
+  source?: "assembly";
+  organizer?: string;
+  url?: string;
   hidden?: boolean;
 };
 
@@ -31,6 +35,21 @@ export function getEvents(): SiteEvent[] {
       .sort((a, b) => String(a.date).localeCompare(String(b.date)));
   } catch {
     // 파일이 없거나 깨져도 화면은 살려 둔다 - 일정 칸만 비어 보인다.
+    return [];
+  }
+}
+
+/** GitHub Actions가 국회 공개 일정에서 받아 둔 토론회·세미나 일정. */
+export function getAssemblyEvents(): SiteEvent[] {
+  try {
+    const raw = fs.readFileSync(path.join(DATA, "assembly-events.json"), "utf8");
+    const json = JSON.parse(raw) as { events?: unknown };
+    const list = Array.isArray(json.events) ? (json.events as SiteEvent[]) : [];
+    return list
+      .filter((e) => e && e.id && e.date && e.source === "assembly" && !e.hidden)
+      .sort((a, b) => `${a.date} ${a.time ?? ""}`.localeCompare(`${b.date} ${b.time ?? ""}`));
+  } catch {
+    // 국회 쪽 응답이 잠시 끊겨도 한대포 일정과 나머지 홈페이지는 그대로 보인다.
     return [];
   }
 }

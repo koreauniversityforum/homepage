@@ -4,7 +4,6 @@ import {
   CalendarDays,
   ChevronRight,
   MessageCircle,
-  UsersRound,
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -15,13 +14,14 @@ import Board from "@/components/Board";
 import IgGlyph from "@/components/IgGlyph";
 import { ABOUT_MORE, INSTAGRAM, JOIN_FORM } from "@/lib/site";
 import { getPosts, pickNotice, firstImage, fmtDate, excerpt } from "@/lib/posts";
-import { getEvents } from "@/lib/events";
+import { getAssemblyEvents, getEvents } from "@/lib/events";
 
 export default function Home() {
   const allPosts = getPosts();
   const notice = pickNotice(allPosts);
   const recent = allPosts.filter((p) => p !== notice).slice(0, 3);
   const events = getEvents();
+  const assemblyEvents = getAssemblyEvents();
 
   return (
     <main>
@@ -167,7 +167,7 @@ export default function Home() {
       </section>
 
       <section className="section" id="events">
-        <EventBoard events={events} />
+        <EventBoard events={events} assemblyEvents={assemblyEvents} />
       </section>
 
       <NewbodaeRow />
