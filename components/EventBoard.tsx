@@ -9,8 +9,8 @@ import type { SiteEvent } from "@/lib/events";
  * 「곧 만날 수 있는 자리」.
  *
  * 보는 방법이 둘이다.
- *  - 목록: 지난 자리 1건 + 다가오는 자리 2건. 첫 화면에서 훑기 좋은 쪽.
- *  - 달력: 그 달을 통째로. 어느 주에 몰려 있는지 보려는 쪽.
+ *  - 목록: 한대포 일정 3건을 위에, 국회 일정 2건을 아래에 나누어 둔다.
+ *  - 달력: 두 출처를 한 달에 함께 놓고 국회 일정에는 커뮤니케이션마크를 단다.
  *
  * 🔴 오늘이 며칠인지는 **보는 사람의 화면에서** 정해야 한다.
  *    이 홈페이지는 만들어 둘 때 한 번 찍혀 나가므로(SSG), 서버에서 오늘을 정해 두면
@@ -22,6 +22,7 @@ import type { SiteEvent } from "@/lib/events";
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 const WEEK = ["일", "월", "화", "수", "목", "금", "토"];
 const ASSEMBLY_AGENDA = "https://www.assembly.go.kr/portal/na/agenda/agendaSchl.do?menuNo=600015";
+const ASSEMBLY_MARK_GUIDE = "https://www.assembly.go.kr/portal/main/contents.do?menuNo=600120";
 const ASSEMBLY_MARK = "https://www.assembly.go.kr/static/portal/img/img_assemblyCi_02.gif";
 
 /** "2026-08-24" → 그 날 자정(한국 시간)의 밀리초. 시간대를 안 박으면 하루씩 어긋난다. */
@@ -47,9 +48,21 @@ function AssemblyMark({ compact = false }: { compact?: boolean }) {
   );
 }
 
+/** 목록은 각 출처별로 바로 지난 일정 1건과 가까운 예정 일정을 보여 준다. */
+function pickForList(list: SiteEvent[], limit: number, now: number | null): SiteEvent[] {
+  if (now === null) return list.slice(0, limit);
+  const past = list.filter((event) => stamp(event.date) < now);
+  const soon = list.filter((event) => stamp(event.date) >= now);
+  const back = past.slice(-1);
+  const front = soon.slice(0, limit - back.length);
+  const short = limit - back.length - front.length;
+  const end = past.length - back.length;
+  const extra = short > 0 ? past.slice(Math.max(0, end - short), end) : [];
+  return [...extra, ...back, ...front];
+}
+
 export default function EventBoard({ events, assemblyEvents }: { events: SiteEvent[]; assemblyEvents: SiteEvent[] }) {
   const [view, setView] = useState<"list" | "calendar">("list");
-  const [source, setSource] = useState<"kuf" | "assembly">("kuf");
   const [now, setNow] = useState<number | null>(null);
   const [cursor, setCursor] = useState<{ y: number; m: number } | null>(null);
   const [picked, setPicked] = useState<string | null>(null);
@@ -61,34 +74,23 @@ export default function EventBoard({ events, assemblyEvents }: { events: SiteEve
     return () => window.clearTimeout(timer);
   }, []);
 
-  /* 목록에 보일 것: 지난 자리 1건 + 다가오는 자리 2건.
-     한쪽이 모자라면 다른 쪽에서 채운다 - 세 줄을 비워 두는 것보다 낫다. */
-  const activeEvents = source === "assembly" ? assemblyEvents : events;
-
-  const shown = useMemo(() => {
-    const limit = source === "assembly" ? 6 : 3;
-    if (now === null) return activeEvents.slice(0, limit);
-    const past = activeEvents.filter((e) => stamp(e.date) < now);
-    const soon = activeEvents.filter((e) => stamp(e.date) >= now);
-    const back = past.slice(-1); // 바로 지난 자리 한 건
-    const front = soon.slice(0, limit - back.length); // 다가오는 자리로 채운다
-    /* 앞으로 잡힌 것이 모자라면 지난 자리를 더 끌어온다 - 세 줄을 비워 두는 것보다 낫다. */
-    const short = limit - back.length - front.length;
-    const end = past.length - back.length;
-    const extra = short > 0 ? past.slice(Math.max(0, end - short), end) : [];
-    return [...extra, ...back, ...front];
-  }, [activeEvents, now, source]);
+  const kufShown = useMemo(() => pickForList(events, 3, now), [events, now]);
+  const assemblyShown = useMemo(() => pickForList(assemblyEvents, 2, now), [assemblyEvents, now]);
+  const allEvents = useMemo(
+    () => [...events, ...assemblyEvents].sort((a, b) => `${a.date} ${a.time ?? ""}`.localeCompare(`${b.date} ${b.time ?? ""}`)),
+    [events, assemblyEvents],
+  );
 
   const monthCursor = useMemo(() => {
     if (cursor) return cursor;
-    const base = now === null ? activeEvents[0]?.date : null;
+    const base = now === null ? allEvents[0]?.date : null;
     if (base) {
       const p = parts(base);
       return { y: p.y, m: p.m };
     }
     const d = now === null ? new Date() : new Date(now);
     return { y: d.getFullYear(), m: d.getMonth() + 1 };
-  }, [cursor, now, activeEvents]);
+  }, [cursor, now, allEvents]);
 
   /* 그 달 격자에 넣을 날들. 앞뒤로 빈 칸을 채워 요일을 맞춘다. */
   const cells = useMemo(() => {
@@ -106,13 +108,13 @@ export default function EventBoard({ events, assemblyEvents }: { events: SiteEve
 
   const byDate = useMemo(() => {
     const map = new Map<string, SiteEvent[]>();
-    activeEvents.forEach((e) => {
+    allEvents.forEach((e) => {
       const list = map.get(e.date) ?? [];
       list.push(e);
       map.set(e.date, list);
     });
     return map;
-  }, [activeEvents]);
+  }, [allEvents]);
 
   const todayStr = now === null ? "" : new Date(now).toLocaleDateString("sv-SE", { timeZone: "Asia/Seoul" });
   const pickedList = picked ? byDate.get(picked) ?? [] : [];
@@ -120,7 +122,7 @@ export default function EventBoard({ events, assemblyEvents }: { events: SiteEve
   /* 달력 아래에 펴 놓을 것 - 고른 날이 있으면 그 날만, 없으면 보고 있는 달 전체. */
   const detail = picked
     ? pickedList
-    : activeEvents.filter((e) => {
+    : allEvents.filter((e) => {
         const p = parts(e.date);
         return p.y === monthCursor.y && p.m === monthCursor.m;
       });
@@ -132,10 +134,36 @@ export default function EventBoard({ events, assemblyEvents }: { events: SiteEve
     setPicked(null);
   }
 
-  function chooseSource(next: "kuf" | "assembly") {
-    setSource(next);
-    setCursor(null);
-    setPicked(null);
+  function renderEvent(event: SiteEvent) {
+    const p = parts(event.date);
+    const over = now !== null && stamp(event.date) < now;
+    return (
+      <article className={`event-item${over ? " past" : ""}${event.source === "assembly" ? " assembly" : ""}`} key={event.id}>
+        <div className="event-date">
+          <strong>{String(p.d).padStart(2, "0")}</strong>
+          <span>{MONTHS[p.m - 1]}</span>
+        </div>
+        <div className="event-info">
+          <span className="event-label">
+            {event.source === "assembly" && <AssemblyMark compact />}
+            {event.source === "assembly" ? "대한민국 국회 일정" : over ? "지난 자리" : "한대포 공식 행사"}
+          </span>
+          <h3>{event.title}</h3>
+          <p>
+            {event.place && <><MapPin size={15} /> {event.place}</>}
+            {event.time && <><Clock3 size={15} /> {event.time}</>}
+          </p>
+          {event.organizer && <small className="event-organizer">주최 · {event.organizer}</small>}
+        </div>
+        {event.url ? (
+          <a className="event-go" href={event.url} target="_blank" rel="noreferrer" aria-label="국회 원문 일정 열기">
+            <ExternalLink size={18} />
+          </a>
+        ) : (
+          <span className="event-go" aria-hidden="true"><ArrowRight size={19} /></span>
+        )}
+      </article>
+    );
   }
 
   return (
@@ -143,18 +171,6 @@ export default function EventBoard({ events, assemblyEvents }: { events: SiteEve
       <div className="section-heading">
         <div>
           <h2>곧 만날 수 있는 자리</h2>
-          <div className="event-source-switch" role="group" aria-label="일정 출처">
-            <button type="button" className={source === "kuf" ? "on" : ""} onClick={() => chooseSource("kuf")}>
-              한대포 일정
-            </button>
-            <button
-              type="button"
-              className={source === "assembly" ? "on assembly" : "assembly"}
-              onClick={() => chooseSource("assembly")}
-            >
-              <AssemblyMark compact /> 국회 토론회
-            </button>
-          </div>
         </div>
         {/* 보는 방법 고르개. 지금 보고 있는 쪽이 눌려 있다. */}
         <div className="view-switch" role="group" aria-label="일정 보는 방법">
@@ -177,51 +193,27 @@ export default function EventBoard({ events, assemblyEvents }: { events: SiteEve
         </div>
       </div>
 
-      {activeEvents.length === 0 ? (
-        <p className="empty">
-          {source === "assembly" ? "현재 공개된 국회 토론회 일정이 없습니다." : "잡혀 있는 일정이 없습니다. 새 자리가 열리면 여기에 올라옵니다."}
-        </p>
-      ) : view === "list" ? (
-        <div className="event-list">
-          {shown.map((event) => {
-            const p = parts(event.date);
-            const over = now !== null && stamp(event.date) < now;
-            return (
-              <article className={`event-item${over ? " past" : ""}${event.source === "assembly" ? " assembly" : ""}`} key={event.id}>
-                <div className="event-date">
-                  <strong>{String(p.d).padStart(2, "0")}</strong>
-                  <span>{MONTHS[p.m - 1]}</span>
-                </div>
-                <div className="event-info">
-                  <span className="event-label">
-                    {event.source === "assembly" && <AssemblyMark compact />}
-                    {event.source === "assembly" ? "대한민국 국회 일정" : over ? "지난 자리" : "한대포 공식 행사"}
-                  </span>
-                  <h3>{event.title}</h3>
-                  <p>
-                    {event.place && (
-                      <>
-                        <MapPin size={15} /> {event.place}
-                      </>
-                    )}
-                    {event.time && (
-                      <>
-                        <Clock3 size={15} /> {event.time}
-                      </>
-                    )}
-                  </p>
-                  {event.organizer && <small className="event-organizer">주최 · {event.organizer}</small>}
-                </div>
-                {event.url ? (
-                  <a className="event-go" href={event.url} target="_blank" rel="noreferrer" aria-label="국회 원문 일정 열기">
-                    <ExternalLink size={18} />
-                  </a>
-                ) : (
-                  <span className="event-go" aria-hidden="true"><ArrowRight size={19} /></span>
-                )}
-              </article>
-            );
-          })}
+      {view === "list" ? (
+        <div className="event-groups">
+          <section className="event-group" aria-labelledby="kuf-events-title">
+            <div className="event-group-title">
+              <h3 id="kuf-events-title">한대포 일정</h3>
+              <span>최대 3개</span>
+            </div>
+            {kufShown.length > 0 ? <div className="event-list">{kufShown.map(renderEvent)}</div> : <p className="empty">잡혀 있는 한대포 일정이 없습니다.</p>}
+          </section>
+          <section className="event-group assembly-group" aria-labelledby="assembly-events-title">
+            <div className="event-group-title">
+              <div><AssemblyMark compact /><h3 id="assembly-events-title">국회 일정</h3></div>
+              <span>최근·예정 2개</span>
+            </div>
+            {assemblyShown.length > 0 ? <div className="event-list">{assemblyShown.map(renderEvent)}</div> : <p className="empty">현재 공개된 국회 일정이 없습니다.</p>}
+            <p className="assembly-credit">
+              일정 출처 · <a href={ASSEMBLY_AGENDA} target="_blank" rel="noreferrer">대한민국 국회 일정</a>
+              <span> · </span>
+              마크 출처 · <a href={ASSEMBLY_MARK_GUIDE} target="_blank" rel="noreferrer">국회상징</a>
+            </p>
+          </section>
         </div>
       ) : (
         <div className="cal">
@@ -246,13 +238,15 @@ export default function EventBoard({ events, assemblyEvents }: { events: SiteEve
             {cells.map((date, i) => {
               if (!date) return <span className="cal-cell empty" key={`x${i}`} />;
               const list = byDate.get(date) ?? [];
+              const kufList = list.filter((event) => event.source !== "assembly");
+              const assemblyList = list.filter((event) => event.source === "assembly");
               const p = parts(date);
               const isToday = date === todayStr;
               return (
                 <button
                   type="button"
                   key={date}
-                  className={`cal-cell${list.length ? " has" : ""}${isToday ? " today" : ""}${
+                  className={`cal-cell${list.length ? " has" : ""}${assemblyList.length ? " has-assembly" : ""}${isToday ? " today" : ""}${
                     picked === date ? " on" : ""
                   }`}
                   onClick={() => setPicked(list.length ? (picked === date ? null : date) : null)}
@@ -260,17 +254,18 @@ export default function EventBoard({ events, assemblyEvents }: { events: SiteEve
                 >
                   <span className="cal-day">{p.d}</span>
                   {/* 점 하나가 일정 하나. 셋을 넘으면 점 대신 숫자로 접는다. */}
-                  {source === "assembly" && list.length > 0 ? (
+                  {assemblyList.length > 0 && (
                     <span className="cal-assembly"><AssemblyMark compact /></span>
-                  ) : list.length > 0 && list.length <= 3 ? (
+                  )}
+                  {kufList.length > 0 && kufList.length <= 3 ? (
                     <span className="cal-dots">
-                      {list.map((e) => (
+                      {kufList.map((e) => (
                         <i key={e.id} />
                       ))}
                     </span>
                   ) : null}
-                  {source !== "assembly" && list.length > 3 && <span className="cal-more">{list.length}</span>}
-                  {source === "assembly" && list.length > 1 && <span className="cal-count">{list.length}</span>}
+                  {kufList.length > 3 && <span className="cal-more">{kufList.length}</span>}
+                  {assemblyList.length > 1 && <span className="cal-count">{assemblyList.length}</span>}
                 </button>
               );
             })}
@@ -299,11 +294,11 @@ export default function EventBoard({ events, assemblyEvents }: { events: SiteEve
             ))}
             {detail.length === 0 && <li className="none">이 달에는 잡힌 일정이 없습니다.</li>}
           </ul>
-          {source === "assembly" && (
-            <p className="assembly-credit">
-              일정·커뮤니케이션마크 출처 · <a href={ASSEMBLY_AGENDA} target="_blank" rel="noreferrer">대한민국 국회</a>
-            </p>
-          )}
+          <p className="assembly-credit">
+            일정 출처 · <a href={ASSEMBLY_AGENDA} target="_blank" rel="noreferrer">대한민국 국회 일정</a>
+            <span> · </span>
+            마크 출처 · <a href={ASSEMBLY_MARK_GUIDE} target="_blank" rel="noreferrer">국회상징</a>
+          </p>
         </div>
       )}
     </>

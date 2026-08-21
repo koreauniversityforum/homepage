@@ -459,9 +459,12 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
 .view-switch{display:flex;gap:6px;padding:4px;border:1px solid var(--line);border-radius:999px;background:white}
 .view-switch button{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border:0;border-radius:999px;background:transparent;color:var(--muted);font-size:12px;font-weight:800;cursor:pointer}
 .view-switch button.on{background:var(--ink);color:white}
-.event-source-switch{display:flex;align-items:center;gap:6px;margin-top:12px}
-.event-source-switch button{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:white;color:var(--muted);font-size:11px;font-weight:900;cursor:pointer}
-.event-source-switch button.on{border-color:var(--blue);background:var(--sky);color:var(--ink)}
+.event-groups{display:grid;gap:30px}
+.event-group-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.event-group-title>div{display:flex;align-items:center;gap:8px}
+.event-group-title h3{margin:0;font-size:15px;letter-spacing:-.03em}
+.event-group-title>span{color:var(--muted);font-size:10px;font-weight:800}
+.assembly-group{padding-top:24px;border-top:1px solid var(--line)}
 .assembly-mark{display:block;width:84px;height:auto;object-fit:contain}
 .assembly-mark.compact{width:35px;max-height:18px}
 .event-item.assembly{border-left:3px solid #0c2b80}
@@ -487,13 +490,14 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
 .cal-day{font-size:12px;font-weight:800}
 /* 점 하나가 일정 하나. 숫자를 쓰면 칸이 시끄러워진다 */
 .cal-dots{position:absolute;left:9px;bottom:10px;display:flex;gap:4px}
+.cal-cell.has-assembly .cal-dots{right:9px;left:auto}
 .cal-dots i{width:6px;height:6px;border-radius:50%;background:var(--blue)}
 .cal-cell.on .cal-dots i{background:white}
 .cal-more{position:absolute;left:9px;bottom:8px;color:var(--blue);font-size:10px;font-weight:900}
 .cal-cell.on .cal-more{color:white}
 .cal-assembly{position:absolute;left:8px;bottom:7px;padding:2px 4px;border-radius:5px;background:white}
 .cal-assembly .assembly-mark.compact{width:28px;max-height:13px}
-.cal-count{position:absolute;right:7px;bottom:7px;display:grid;place-items:center;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#0c2b80;color:white;font-size:9px;font-weight:900}
+.cal-count{position:absolute;left:40px;bottom:7px;display:grid;place-items:center;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#0c2b80;color:white;font-size:9px;font-weight:900}
 .cal-cell.on .cal-count{background:white;color:#0c2b80}
 .cal-detail{list-style:none;margin:18px 0 0;padding:0;border-top:1px solid var(--line)}
 .cal-detail li{display:grid;grid-template-columns:96px 1fr;gap:16px;padding:15px 4px;border-bottom:1px solid var(--line)}
@@ -519,8 +523,6 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
 .nb-arrow:disabled{opacity:.25;cursor:default}
 @media(max-width:900px){.nb-arrow.left{left:-4px}.nb-arrow.right{right:-4px}}
 @media(max-width:620px){
-  .section-heading:has(.event-source-switch){align-items:flex-start;gap:14px}
-  .event-source-switch{flex-wrap:wrap}
   .view-switch button{padding:7px 11px;font-size:11px}
   .cal-cell{min-height:56px;padding:6px;border-radius:11px}
   .cal-grid{gap:4px}

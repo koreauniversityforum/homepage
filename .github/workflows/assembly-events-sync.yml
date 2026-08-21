@@ -2,7 +2,7 @@ name: 국회 토론회 일정 가져오기
 
 on:
   schedule:
-    - cron: '17 21 * * *' # 매일 한국시간 오전 6시 17분
+    - cron: '*/5 * * * *' # 5분마다 확인(GitHub 사정에 따라 실제 시작은 늦어질 수 있음)
   workflow_dispatch:
 
 permissions:
