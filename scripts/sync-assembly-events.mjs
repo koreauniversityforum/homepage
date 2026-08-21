@@ -1,5 +1,5 @@
 /** 대한민국 국회 공개 일정 → 홈페이지 국회 토론회 일정 */
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -65,13 +65,33 @@ async function main() {
 
   const unique = [...new Map(events.map((event) => [event.id, event])).values()]
     .sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
-  const data = {
+  const next = {
     _안내: '대한민국 국회 홈페이지 공개 일정 중 국회행사(토론회·세미나·포럼 등)를 자동 수집합니다. 직접 편집하지 마세요.',
     source: AGENDA,
-    updated: new Date().toISOString(),
     range: { from: dates[0], to: dates.at(-1) },
     events: unique,
   };
+
+  /* 5분마다 확인하더라도 실제 일정이 같으면 파일을 건드리지 않는다.
+     updated 만 바뀌어 빈 커밋·재배포가 하루 288번 생기는 일을 막는다. */
+  let current = null;
+  try {
+    current = JSON.parse(await readFile(OUTPUT, 'utf8'));
+  } catch {
+    // 첫 실행이거나 기존 파일이 깨졌다면 새 파일을 쓴다.
+  }
+  const comparable = current && {
+    _안내: current._안내,
+    source: current.source,
+    range: current.range,
+    events: current.events,
+  };
+  if (JSON.stringify(comparable) === JSON.stringify(next)) {
+    console.log(`[assembly-sync] ${dates[0]} ~ ${dates.at(-1)}, ${unique.length}건 · 바뀐 일정 없음`);
+    return;
+  }
+
+  const data = { ...next, updated: new Date().toISOString() };
   await writeFile(OUTPUT, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
   console.log(`[assembly-sync] ${dates[0]} ~ ${dates.at(-1)}, ${unique.length}건 저장`);
 }
