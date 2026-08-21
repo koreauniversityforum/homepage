@@ -22,7 +22,6 @@ import type { SiteEvent } from "@/lib/events";
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 const WEEK = ["일", "월", "화", "수", "목", "금", "토"];
 const ASSEMBLY_AGENDA = "https://www.assembly.go.kr/portal/na/agenda/agendaSchl.do?menuNo=600015";
-const ASSEMBLY_MARK_GUIDE = "https://www.assembly.go.kr/portal/main/contents.do?menuNo=600120";
 const ASSEMBLY_MARK = "https://www.assembly.go.kr/static/portal/img/img_assemblyCi_02.gif";
 
 /** "2026-08-24" → 그 날 자정(한국 시간)의 밀리초. 시간대를 안 박으면 하루씩 어긋난다. */
@@ -210,8 +209,6 @@ export default function EventBoard({ events, assemblyEvents }: { events: SiteEve
             {assemblyShown.length > 0 ? <div className="event-list">{assemblyShown.map(renderEvent)}</div> : <p className="empty">현재 공개된 국회 일정이 없습니다.</p>}
             <p className="assembly-credit">
               일정 출처 · <a href={ASSEMBLY_AGENDA} target="_blank" rel="noreferrer">대한민국 국회 일정</a>
-              <span> · </span>
-              마크 출처 · <a href={ASSEMBLY_MARK_GUIDE} target="_blank" rel="noreferrer">국회상징</a>
             </p>
           </section>
         </div>
@@ -296,8 +293,6 @@ export default function EventBoard({ events, assemblyEvents }: { events: SiteEve
           </ul>
           <p className="assembly-credit">
             일정 출처 · <a href={ASSEMBLY_AGENDA} target="_blank" rel="noreferrer">대한민국 국회 일정</a>
-            <span> · </span>
-            마크 출처 · <a href={ASSEMBLY_MARK_GUIDE} target="_blank" rel="noreferrer">국회상징</a>
           </p>
         </div>
       )}
