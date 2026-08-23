@@ -9,6 +9,15 @@ const API = 'https://www.assembly.go.kr/portal/na/agenda/findAgendaSchl.json';
 const AGENDA = 'https://www.assembly.go.kr/portal/na/agenda/agendaSchl.do?menuNo=600015';
 const DAYS_BACK = 1;
 const DAYS_AHEAD = 45;
+const BATCH_SIZE = 3;
+const BATCH_DELAY_MS = 500;
+const REQUEST_TIMEOUT_MS = 15_000;
+const MAX_ATTEMPTS = 4;
+const RETRY_BASE_MS = 1_000;
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function kstDate(offset = 0) {
   const now = new Date();
@@ -26,29 +35,51 @@ function decode(text = '') {
 async function fetchDay(date) {
   const [meetYear, meetMonth, meetDate] = date.split('-');
   const body = new URLSearchParams({ meetYear, meetMonth, meetDate });
-  const res = await fetch(API, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      'user-agent': 'KoreaUniversityForum-ScheduleBot/1.0 (+https://www.univforum.kr)',
-    },
-    body,
-  });
-  if (!res.ok) throw new Error(`${date}: 국회 일정 응답 ${res.status}`);
-  const json = await res.json();
-  return (json.agendaSchl || [])
-    .filter((item) => item.gubun === 'NAEVT')
-    .map((item) => ({
-      id: `assembly-${item.uniqId}`,
-      title: decode(item.title),
-      date: item.meettingDate || date,
-      time: decode(item.meettingTime || ''),
-      place: decode(item.infoName || ''),
-      organizer: decode(item.orgName || ''),
-      note: '국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.',
-      source: 'assembly',
-      url: item.linkUrl || AGENDA,
-    }));
+
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
+    try {
+      const res = await fetch(API, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          'user-agent': 'KoreaUniversityForum-ScheduleBot/1.0 (+https://www.univforum.kr)',
+        },
+        body,
+        signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+      });
+      if (!res.ok) {
+        const error = new Error(`HTTP ${res.status}`);
+        error.retryable = res.status === 408 || res.status === 429 || res.status >= 500;
+        throw error;
+      }
+
+      const json = await res.json();
+      return (json.agendaSchl || [])
+        .filter((item) => item.gubun === 'NAEVT')
+        .map((item) => ({
+          id: `assembly-${item.uniqId}`,
+          title: decode(item.title),
+          date: item.meettingDate || date,
+          time: decode(item.meettingTime || ''),
+          place: decode(item.infoName || ''),
+          organizer: decode(item.orgName || ''),
+          note: '국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.',
+          source: 'assembly',
+          url: item.linkUrl || AGENDA,
+        }));
+    } catch (error) {
+      const detail = error.cause?.code || error.code || error.message || String(error);
+      if (attempt === MAX_ATTEMPTS || error.retryable === false) {
+        throw new Error(`${date}: 국회 일정 요청 실패 (${detail}, ${attempt}회 시도)`);
+      }
+
+      const delay = RETRY_BASE_MS * 2 ** (attempt - 1);
+      console.warn(`[assembly-sync] ${date}: ${detail} · ${delay}ms 후 재시도 (${attempt}/${MAX_ATTEMPTS})`);
+      await wait(delay);
+    }
+  }
+
+  throw new Error(`${date}: 국회 일정 요청 실패`);
 }
 
 async function main() {
@@ -56,11 +87,12 @@ async function main() {
   for (let i = -DAYS_BACK; i <= DAYS_AHEAD; i += 1) dates.push(kstDate(i));
 
   const events = [];
-  // 국회 서버에 요청이 한꺼번에 몰리지 않도록 다섯 날짜씩 나눠 받는다.
-  for (let i = 0; i < dates.length; i += 5) {
-    const chunk = dates.slice(i, i + 5);
+  // 국회 서버에 요청이 한꺼번에 몰리지 않도록 세 날짜씩 나누고 잠시 쉬어 받는다.
+  for (let i = 0; i < dates.length; i += BATCH_SIZE) {
+    const chunk = dates.slice(i, i + BATCH_SIZE);
     const result = await Promise.all(chunk.map(fetchDay));
     events.push(...result.flat());
+    if (i + BATCH_SIZE < dates.length) await wait(BATCH_DELAY_MS);
   }
 
   const unique = [...new Map(events.map((event) => [event.id, event])).values()]

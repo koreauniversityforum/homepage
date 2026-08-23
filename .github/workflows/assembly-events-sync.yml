@@ -2,7 +2,7 @@ name: 국회 토론회 일정 가져오기
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # 5분마다 확인(GitHub 사정에 따라 실제 시작은 늦어질 수 있음)
+    - cron: '17 * * * *' # 매시 17분에 확인(GitHub 사정에 따라 실제 시작은 늦어질 수 있음)
   workflow_dispatch:
 
 permissions:
@@ -16,10 +16,10 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '24'
       - name: 국회 일정 확인
         run: node scripts/sync-assembly-events.mjs
       - name: 바뀐 일정 커밋
