@@ -70,7 +70,11 @@ async function fetchDay(date) {
     } catch (error) {
       const detail = error.cause?.code || error.code || error.message || String(error);
       if (attempt === MAX_ATTEMPTS || error.retryable === false) {
-        throw new Error(`${date}: 국회 일정 요청 실패 (${detail}, ${attempt}회 시도)`);
+        const failure = new Error(`${date}: 국회 일정 요청 실패 (${detail}, ${attempt}회 시도)`);
+        // 연결 자체가 안 되는 것(국회 서버가 해외 IP 를 간헐적으로 막음)은 코드 탓이 아니므로
+        // 「이번엔 건너뜀」으로 표시한다. main 이 이 표시를 보고 실패 대신 조용히 끝낸다.
+        failure.transient = error.retryable !== false && !(error.message || '').startsWith('HTTP 4');
+        throw failure;
       }
 
       const delay = RETRY_BASE_MS * 2 ** (attempt - 1);
@@ -129,6 +133,12 @@ async function main() {
 }
 
 main().catch((error) => {
+  if (error.transient) {
+    /* 국회 서버 연결 시간초과(UND_ERR_CONNECT_TIMEOUT)·5xx 는 한 시간 뒤 다음 회차가 다시 받는다.
+       기존 assembly-events.json 은 그대로 두므로 실패로 처리해 메일이 오게 할 이유가 없다. */
+    console.warn(`[assembly-sync] ${error.message} · 국회 서버 사정이라 이번 회차는 건너뜀(기존 일정 유지)`);
+    return;
+  }
   console.error(`[assembly-sync] ${error.message}`);
   process.exitCode = 1;
 });
