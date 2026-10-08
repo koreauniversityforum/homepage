@@ -2,78 +2,12 @@
   "_안내": "대한민국 국회 홈페이지 공개 일정 중 국회행사(토론회·세미나·포럼 등)를 자동 수집합니다. 직접 편집하지 마세요.",
   "source": "https://www.assembly.go.kr/portal/na/agenda/agendaSchl.do?menuNo=600015",
   "range": {
-    "from": "2026-10-07",
-    "to": "2026-11-22"
+    "from": "2026-10-08",
+    "to": "2026-11-23"
   },
   "events": [
     {
-      "id": "assembly-1000055160310",
-      "title": "노인인권을 지지하는 사람들(노인지사) 출범식 및 토론회",
-      "date": "2026-10-07",
-      "time": "10:00",
-      "place": "의원회관 신관 제2세미나실",
-      "organizer": "남인순 의원실",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261007&endDate=20261007&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055160308",
-      "title": "수사·기소 분리 시대, 공수처 기능 전면 개편 토론회",
-      "date": "2026-10-07",
-      "time": "10:00~12:00",
-      "place": "의원회관 제1간담회의실(201호)",
-      "organizer": "김기표·김남희·김동아·김한규·박균택 의원실",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261007&endDate=20261007&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055160307",
-      "title": "오세훈 서울시장 초청 세미나",
-      "date": "2026-10-07",
-      "time": "12:00",
-      "place": "의원회관 신관 제1세미나실",
-      "organizer": "김소희·이준석·조정훈·박수민·권영세·김재섭·배준영·서명옥·유의동·이주영·조은희·최수진 의원실",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261007&endDate=20261007&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055160305",
-      "title": "피해자의 권리와 안전 약자 시행령에 어떻게 담을 것인가",
-      "date": "2026-10-07",
-      "time": "14:00",
-      "place": "의원회관 제5간담회의실(208호)",
-      "organizer": "박주민 의원실, 생명안전동행, 국회 생명안전포럼, 재난피해자권리센터 우리함께",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261007&endDate=20261007&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055160306",
-      "title": "신분증에 혈액형 기재, 국민 생명안전을 위한 새로운 선택",
-      "date": "2026-10-07",
-      "time": "14:00~16:00",
-      "place": "의원회관 제7간담회의실(210호)",
-      "organizer": "강대식 의원실",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261007&endDate=20261007&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055160309",
-      "title": "교육감 선거제도, 이제는 바꿔야 한다.",
-      "date": "2026-10-07",
-      "time": "14:00~17:00",
-      "place": "의원회관 제1소회의실",
-      "organizer": "주진우 의원실",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261007&endDate=20261007&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055160303",
+      "id": "assembly-1000055179670",
       "title": "한국경제와 부동산 정책 어디로 가나?",
       "date": "2026-10-08",
       "time": "13:30",
@@ -84,7 +18,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261008&endDate=20261008&searchGubun=search"
     },
     {
-      "id": "assembly-1000055160301",
+      "id": "assembly-1000055179668",
       "title": "전남 서남권의 의료 소외 극복과 국가균형발전을 위한 국회 포럼",
       "date": "2026-10-08",
       "time": "14:00",
@@ -95,7 +29,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261008&endDate=20261008&searchGubun=search"
     },
     {
-      "id": "assembly-1000055160304",
+      "id": "assembly-1000055179671",
       "title": "서·논술형 평가 확대 방안 모색을 위한 국회 토론회",
       "date": "2026-10-08",
       "time": "14:00~17:00",
@@ -106,7 +40,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261008&endDate=20261008&searchGubun=search"
     },
     {
-      "id": "assembly-1000055160302",
+      "id": "assembly-1000055179669",
       "title": "2026 중도장애인 지원 방안 모색 토론회",
       "date": "2026-10-08",
       "time": "14:00~17:00",
@@ -117,7 +51,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261008&endDate=20261008&searchGubun=search"
     },
     {
-      "id": "assembly-1000055160300",
+      "id": "assembly-1000055179667",
       "title": "제11차 세계한인여성대회",
       "date": "2026-10-12",
       "time": "00:00",
@@ -128,7 +62,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261012&endDate=20261012&searchGubun=search"
     },
     {
-      "id": "assembly-1000055160298",
+      "id": "assembly-1000055179665",
       "title": "북한의 지뢰도발 2015, 그리고 2026",
       "date": "2026-10-13",
       "time": "13:30~16:00",
@@ -139,7 +73,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261013&endDate=20261013&searchGubun=search"
     },
     {
-      "id": "assembly-1000055160299",
+      "id": "assembly-1000055179666",
       "title": "백남기 농민, 우리에게 무엇을 남겼나?",
       "date": "2026-10-13",
       "time": "14:00",
@@ -150,7 +84,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261013&endDate=20261013&searchGubun=search"
     },
     {
-      "id": "assembly-1000055160297",
+      "id": "assembly-1000055179664",
       "title": "부실 선거 재발 방지를 위한 선거제도 개선 토론회",
       "date": "2026-10-14",
       "time": "14:00",
@@ -161,7 +95,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055160296",
+      "id": "assembly-1000055179663",
       "title": "청년에게 희망이 있는 나라: 한국경제는 성장했는데, 우리는 번영하고 있는가?",
       "date": "2026-10-15",
       "time": "09:00~12:00",
@@ -172,7 +106,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055160295",
+      "id": "assembly-1000055179662",
       "title": "한·중 의료바이오산업 협력의 과제와 실천 전략",
       "date": "2026-10-15",
       "time": "14:00~18:00",
@@ -183,7 +117,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055160294",
+      "id": "assembly-1000055179661",
       "title": "청소년의 정신건강과 정신분석",
       "date": "2026-10-17",
       "time": "09:00~17:00",
@@ -194,5 +128,5 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261017&endDate=20261017&searchGubun=search"
     }
   ],
-  "updated": "2026-10-08T08:59:18.737Z"
+  "updated": "2026-10-08T16:29:25.012Z"
 }
