@@ -7,7 +7,7 @@
   },
   "events": [
     {
-      "id": "assembly-1000055180080",
+      "id": "assembly-1000055180367",
       "title": "한국경제와 부동산 정책 어디로 가나?",
       "date": "2026-10-08",
       "time": "13:30",
@@ -18,7 +18,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261008&endDate=20261008&searchGubun=search"
     },
     {
-      "id": "assembly-1000055180078",
+      "id": "assembly-1000055180365",
       "title": "전남 서남권의 의료 소외 극복과 국가균형발전을 위한 국회 포럼",
       "date": "2026-10-08",
       "time": "14:00",
@@ -29,18 +29,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261008&endDate=20261008&searchGubun=search"
     },
     {
-      "id": "assembly-1000055180081",
-      "title": "서·논술형 평가 확대 방안 모색을 위한 국회 토론회",
-      "date": "2026-10-08",
-      "time": "14:00~17:00",
-      "place": "의원회관 제7간담회의실(210호)",
-      "organizer": "강득구·김문수 의원실, 교육정책디자인연구소·사교육걱정없는세상, 좋은교사운동, 교육의봄, 참교육을위한전국학부모회",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261008&endDate=20261008&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055180079",
+      "id": "assembly-1000055180366",
       "title": "2026 중도장애인 지원 방안 모색 토론회",
       "date": "2026-10-08",
       "time": "14:00~17:00",
@@ -51,7 +40,18 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261008&endDate=20261008&searchGubun=search"
     },
     {
-      "id": "assembly-1000055180077",
+      "id": "assembly-1000055180368",
+      "title": "서·논술형 평가 확대 방안 모색을 위한 국회 토론회",
+      "date": "2026-10-08",
+      "time": "14:00~17:00",
+      "place": "의원회관 제7간담회의실(210호)",
+      "organizer": "강득구·김문수 의원실, 교육정책디자인연구소·사교육걱정없는세상, 좋은교사운동, 교육의봄, 참교육을위한전국학부모회",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261008&endDate=20261008&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055180364",
       "title": "제11차 세계한인여성대회",
       "date": "2026-10-12",
       "time": "00:00",
@@ -62,7 +62,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261012&endDate=20261012&searchGubun=search"
     },
     {
-      "id": "assembly-1000055180075",
+      "id": "assembly-1000055180362",
       "title": "북한의 지뢰도발 2015, 그리고 2026",
       "date": "2026-10-13",
       "time": "13:30~16:00",
@@ -73,7 +73,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261013&endDate=20261013&searchGubun=search"
     },
     {
-      "id": "assembly-1000055180076",
+      "id": "assembly-1000055180363",
       "title": "백남기 농민, 우리에게 무엇을 남겼나?",
       "date": "2026-10-13",
       "time": "14:00",
@@ -84,7 +84,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261013&endDate=20261013&searchGubun=search"
     },
     {
-      "id": "assembly-1000055180074",
+      "id": "assembly-1000055180361",
       "title": "부실 선거 재발 방지를 위한 선거제도 개선 토론회",
       "date": "2026-10-14",
       "time": "14:00",
@@ -95,7 +95,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055180073",
+      "id": "assembly-1000055180360",
       "title": "청년에게 희망이 있는 나라: 한국경제는 성장했는데, 우리는 번영하고 있는가?",
       "date": "2026-10-15",
       "time": "09:00~12:00",
@@ -106,7 +106,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055180072",
+      "id": "assembly-1000055180359",
       "title": "한·중 의료바이오산업 협력의 과제와 실천 전략",
       "date": "2026-10-15",
       "time": "14:00~18:00",
@@ -117,7 +117,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055180071",
+      "id": "assembly-1000055180358",
       "title": "청소년의 정신건강과 정신분석",
       "date": "2026-10-17",
       "time": "09:00~17:00",
@@ -128,5 +128,5 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261017&endDate=20261017&searchGubun=search"
     }
   ],
-  "updated": "2026-10-09T02:10:59.236Z"
+  "updated": "2026-10-09T09:05:55.431Z"
 }
