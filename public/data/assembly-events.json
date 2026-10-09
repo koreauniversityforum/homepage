@@ -7,7 +7,7 @@
   },
   "events": [
     {
-      "id": "assembly-1000055199267",
+      "id": "assembly-1000055199375",
       "title": "제11차 세계한인여성대회",
       "date": "2026-10-12",
       "time": "00:00",
@@ -18,7 +18,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261012&endDate=20261012&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199265",
+      "id": "assembly-1000055199373",
       "title": "북한의 지뢰도발 2015, 그리고 2026",
       "date": "2026-10-13",
       "time": "13:30~16:00",
@@ -29,7 +29,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261013&endDate=20261013&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199266",
+      "id": "assembly-1000055199374",
       "title": "백남기 농민, 우리에게 무엇을 남겼나?",
       "date": "2026-10-13",
       "time": "14:00",
@@ -40,7 +40,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261013&endDate=20261013&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199264",
+      "id": "assembly-1000055199372",
       "title": "부실 선거 재발 방지를 위한 선거제도 개선 토론회",
       "date": "2026-10-14",
       "time": "14:00",
@@ -51,7 +51,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199263",
+      "id": "assembly-1000055199371",
       "title": "청년에게 희망이 있는 나라: 한국경제는 성장했는데, 우리는 번영하고 있는가?",
       "date": "2026-10-15",
       "time": "09:00~12:00",
@@ -62,7 +62,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199262",
+      "id": "assembly-1000055199370",
       "title": "한·중 의료바이오산업 협력의 과제와 실천 전략",
       "date": "2026-10-15",
       "time": "14:00~18:00",
@@ -73,7 +73,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199261",
+      "id": "assembly-1000055199369",
       "title": "청소년의 정신건강과 정신분석",
       "date": "2026-10-17",
       "time": "09:00~17:00",
@@ -84,5 +84,5 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261017&endDate=20261017&searchGubun=search"
     }
   ],
-  "updated": "2026-10-09T16:13:45.525Z"
+  "updated": "2026-10-09T20:56:44.562Z"
 }
