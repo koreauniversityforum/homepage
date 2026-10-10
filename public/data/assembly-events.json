@@ -7,7 +7,7 @@
   },
   "events": [
     {
-      "id": "assembly-1000055199483",
+      "id": "assembly-1000055199679",
       "title": "제11차 세계한인여성대회",
       "date": "2026-10-12",
       "time": "00:00",
@@ -18,7 +18,18 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261012&endDate=20261012&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199481",
+      "id": "assembly-1000055199678",
+      "title": "2027년도 예산안 토론회",
+      "date": "2026-10-12",
+      "time": "14:00",
+      "place": "의원회관 제8간담회의실(211호)",
+      "organizer": "박수영 의원실, 한국재정학회",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261012&endDate=20261012&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055199676",
       "title": "북한의 지뢰도발 2015, 그리고 2026",
       "date": "2026-10-13",
       "time": "13:30~16:00",
@@ -29,7 +40,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261013&endDate=20261013&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199482",
+      "id": "assembly-1000055199677",
       "title": "백남기 농민, 우리에게 무엇을 남겼나?",
       "date": "2026-10-13",
       "time": "14:00",
@@ -40,7 +51,29 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261013&endDate=20261013&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199480",
+      "id": "assembly-1000055199674",
+      "title": "국가인권위원회 기능회복을 위한 토론회",
+      "date": "2026-10-14",
+      "time": "10:00~12:00",
+      "place": "의원회관 제5간담회의실(208호)",
+      "organizer": "서미화·박지원 의원실, 인권위개혁을 위한 국회의원 모임, 더불어민주당 사회적약자 기본권 강화 TF",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055199673",
+      "title": "지역 사회연대금융 중개기관 육성 어떻게 할 것인가?",
+      "date": "2026-10-14",
+      "time": "13:30",
+      "place": "의원회관 제10간담회의실(217호)",
+      "organizer": "이광희·김영배·용혜인 의원실",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055199675",
       "title": "부실 선거 재발 방지를 위한 선거제도 개선 토론회",
       "date": "2026-10-14",
       "time": "14:00",
@@ -51,7 +84,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199479",
+      "id": "assembly-1000055199672",
       "title": "청년에게 희망이 있는 나라: 한국경제는 성장했는데, 우리는 번영하고 있는가?",
       "date": "2026-10-15",
       "time": "09:00~12:00",
@@ -62,7 +95,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199478",
+      "id": "assembly-1000055199671",
       "title": "한·중 의료바이오산업 협력의 과제와 실천 전략",
       "date": "2026-10-15",
       "time": "14:00~18:00",
@@ -73,7 +106,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199477",
+      "id": "assembly-1000055199670",
       "title": "청소년의 정신건강과 정신분석",
       "date": "2026-10-17",
       "time": "09:00~17:00",
@@ -82,7 +115,18 @@
       "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
       "source": "assembly",
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261017&endDate=20261017&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055199669",
+      "title": "AI·로봇 산업 생태계 전략 국회포럼",
+      "date": "2026-10-21",
+      "time": "14:00~17:00",
+      "place": "의원회관 제1소회의실",
+      "organizer": "이언주 의원실, 더불어민주당 미래경제성장전략위원회, 국제질서의 전환기 속 국가전략 포럼",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
     }
   ],
-  "updated": "2026-10-10T00:52:46.081Z"
+  "updated": "2026-10-10T07:09:37.189Z"
 }
