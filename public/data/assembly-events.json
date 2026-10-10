@@ -2,12 +2,12 @@
   "_안내": "대한민국 국회 홈페이지 공개 일정 중 국회행사(토론회·세미나·포럼 등)를 자동 수집합니다. 직접 편집하지 마세요.",
   "source": "https://www.assembly.go.kr/portal/na/agenda/agendaSchl.do?menuNo=600015",
   "range": {
-    "from": "2026-10-09",
-    "to": "2026-11-24"
+    "from": "2026-10-10",
+    "to": "2026-11-25"
   },
   "events": [
     {
-      "id": "assembly-1000055199865",
+      "id": "assembly-1000055218617",
       "title": "제11차 세계한인여성대회",
       "date": "2026-10-12",
       "time": "00:00",
@@ -18,7 +18,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261012&endDate=20261012&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199864",
+      "id": "assembly-1000055218616",
       "title": "2027년도 예산안 토론회",
       "date": "2026-10-12",
       "time": "14:00",
@@ -29,7 +29,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261012&endDate=20261012&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199862",
+      "id": "assembly-1000055218614",
       "title": "북한의 지뢰도발 2015, 그리고 2026",
       "date": "2026-10-13",
       "time": "13:30~16:00",
@@ -40,7 +40,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261013&endDate=20261013&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199863",
+      "id": "assembly-1000055218615",
       "title": "백남기 농민, 우리에게 무엇을 남겼나?",
       "date": "2026-10-13",
       "time": "14:00",
@@ -51,7 +51,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261013&endDate=20261013&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199860",
+      "id": "assembly-1000055218612",
       "title": "국가인권위원회 기능회복을 위한 토론회",
       "date": "2026-10-14",
       "time": "10:00~12:00",
@@ -62,7 +62,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199859",
+      "id": "assembly-1000055218611",
       "title": "지역 사회연대금융 중개기관 육성 어떻게 할 것인가?",
       "date": "2026-10-14",
       "time": "13:30",
@@ -73,7 +73,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199861",
+      "id": "assembly-1000055218613",
       "title": "부실 선거 재발 방지를 위한 선거제도 개선 토론회",
       "date": "2026-10-14",
       "time": "14:00",
@@ -84,7 +84,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199858",
+      "id": "assembly-1000055218610",
       "title": "청년에게 희망이 있는 나라: 한국경제는 성장했는데, 우리는 번영하고 있는가?",
       "date": "2026-10-15",
       "time": "09:00~12:00",
@@ -95,7 +95,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199857",
+      "id": "assembly-1000055218609",
       "title": "한·중 의료바이오산업 협력의 과제와 실천 전략",
       "date": "2026-10-15",
       "time": "14:00~18:00",
@@ -106,7 +106,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199856",
+      "id": "assembly-1000055218608",
       "title": "청소년의 정신건강과 정신분석",
       "date": "2026-10-17",
       "time": "09:00~17:00",
@@ -117,7 +117,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261017&endDate=20261017&searchGubun=search"
     },
     {
-      "id": "assembly-1000055199855",
+      "id": "assembly-1000055218607",
       "title": "AI·로봇 산업 생태계 전략 국회포럼",
       "date": "2026-10-21",
       "time": "14:00~17:00",
@@ -128,5 +128,5 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
     }
   ],
-  "updated": "2026-10-10T13:43:41.343Z"
+  "updated": "2026-10-10T18:37:03.868Z"
 }
