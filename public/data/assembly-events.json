@@ -2,111 +2,12 @@
   "_안내": "대한민국 국회 홈페이지 공개 일정 중 국회행사(토론회·세미나·포럼 등)를 자동 수집합니다. 직접 편집하지 마세요.",
   "source": "https://www.assembly.go.kr/portal/na/agenda/agendaSchl.do?menuNo=600015",
   "range": {
-    "from": "2026-10-14",
-    "to": "2026-11-29"
+    "from": "2026-10-15",
+    "to": "2026-11-30"
   },
   "events": [
     {
-      "id": "assembly-1000055666410",
-      "title": "굿모닝! 수요 정책 아카데미 2차",
-      "date": "2026-10-14",
-      "time": "07:30~08:40",
-      "place": "의원회관 신관 제2세미나실",
-      "organizer": "조승환 의원실, 여의도연구원",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055666412",
-      "title": "국가인권위원회 기능회복을 위한 토론회",
-      "date": "2026-10-14",
-      "time": "10:00~12:00",
-      "place": "의원회관 제5간담회의실(208호)",
-      "organizer": "서미화·박지원 의원실, 인권위개혁을 위한 국회의원 모임, 더불어민주당 사회적약자 기본권 강화 TF",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055666406",
-      "title": "주민참여예산 정책토론회",
-      "date": "2026-10-14",
-      "time": "10:00~12:00",
-      "place": "국회도서관 소강당",
-      "organizer": "안도걸 의원실, 주민참여예산광역단체협의회",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055666409",
-      "title": "제6회 홍범도아카데미 포럼",
-      "date": "2026-10-14",
-      "time": "13:00",
-      "place": "의원회관 신관 제2세미나실",
-      "organizer": "우원식 의원실, 홍범도장군기념사업회, 대한고려인협회",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055666405",
-      "title": "세종호텔 투쟁 승리를 위한 국회토론회",
-      "date": "2026-10-14",
-      "time": "13:00",
-      "place": "의원회관 제5간담회의실(208호)",
-      "organizer": "정혜경·이용우·고민정 의원실, 민주노총 서비스연맹 세종호텔지부, 세종호텔 정리해고 철회를 위한 공동대책위원회",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055666411",
-      "title": "지역 사회연대금융 중개기관 육성 어떻게 할 것인가?",
-      "date": "2026-10-14",
-      "time": "13:30",
-      "place": "의원회관 제10간담회의실(217호)",
-      "organizer": "이광희·김영배·용혜인 의원실",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055666408",
-      "title": "중소.중견 제조기업 AI 전환 촉진과 생산적 금융지원",
-      "date": "2026-10-14",
-      "time": "14:00",
-      "place": "기타 : 중소기업중앙회 희망룸",
-      "organizer": "박민규 의원실, 더불어민주당 AI 금융·경제추진단",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055666413",
-      "title": "부실 선거 재발 방지를 위한 선거제도 개선 토론회",
-      "date": "2026-10-14",
-      "time": "14:00",
-      "place": "의원회관 제2소회의실",
-      "organizer": "손솔·송기헌·이해식·이정헌·임미애·이주희 의원실",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055666407",
-      "title": "메가프로젝트, 다음 질문에 답하다",
-      "date": "2026-10-14",
-      "time": "14:00~16:00",
-      "place": "의원회관 제7간담회의실(210호)",
-      "organizer": "서왕진·박지혜 의원실",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055666404",
+      "id": "assembly-1000055667079",
       "title": "청년에게 희망이 있는 나라: 한국경제는 성장했는데, 우리는 번영하고 있는가?",
       "date": "2026-10-15",
       "time": "09:00~12:00",
@@ -117,7 +18,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666401",
+      "id": "assembly-1000055667076",
       "title": "소년 사법의 미래를 묻고 답하다",
       "date": "2026-10-15",
       "time": "14:00~17:00",
@@ -128,7 +29,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666403",
+      "id": "assembly-1000055667078",
       "title": "한·중 의료바이오산업 협력의 과제와 실천 전략",
       "date": "2026-10-15",
       "time": "14:00~18:00",
@@ -139,7 +40,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666402",
+      "id": "assembly-1000055667077",
       "title": "2026 백화점·면세점 판매노동자 근무환경 및 건강실태조사 결과 발표 국회 토론회",
       "date": "2026-10-15",
       "time": "15:00",
@@ -150,7 +51,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666400",
+      "id": "assembly-1000055667075",
       "title": "2026 대한민국 직접민주주의 박람회: 100인 저자와 함께하는 '생산시민 민주주의'",
       "date": "2026-10-16",
       "time": "10:00~12:00",
@@ -161,7 +62,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261016&endDate=20261016&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666399",
+      "id": "assembly-1000055667074",
       "title": "미래 모빌리티 산업과 규제",
       "date": "2026-10-16",
       "time": "13:30~18:00",
@@ -172,7 +73,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261016&endDate=20261016&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666398",
+      "id": "assembly-1000055667073",
       "title": "청소년의 정신건강과 정신분석",
       "date": "2026-10-17",
       "time": "09:00~17:00",
@@ -183,7 +84,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261017&endDate=20261017&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666396",
+      "id": "assembly-1000055667071",
       "title": "왜! 경인 지역 대학은 늘 소외되는가?",
       "date": "2026-10-19",
       "time": "10:00~12:00",
@@ -194,7 +95,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261019&endDate=20261019&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666397",
+      "id": "assembly-1000055667072",
       "title": "중앙차세대여성위원회 임명장 수여식 및 전체회의",
       "date": "2026-10-19",
       "time": "14:00",
@@ -205,7 +106,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261019&endDate=20261019&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666395",
+      "id": "assembly-1000055667070",
       "title": "충남권 국립호국원 설립, 왜 부여인가?",
       "date": "2026-10-20",
       "time": "10:00",
@@ -216,7 +117,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261020&endDate=20261020&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666393",
+      "id": "assembly-1000055667068",
       "title": "드라마 스태프의 숨겨진 노동시간, 가려진 권리",
       "date": "2026-10-21",
       "time": "10:00",
@@ -227,7 +128,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666392",
+      "id": "assembly-1000055667067",
       "title": "김치자급률 법제화 국회 토론회",
       "date": "2026-10-21",
       "time": "13:30",
@@ -238,7 +139,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666391",
+      "id": "assembly-1000055667066",
       "title": "호르무즈·홍해 위기 속 청해부대 파병의 쟁점",
       "date": "2026-10-21",
       "time": "14:00",
@@ -249,7 +150,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666394",
+      "id": "assembly-1000055667069",
       "title": "AI·로봇 산업 생태계 전략 국회포럼",
       "date": "2026-10-21",
       "time": "14:00~17:00",
@@ -260,7 +161,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666390",
+      "id": "assembly-1000055667065",
       "title": "\"대한민국, 글로벌 5대 수출 강국 도약을 위한 FTA·통상 자원의 AI플랫폼 전환(AX)과 EU통상 규제 대응 전략\"",
       "date": "2026-10-21",
       "time": "15:00~16:30",
@@ -271,7 +172,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666389",
+      "id": "assembly-1000055667064",
       "title": "혁명가 박정희",
       "date": "2026-10-22",
       "time": "10:00~12:00",
@@ -282,7 +183,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261022&endDate=20261022&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666388",
+      "id": "assembly-1000055667063",
       "title": "대한민국 목재산업 미래비전",
       "date": "2026-10-30",
       "time": "13:00~15:00",
@@ -293,7 +194,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261030&endDate=20261030&searchGubun=search"
     },
     {
-      "id": "assembly-1000055666387",
+      "id": "assembly-1000055667062",
       "title": "AI 대전환과 마리나산업 고도화 방안",
       "date": "2026-11-03",
       "time": "14:00~16:00",
@@ -304,5 +205,5 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261103&endDate=20261103&searchGubun=search"
     }
   ],
-  "updated": "2026-10-15T09:56:00.583Z"
+  "updated": "2026-10-15T15:01:56.460Z"
 }
