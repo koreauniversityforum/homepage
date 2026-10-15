@@ -7,7 +7,7 @@
   },
   "events": [
     {
-      "id": "assembly-1000055665739",
+      "id": "assembly-1000055666410",
       "title": "굿모닝! 수요 정책 아카데미 2차",
       "date": "2026-10-14",
       "time": "07:30~08:40",
@@ -18,7 +18,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665741",
+      "id": "assembly-1000055666412",
       "title": "국가인권위원회 기능회복을 위한 토론회",
       "date": "2026-10-14",
       "time": "10:00~12:00",
@@ -29,7 +29,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665735",
+      "id": "assembly-1000055666406",
       "title": "주민참여예산 정책토론회",
       "date": "2026-10-14",
       "time": "10:00~12:00",
@@ -40,7 +40,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665738",
+      "id": "assembly-1000055666409",
       "title": "제6회 홍범도아카데미 포럼",
       "date": "2026-10-14",
       "time": "13:00",
@@ -51,7 +51,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665734",
+      "id": "assembly-1000055666405",
       "title": "세종호텔 투쟁 승리를 위한 국회토론회",
       "date": "2026-10-14",
       "time": "13:00",
@@ -62,7 +62,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665740",
+      "id": "assembly-1000055666411",
       "title": "지역 사회연대금융 중개기관 육성 어떻게 할 것인가?",
       "date": "2026-10-14",
       "time": "13:30",
@@ -73,18 +73,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665742",
-      "title": "부실 선거 재발 방지를 위한 선거제도 개선 토론회",
-      "date": "2026-10-14",
-      "time": "14:00",
-      "place": "의원회관 제2소회의실",
-      "organizer": "손솔·송기헌·이해식·이정헌·임미애·이주희 의원실",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055665737",
+      "id": "assembly-1000055666408",
       "title": "중소.중견 제조기업 AI 전환 촉진과 생산적 금융지원",
       "date": "2026-10-14",
       "time": "14:00",
@@ -95,7 +84,18 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665736",
+      "id": "assembly-1000055666413",
+      "title": "부실 선거 재발 방지를 위한 선거제도 개선 토론회",
+      "date": "2026-10-14",
+      "time": "14:00",
+      "place": "의원회관 제2소회의실",
+      "organizer": "손솔·송기헌·이해식·이정헌·임미애·이주희 의원실",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055666407",
       "title": "메가프로젝트, 다음 질문에 답하다",
       "date": "2026-10-14",
       "time": "14:00~16:00",
@@ -106,7 +106,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261014&endDate=20261014&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665733",
+      "id": "assembly-1000055666404",
       "title": "청년에게 희망이 있는 나라: 한국경제는 성장했는데, 우리는 번영하고 있는가?",
       "date": "2026-10-15",
       "time": "09:00~12:00",
@@ -117,7 +117,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665730",
+      "id": "assembly-1000055666401",
       "title": "소년 사법의 미래를 묻고 답하다",
       "date": "2026-10-15",
       "time": "14:00~17:00",
@@ -128,7 +128,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665732",
+      "id": "assembly-1000055666403",
       "title": "한·중 의료바이오산업 협력의 과제와 실천 전략",
       "date": "2026-10-15",
       "time": "14:00~18:00",
@@ -139,7 +139,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665731",
+      "id": "assembly-1000055666402",
       "title": "2026 백화점·면세점 판매노동자 근무환경 및 건강실태조사 결과 발표 국회 토론회",
       "date": "2026-10-15",
       "time": "15:00",
@@ -150,7 +150,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261015&endDate=20261015&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665729",
+      "id": "assembly-1000055666400",
       "title": "2026 대한민국 직접민주주의 박람회: 100인 저자와 함께하는 '생산시민 민주주의'",
       "date": "2026-10-16",
       "time": "10:00~12:00",
@@ -161,18 +161,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261016&endDate=20261016&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665727",
-      "title": "자살 유가족 지원체계 구축을 위한 정책토론회",
-      "date": "2026-10-16",
-      "time": "10:00~12:00",
-      "place": "의원회관 제5간담회의실(208호)",
-      "organizer": "장종태·이성권·서왕진 의원실, 생명존중시민회의, 한국생명운동연대, 자살유가족와 따뜻한 친구들",
-      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
-      "source": "assembly",
-      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261016&endDate=20261016&searchGubun=search"
-    },
-    {
-      "id": "assembly-1000055665728",
+      "id": "assembly-1000055666399",
       "title": "미래 모빌리티 산업과 규제",
       "date": "2026-10-16",
       "time": "13:30~18:00",
@@ -183,7 +172,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261016&endDate=20261016&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665726",
+      "id": "assembly-1000055666398",
       "title": "청소년의 정신건강과 정신분석",
       "date": "2026-10-17",
       "time": "09:00~17:00",
@@ -194,7 +183,40 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261017&endDate=20261017&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665724",
+      "id": "assembly-1000055666396",
+      "title": "왜! 경인 지역 대학은 늘 소외되는가?",
+      "date": "2026-10-19",
+      "time": "10:00~12:00",
+      "place": "의원회관 제2소회의실",
+      "organizer": "김준혁 의원실",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261019&endDate=20261019&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055666397",
+      "title": "중앙차세대여성위원회 임명장 수여식 및 전체회의",
+      "date": "2026-10-19",
+      "time": "14:00",
+      "place": "국회박물관 국회체험관",
+      "organizer": "서명옥 의원실, 국민의힘 중앙여성위원회",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261019&endDate=20261019&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055666395",
+      "title": "충남권 국립호국원 설립, 왜 부여인가?",
+      "date": "2026-10-20",
+      "time": "10:00",
+      "place": "의원회관 제1소회의실",
+      "organizer": "윤용근 의원실, 부여군",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261020&endDate=20261020&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055666393",
       "title": "드라마 스태프의 숨겨진 노동시간, 가려진 권리",
       "date": "2026-10-21",
       "time": "10:00",
@@ -205,7 +227,7 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665723",
+      "id": "assembly-1000055666392",
       "title": "김치자급률 법제화 국회 토론회",
       "date": "2026-10-21",
       "time": "13:30",
@@ -216,7 +238,18 @@
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
     },
     {
-      "id": "assembly-1000055665725",
+      "id": "assembly-1000055666391",
+      "title": "호르무즈·홍해 위기 속 청해부대 파병의 쟁점",
+      "date": "2026-10-21",
+      "time": "14:00",
+      "place": "의원회관 제3간담회의실(203호)",
+      "organizer": "김준형·이용선·윤종오·용혜인 의원실, 미국침략전쟁중단 한국군파병반대 긴급행동",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055666394",
       "title": "AI·로봇 산업 생태계 전략 국회포럼",
       "date": "2026-10-21",
       "time": "14:00~17:00",
@@ -225,7 +258,51 @@
       "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
       "source": "assembly",
       "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055666390",
+      "title": "\"대한민국, 글로벌 5대 수출 강국 도약을 위한 FTA·통상 자원의 AI플랫폼 전환(AX)과 EU통상 규제 대응 전략\"",
+      "date": "2026-10-21",
+      "time": "15:00~16:30",
+      "place": "의원회관 제2소회의실",
+      "organizer": "장철민·박희승 의원실, 산업통상부, 산업통상자원중소벤처기업위원회",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261021&endDate=20261021&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055666389",
+      "title": "혁명가 박정희",
+      "date": "2026-10-22",
+      "time": "10:00~12:00",
+      "place": "의원회관 대회의실",
+      "organizer": "임이자 의원실",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261022&endDate=20261022&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055666388",
+      "title": "대한민국 목재산업 미래비전",
+      "date": "2026-10-30",
+      "time": "13:00~15:00",
+      "place": "의원회관 제5간담회의실(208호)",
+      "organizer": "문금주·김용태 의원실, 임업단체총연합회",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261030&endDate=20261030&searchGubun=search"
+    },
+    {
+      "id": "assembly-1000055666387",
+      "title": "AI 대전환과 마리나산업 고도화 방안",
+      "date": "2026-11-03",
+      "time": "14:00~16:00",
+      "place": "의원회관 신관 제3세미나실",
+      "organizer": "조경태 의원실, (사)한국해양레저네트워크",
+      "note": "국회에서 공개한 토론회·세미나·포럼 등 의원실 행사 일정입니다.",
+      "source": "assembly",
+      "url": "https://ampos.nanet.go.kr:7443/seminarList.do#fromDate=20261103&endDate=20261103&searchGubun=search"
     }
   ],
-  "updated": "2026-10-15T04:40:48.039Z"
+  "updated": "2026-10-15T09:56:00.583Z"
 }
