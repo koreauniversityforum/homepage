@@ -1,0 +1,50 @@
+name: 뉴보대 성과 (관리자 요청)
+run-name: ${{ github.event.client_payload.req && format('뉴보대 성과 {0}', github.event.client_payload.req) || '뉴보대 성과' }}
+
+# 관리자 화면(admin.html 「뉴보대 성과」)이 부른다. 숫자는 저장하지 않고, 관리자 브라우저가 그 자리에서
+# 만든 공개 열쇠로 잠가 `insights` 브랜치에 잠깐 올린다(풀 열쇠는 그 브라우저에만 있다).
+# 자세한 것은 scripts/ig-insights.mjs 머리 주석.
+
+on:
+  repository_dispatch:
+    types: [insights-req]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ig-insights
+  cancel-in-progress: false
+
+jobs:
+  insights:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 성과 받아 잠그기
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_NBD: ${{ secrets.IG_USER_NBD }}
+          PUB: ${{ toJSON(github.event.client_payload.pub) }}
+          REQ: ${{ github.event.client_payload.req }}
+          OUT: ${{ runner.temp }}/res.json
+        run: node scripts/ig-insights.mjs
+
+      - name: insights 브랜치에 올리기
+        env:
+          REQ: ${{ github.event.client_payload.req }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # 앞의 결과는 남기지 않는다 - 빈 브랜치에 이번 것 하나만 얹어 갈아 끼운다
+          mkdir -p "$RUNNER_TEMP/pub/res" && cd "$RUNNER_TEMP/pub"
+          cp "$RUNNER_TEMP/res.json" "res/$REQ.json"
+          git init -q && git checkout -q -b insights
+          git config user.name  "kuf-bot"
+          git config user.email "koreauniversityforum@gmail.com"
+          git add . && git commit -qm "성과 (잠김) $REQ"
+          git push -q --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" insights

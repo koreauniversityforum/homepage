@@ -18,9 +18,24 @@
   <div class="bar-right">
     <a class="ghost" href="/board-admin.html">게시판 승인 →</a>
     <a class="ghost" href="/news" target="_blank" rel="noreferrer">소식 화면 보기 ↗</a>
+    <button type="button" class="ghost" id="btn-stats">뉴보대 성과</button>
     <button type="button" class="ghost" id="btn-settings">저장소 설정</button>
   </div>
 </header>
+
+<!-- 뉴보대 성과 (public/js/admin-stats.js) - 숫자는 저장하지 않고 이 브라우저에서만 푼다 -->
+<section class="panel" id="stats" hidden>
+  <h2>뉴보대 인스타 성과</h2>
+  <p class="note">
+    최근 게시물 30건의 조회·도달·좋아요·댓글·저장·공유입니다. 누를 때마다 깃허브가 인스타에서 새로 받아 옵니다(30초 안팎).
+    숫자는 어디에도 저장되지 않고, 이 브라우저에서만 풀어서 보여 줍니다. 「저장소 설정」의 토큰을 씁니다.
+  </p>
+  <div class="row">
+    <button type="button" id="btn-stats-load">성과 불러오기</button>
+    <span class="status" id="stats-status"></span>
+  </div>
+  <div id="stats-out"></div>
+</section>
 
 <!-- 저장소 설정 -->
 <section class="panel" id="settings" hidden>
@@ -159,5 +174,6 @@
 <div class="log" id="log" hidden></div>
 
 <script src="/js/admin.js"></script>
+<script src="/js/admin-stats.js"></script>
 </body>
 </html>

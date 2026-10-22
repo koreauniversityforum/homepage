@@ -10,6 +10,8 @@ on:
   schedule:
     - cron: '*/30 * * * *'
   workflow_dispatch:        # 저장소 Actions 화면에서 손으로도 돌릴 수 있다
+  repository_dispatch:      # 뉴보대 발행이 끝나자마자 깨운다(new_bo_dea 의 publish-cards·reserve, 2026-10-23)
+    types: [newbodae-posted]
 
 permissions:
   contents: write
