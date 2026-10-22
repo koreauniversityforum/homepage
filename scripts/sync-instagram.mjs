@@ -53,10 +53,13 @@ async function writeJson(file, obj) {
 
 /** 캡션 첫 줄에서 제목을 만든다. 해시태그 줄과 빈 줄은 건너뛴다. */
 function titleFrom(caption, fallback) {
+  /* 🔴 뉴보대 피드 글은 「📌 무슨 일인가」 같은 절 제목으로 시작하는 것이 있다. 그걸 제목으로 쓰면
+        카드마다 같은 제목이 붙는다 - 이모지로 시작하는 짧은 줄은 절 제목으로 보고 건너뛴다. */
+  const header = (s) => /^\p{Extended_Pictographic}/u.test(s) && s.length <= 16;
   const line = String(caption || '')
     .split('\n')
-    .map((s) => s.trim())
-    .find((s) => s && !s.startsWith('#'));
+    .map((s) => s.trim().replace(/^[·•‧∙\-–]\s*/, ''))
+    .find((s) => s && !s.startsWith('#') && !header(s));
   if (!line) return fallback;
   const clean = line.replace(/#[^\s#]+/g, '').replace(/\s+/g, ' ').trim();
   if (!clean) return fallback;
