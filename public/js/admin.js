@@ -37,7 +37,7 @@ function saveCfg(c) { localStorage.setItem(CFG_KEY, JSON.stringify(c)); }
 /** 올릴 수 있는가 - 관리자 로그인 또는 개인 토큰. 길 고르기는 admin-auth.js 가 한다. */
 function hasRepo() { return KUF_ADMIN.canWrite(); }
 /** 서버 중계(로그인)는 main 만 허락한다. 개인 토큰일 때만 설정한 브랜치를 쓴다. */
-function branch() { return (KUF_ADMIN.hasPat() && cfg().branch) || 'main'; }
+function branch() { return (KUF_ADMIN.usingPat() && cfg().branch) || 'main'; }
 
 function fillCfgForm() {
   const c = cfg();
@@ -629,8 +629,8 @@ $('#btn-commit').addEventListener('click', async () => {
     log('· 홈페이지에서 바로 안 보이면 새로고침(Ctrl+Shift+R)을 한 번 하세요.');
   } catch (e) {
     log(`🔴 실패: ${e.message}`);
-    log(KUF_ADMIN.hasPat()
-      ? '· 개인 토큰 권한(Contents: Read and write)과 브랜치 이름을 확인해 주세요.'
+    log(KUF_ADMIN.usingPat()
+      ? '· 개인 토큰이 만료됐거나 권한이 모자랍니다. 위 「로그인 · 설정」에서 관리자 로그인을 하면 토큰 없이 올라갑니다.'
       : / 401 /.test(e.message)
         ? '· 로그인이 풀렸습니다. 다시 로그인한 뒤 「GitHub에 올리기」를 한 번 더 누르세요(고친 내용은 그대로 있습니다).'
         : '· 계속 실패하면 사진을 「가로 1080px로 줄이기」를 켠 채 다시 넣어 보세요(한 번에 4MB 넘게는 못 올립니다).');
@@ -649,7 +649,7 @@ function renderAuth() {
   $('#auth-in').hidden = on;
   $('#auth-out').hidden = !on;
   $('#auth-who').textContent = on ? KUF_ADMIN.email() : '';
-  $('#bar-who').textContent = on ? `${KUF_ADMIN.email()} 로그인` : KUF_ADMIN.hasPat() ? '개인 토큰 사용 중' : '로그인 안 됨';
+  $('#bar-who').textContent = on ? `${KUF_ADMIN.email()} 로그인` : KUF_ADMIN.usingPat() ? '개인 토큰 사용 중' : '로그인 안 됨';
   $('#btn-commit').disabled = !(hasRepo() && S.dirty);
 }
 

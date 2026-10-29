@@ -5,7 +5,7 @@
  *   1. 관리자 로그인(기본) - 게시판 승인 화면과 같은 계정. 토큰 없이 서버(/api/admin/gh)가 대신 부른다.
  *      그래서 관리자 계정만 있으면 누구든 같은 권한으로 소식·뉴보대·일정을 고칠 수 있다.
  *   2. 개인 토큰(예전 방식) - 「저장소 설정」에 PAT 를 넣으면 브라우저가 GitHub 를 바로 부른다.
- * 둘 다 있으면 개인 토큰을 쓴다.
+ * 둘 다 있으면 로그인을 쓴다. 예전에 넣어 둔 개인 토큰이 만료돼 있어도 로그인만 하면 올라가게.
  *
  * 🔴 로그인 토큰은 board-admin.js 와 같은 sessionStorage 자리에 둔다.
  *    한 탭에서 한 번 로그인하면 「게시판 승인」 화면을 오가도 다시 묻지 않는다.
@@ -23,6 +23,8 @@
   const cfg = () => { try { return JSON.parse(localStorage.getItem(CFG_KEY) || '{}'); } catch { return {}; } };
   const hasPat = () => { const c = cfg(); return !!(c.owner && c.repo && c.token); };
   const session = () => sessionStorage.getItem(TOKEN_KEY) || '';
+  /** 개인 토큰으로 GitHub 를 바로 부르는가 - 로그인하지 않았고 토큰이 있을 때만 */
+  const usingPat = () => !session() && hasPat();
 
   async function login(email, password) {
     const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
@@ -51,7 +53,7 @@
   async function gh(path, opts = {}) {
     const accept = opts.raw ? 'application/vnd.github.raw' : 'application/vnd.github+json';
     const body = opts.body ? { 'Content-Type': 'application/json' } : {};
-    if (hasPat()) {
+    if (usingPat()) {
       const c = cfg();
       return fetch(`https://api.github.com/repos/${c.owner}/${c.repo}${path}`, {
         method: opts.method || 'GET',
@@ -78,6 +80,7 @@
     logout,
     gh,
     hasPat,
+    usingPat,
     loggedIn: () => !!session(),
     /* 게시판 승인 화면에서 로그인했으면 이메일 자리가 비어 있다 - 토큰 안에 적힌 것을 읽는다 */
     email: () => {
