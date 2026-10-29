@@ -5,13 +5,11 @@
  *   1. 이 브라우저가 그 자리에서 RSA 열쇠 쌍을 만든다(비밀 열쇠는 밖으로 못 꺼내게 만든다)
  *   2. 공개 열쇠만 실어 `insights-req` 를 부른다 → ig-insights.yml 이 숫자를 받아 그 열쇠로 잠근다
  *   3. `insights` 브랜치에 잠긴 결과가 올라오면 받아서 이 브라우저에서만 푼다
- * 열쇠(PAT)는 「저장소 설정」에 넣은 것을 그대로 쓴다(Contents 쓰기 - dispatch 에 필요).
+ * GitHub 는 admin-auth.js 를 거쳐 부른다(관리자 로그인 → 서버 중계, 또는 개인 토큰). dispatch 에는 Contents 쓰기 권한이 필요하다.
  */
 (function () {
   'use strict';
-  const CFG_KEY = 'kuf_admin_cfg';                 // admin.js 와 같은 자리
   const $ = (s) => document.querySelector(s);
-  const cfg = () => { try { return JSON.parse(localStorage.getItem(CFG_KEY) || '{}'); } catch { return {}; } };
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const b64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
   const num = (v) => (v == null ? '-' : Number(v).toLocaleString('ko-KR'));
@@ -23,14 +21,8 @@
     el.style.color = bad ? 'var(--danger)' : '';
   }
 
-  async function gh(path, opts = {}) {
-    const c = cfg();
-    return fetch(`https://api.github.com/repos/${c.owner}/${c.repo}${path}`, {
-      ...opts,
-      headers: { Authorization: `Bearer ${c.token}`, Accept: 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28', ...(opts.body ? { 'Content-Type': 'application/json' } : {}) },
-    });
-  }
+  /* 관리자 로그인이면 서버 중계로, 개인 토큰이면 GitHub 로 바로 - admin-auth.js 가 고른다 */
+  const gh = (path, opts = {}) => window.KUF_ADMIN.gh(path, opts);
 
   async function unseal(box, priv) {
     const raw = await crypto.subtle.decrypt({ name: 'RSA-OAEP' }, priv, b64(box.key));
@@ -41,8 +33,7 @@
 
   async function load() {
     if (busy) return;
-    const c = cfg();
-    if (!(c.owner && c.repo && c.token)) { status('먼저 「저장소 설정」에서 owner·repo·토큰을 채워 주세요.', true); return; }
+    if (!window.KUF_ADMIN.canWrite()) { status('먼저 「로그인 · 설정」에서 관리자 로그인을 해 주세요.', true); return; }
     busy = true; $('#btn-stats-load').disabled = true;
     try {
       status('1/3 열쇠를 만듭니다…');
@@ -53,7 +44,8 @@
       status('2/3 깃허브에 성과를 부탁합니다…');
       const r = await gh('/dispatches', { method: 'POST',
         body: JSON.stringify({ event_type: 'insights-req', client_payload: { req, pub: { kty: pub.kty, n: pub.n, e: pub.e } } }) });
-      if (r.status !== 204) throw new Error(r.status === 401 ? '토큰이 틀렸거나 만료됐습니다.' :
+      if (r.status !== 204) throw new Error(r.status === 401 ? '로그인이 풀렸거나 토큰이 틀렸습니다.' :
+        r.status === 503 ? '서버에 GITHUB_TOKEN 이 아직 없습니다(Vercel 환경변수).' :
         r.status === 403 || r.status === 404 ? '토큰 권한이 모자랍니다(Contents: Read and write).' : 'GitHub ' + r.status);
       const until = Date.now() + 4 * 60e3;
       let box = null, n = 0;

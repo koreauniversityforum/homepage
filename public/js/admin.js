@@ -34,7 +34,10 @@ function cfg() {
   try { return JSON.parse(localStorage.getItem(CFG_KEY) || '{}'); } catch { return {}; }
 }
 function saveCfg(c) { localStorage.setItem(CFG_KEY, JSON.stringify(c)); }
-function hasRepo() { const c = cfg(); return !!(c.owner && c.repo && c.token); }
+/** 올릴 수 있는가 - 관리자 로그인 또는 개인 토큰. 길 고르기는 admin-auth.js 가 한다. */
+function hasRepo() { return KUF_ADMIN.canWrite(); }
+/** 서버 중계(로그인)는 main 만 허락한다. 개인 토큰일 때만 설정한 브랜치를 쓴다. */
+function branch() { return (KUF_ADMIN.hasPat() && cfg().branch) || 'main'; }
 
 function fillCfgForm() {
   const c = cfg();
@@ -56,17 +59,7 @@ function log(msg, keep = true) {
 /* ── GitHub ───────────────────────────────────────────── */
 
 async function gh(path, opts = {}) {
-  const c = cfg();
-  const res = await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}${path}`, {
-    ...opts,
-    headers: {
-      Authorization: `Bearer ${c.token}`,
-      Accept: opts.raw ? 'application/vnd.github.raw' : 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28',
-      ...(opts.body ? { 'Content-Type': 'application/json' } : {}),
-      ...(opts.headers || {}),
-    },
-  });
+  const res = await KUF_ADMIN.gh(path, opts);
   if (!res.ok) {
     const detail = await res.text().catch(() => '');
     throw new Error(`GitHub ${res.status} ${path}\n${detail.slice(0, 300)}`);
@@ -90,11 +83,10 @@ function b64(str) {
  * files: [{path, content}] 또는 [{path, base64}]
  */
 async function commitFiles(files, message) {
-  const c = cfg();
-  const branch = c.branch || 'main';
+  const br = branch();
 
-  log(`· 브랜치 ${branch} 의 현재 위치를 확인합니다…`);
-  const ref = await gh(`/git/ref/heads/${branch}`);
+  log(`· 브랜치 ${br} 의 현재 위치를 확인합니다…`);
+  const ref = await gh(`/git/ref/heads/${br}`);
   const headSha = ref.object.sha;
   const head = await gh(`/git/commits/${headSha}`);
 
@@ -118,7 +110,7 @@ async function commitFiles(files, message) {
     method: 'POST',
     body: JSON.stringify({ message, tree: newTree.sha, parents: [headSha] }),
   });
-  await gh(`/git/refs/heads/${branch}`, {
+  await gh(`/git/refs/heads/${br}`, {
     method: 'PATCH',
     body: JSON.stringify({ sha: commit.sha }),
   });
@@ -149,8 +141,7 @@ async function loadOne(kind) {
   /* 토큰이 있으면 GitHub 쪽을 원본으로 본다 - 배포 캐시 때문에 옛 내용을 볼 일이 없다. */
   if (hasRepo()) {
     try {
-      const c = cfg();
-      const text = await gh(`/contents/${repoPath(path)}?ref=${c.branch || 'main'}`, { raw: true });
+      const text = await gh(`/contents/${repoPath(path)}?ref=${branch()}`, { raw: true });
       return JSON.parse(text);
     } catch (e) {
       log(`· ${path} 을 GitHub 에서 읽지 못했습니다(${e.message.split('\n')[0]}). 홈페이지 쪽을 봅니다.`);
@@ -620,7 +611,7 @@ $('#btn-download').addEventListener('click', async () => {
 });
 
 $('#btn-commit').addEventListener('click', async () => {
-  if (!hasRepo()) { alert('먼저 「저장소 설정」에서 owner·repo·토큰을 채워 주세요.'); return; }
+  if (!hasRepo()) { alert('먼저 「로그인 · 설정」에서 관리자 로그인을 해 주세요.'); return; }
   const btn = $('#btn-commit');
   btn.disabled = true;
   log('── GitHub에 올리기 ──', false);
@@ -638,7 +629,11 @@ $('#btn-commit').addEventListener('click', async () => {
     log('· 홈페이지에서 바로 안 보이면 새로고침(Ctrl+Shift+R)을 한 번 하세요.');
   } catch (e) {
     log(`🔴 실패: ${e.message}`);
-    log('· 토큰 권한(Contents: Read and write)과 브랜치 이름을 확인해 주세요.');
+    log(KUF_ADMIN.hasPat()
+      ? '· 개인 토큰 권한(Contents: Read and write)과 브랜치 이름을 확인해 주세요.'
+      : / 401 /.test(e.message)
+        ? '· 로그인이 풀렸습니다. 다시 로그인한 뒤 「GitHub에 올리기」를 한 번 더 누르세요(고친 내용은 그대로 있습니다).'
+        : '· 계속 실패하면 사진을 「가로 1080px로 줄이기」를 켠 채 다시 넣어 보세요(한 번에 4MB 넘게는 못 올립니다).');
   } finally {
     btn.disabled = !hasRepo();
   }
@@ -648,6 +643,46 @@ $('#btn-commit').addEventListener('click', async () => {
 
 $('#btn-settings').addEventListener('click', () => { $('#settings').hidden = !$('#settings').hidden; });
 
+/** 로그인 칸과 위쪽 이름표를 지금 상태에 맞춘다. */
+function renderAuth() {
+  const on = KUF_ADMIN.loggedIn();
+  $('#auth-in').hidden = on;
+  $('#auth-out').hidden = !on;
+  $('#auth-who').textContent = on ? KUF_ADMIN.email() : '';
+  $('#bar-who').textContent = on ? `${KUF_ADMIN.email()} 로그인` : KUF_ADMIN.hasPat() ? '개인 토큰 사용 중' : '로그인 안 됨';
+  $('#btn-commit').disabled = !(hasRepo() && S.dirty);
+}
+
+async function doLogin() {
+  const st = $('#auth-status');
+  st.textContent = '로그인하는 중…';
+  try {
+    await KUF_ADMIN.login($('#auth-email').value.trim(), $('#auth-pw').value);
+    $('#auth-pw').value = '';
+    renderAuth();
+    st.textContent = '로그인했습니다. 목록을 다시 읽습니다…';
+    /* 고치던 것이 있으면 다시 읽지 않는다 - 다시 읽으면 고친 내용이 사라진다. */
+    if (!S.dirty) await loadAll();
+    st.textContent = '준비됐습니다.';
+  } catch (e) {
+    st.textContent = e.message;
+  }
+}
+
+$('#btn-login').addEventListener('click', doLogin);
+$('#auth-pw').addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
+$('#btn-logout').addEventListener('click', () => {
+  KUF_ADMIN.logout();
+  renderAuth();
+  $('#auth-status').textContent = '로그아웃했습니다.';
+});
+/* 서버 중계가 401 을 받으면 admin-auth.js 가 이 신호를 보낸다 */
+window.addEventListener('kuf-auth', () => {
+  renderAuth();
+  $('#settings').hidden = false;
+  $('#auth-status').textContent = '로그인이 풀렸습니다. 다시 로그인해 주세요.';
+});
+
 $('#btn-cfg-save').addEventListener('click', async () => {
   saveCfg({
     owner: $('#cfg-owner').value.trim(),
@@ -655,8 +690,8 @@ $('#btn-cfg-save').addEventListener('click', async () => {
     branch: $('#cfg-branch').value.trim() || 'main',
     token: $('#cfg-token').value.trim(),
   });
-  $('#cfg-status').textContent = hasRepo() ? '저장했습니다. 목록을 다시 읽습니다…' : '저장했습니다(토큰 없음 - 내려받기 방식으로 씁니다).';
-  $('#btn-commit').disabled = !(hasRepo() && S.dirty);
+  $('#cfg-status').textContent = KUF_ADMIN.hasPat() ? '저장했습니다. 목록을 다시 읽습니다…' : '저장했습니다(토큰 없음 - 관리자 로그인으로 씁니다).';
+  renderAuth();
   await loadAll();
   $('#cfg-status').textContent = '준비됐습니다.';
 });
@@ -666,7 +701,7 @@ $('#btn-cfg-clear').addEventListener('click', () => {
   delete c.token;
   saveCfg(c);
   $('#cfg-token').value = '';
-  $('#btn-commit').disabled = true;
+  renderAuth();
   $('#cfg-status').textContent = '토큰을 지웠습니다.';
 });
 
@@ -678,6 +713,7 @@ window.addEventListener('beforeunload', (e) => {
 
 (async function start() {
   fillCfgForm();
+  renderAuth();
   applyKindUi();
   if (!hasRepo()) $('#settings').hidden = false;
   await loadAll();
