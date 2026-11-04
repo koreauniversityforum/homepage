@@ -24,11 +24,16 @@ export default function AboutPage() {
           <br />
           대학생 경제·시사 연합 동아리
         </h1>
-        <p>
+        <p className="page-lead">
           한국대학생포럼은 자유민주주의와 시장경제의 가치를 바탕으로 사회·정치·경제를 연구하고
           토론하는 대학생 시민 네트워크입니다. 대학생들이 서로의 경험과 정보를 나누며 더 넓은
           선택지를 발견하도록 열린 네트워크를 만들고, 현업에 계신 분들과 꾸준히 만남을 이어 갑니다.
         </p>
+        <div className="page-actions">
+          <Link className="primary-button compact" href="/history">
+            과거 활동 이력 <ArrowRight size={16} />
+          </Link>
+        </div>
       </section>
 
       <section className="section about-page">
