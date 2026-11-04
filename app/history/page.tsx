@@ -8,7 +8,7 @@ import { getHistory } from "@/lib/history";
 
 export const metadata: Metadata = {
   title: "과거 활동 이력",
-  description: "2009년부터 지금까지 한국대학생포럼을 다룬 기사·칼럼·인터뷰·블로그 글·논문 목록입니다.",
+  description: "한국대학생포럼의 활동을 다룬 기사·칼럼·인터뷰·블로그 글 가운데 골라 모은 목록입니다.",
 };
 
 export default function HistoryPage() {
@@ -23,7 +23,7 @@ export default function HistoryPage() {
       <section className="page-head">
         <h1>과거 활동 이력</h1>
         <p>
-          {first}년부터 {last}년까지 한국대학생포럼을 다룬 기사·칼럼·인터뷰·블로그 글·논문 {items.length}건입니다.
+          {first}년부터 {last}년까지 한국대학생포럼의 활동을 다룬 기사·칼럼·인터뷰·블로그 글 가운데 {items.length}건을 골라 모았습니다.
           제목을 누르면 원문이 새 창으로 열립니다. 제목·출처·날짜·링크만 싣고 본문은 싣지 않습니다.
         </p>
       </section>
