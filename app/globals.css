@@ -555,3 +555,4 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
 .post-figs.n2 img,.post-figs.n3 img{aspect-ratio:4/3;object-fit:cover}
 .post-figs figcaption{margin-top:6px;font-size:12px;line-height:1.5;color:var(--muted);text-align:center}
 @media(max-width:620px){.post-figs.n3{grid-template-columns:1fr 1fr}}
+.post-figs img[alt*="로고"],.post-figs img[alt*="엠블럼"]{width:240px;max-width:60%;margin:8px auto 0}
