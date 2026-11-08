@@ -8,14 +8,14 @@
  *
  * 하는 일
  *   1. 각 계정의 최근 게시물을 받아 온다
- *   2. 이미 등록된 것(ig 아이디로 비교)은 건너뛴다
+ *   2. 이미 등록된 것(ig 아이디로 비교)은 건너뛴다. 최근 범위 안에서 인스타에서 지운 글은 홈페이지에서도 뺀다
  *   3. 사진을 media/ 에 내려받는다 (인스타 CDN 주소는 며칠 뒤 만료되므로 반드시 사본을 둔다)
  *   4. 한대포 새 글이 가장 최신이면 그 글을 공지로 올리고, 이전 공지는 일반글로 내린다
  *
  * 실행: node scripts/sync-instagram.mjs
  */
 
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, unlink } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -121,7 +121,32 @@ async function syncAccount({ kind, id, handle }) {
   log(`${kind}: 인스타에서 ${media.length}건 확인, 이미 등록된 것 ${known.size}건`);
 
   const fresh = media.filter((m) => !known.has(m.id));
-  if (!fresh.length) return 0;
+
+  /* 인스타에서 지운 글 정리: 이번에 받아 온 최근 글 범위(가장 오래된 글 날짜 이후) 안에서
+     인스타 쪽에 더 이상 없는 자동 등록 글은 홈페이지에서도 뺀다. 범위 밖 옛 글과 손으로 쓴 글은 건드리지 않는다. */
+  let removed = 0;
+  if (media.length) {
+    const alive = new Set(media.map((m) => m.id));
+    const oldest = media.map((m) => dateFrom(m.timestamp)).sort()[0];
+    for (let i = list.length - 1; i >= 0; i--) {
+      const x = list[i];
+      if (!x.ig || alive.has(x.ig) || String(x.date || '') < oldest) continue;
+      if (kind === 'posts' && x.source !== 'instagram') continue;
+      for (const rel of x.images || []) {
+        const f = path.join(ROOT, 'public', rel);
+        try { await unlink(f); } catch { /* 이미 없으면 그냥 둔다 */ }
+      }
+      log(`  - ${x.id} (인스타에서 지운 글)`);
+      list.splice(i, 1);
+      removed++;
+    }
+  }
+  if (!fresh.length && !removed) return 0;
+  if (!fresh.length) {
+    data.updated = new Date().toISOString().slice(0, 10);
+    await writeJson(file, data);
+    return 0;
+  }
 
   if (!existsSync(MEDIA_DIR)) await mkdir(MEDIA_DIR, { recursive: true });
 
