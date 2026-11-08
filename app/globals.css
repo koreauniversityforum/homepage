@@ -545,3 +545,13 @@ body,button,input,textarea,select{word-break:keep-all;overflow-wrap:anywhere}
 .history .post-line{text-decoration:none;color:inherit}
 .history .post-line strong{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 @media(max-width:620px){.history-section{padding-top:28px}.history .post-line{grid-template-columns:44px 1fr 16px;gap:9px}}
+
+/* 소식 본문 안 사진·소제목 (2026-11-09) */
+.post-h{margin:2.2em 0 .7em;font-size:20px;line-height:1.45;letter-spacing:-.03em;color:#1d2a44}
+.post-figs{display:grid;gap:8px;margin:18px 0 26px}
+.post-figs.n2{grid-template-columns:1fr 1fr}
+.post-figs.n3{grid-template-columns:1fr 1fr 1fr}
+.post-figs img{display:block;width:100%;height:auto;border-radius:14px}
+.post-figs.n2 img,.post-figs.n3 img{aspect-ratio:4/3;object-fit:cover}
+.post-figs figcaption{margin-top:6px;font-size:12px;line-height:1.5;color:var(--muted);text-align:center}
+@media(max-width:620px){.post-figs.n3{grid-template-columns:1fr 1fr}}

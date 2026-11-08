@@ -8,6 +8,9 @@ import { getPosts, pickNotice, fmtDate, excerpt, paragraphs } from "@/lib/posts"
 
 type Params = { params: Promise<{ id: string }> };
 
+/** 본문 사진 줄: ![설명](/media/파일.jpg) */
+const FIG = /^!\[([^\]]*)\]\((\S+)\)$/;
+
 /**
  * 글 주소를 빌드 때 미리 만들어 둔다.
  * 관리 화면이 글을 올리면 커밋 → Vercel 재빌드 → 새 주소가 생기는 흐름이라 이걸로 충분하다.
@@ -67,16 +70,37 @@ export default async function PostPage({ params }: Params) {
         ))}
 
         <div className="post-body">
-          {paragraphs(post.body || post.summary).map((lines, i) => (
-            <p key={i}>
-              {lines.map((line, j) => (
-                <span key={j}>
-                  {j > 0 && <br />}
-                  {line}
-                </span>
-              ))}
-            </p>
-          ))}
+          {paragraphs(post.body || post.summary).map((lines, i) => {
+            // 본문 안 사진: 문단의 모든 줄이 ![설명](주소) 이면 그 자리에 사진(2·3장이면 나란히)
+            const figs = lines.map((l) => FIG.exec(l.trim())).filter(Boolean) as RegExpExecArray[];
+            if (figs.length && figs.length === lines.length) {
+              return (
+                <figure className={`post-figs n${Math.min(figs.length, 3)}`} key={i}>
+                  {figs.map((m) => (
+                    <div key={m[2]}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={m[2]} alt={m[1]} loading="lazy" />
+                      {m[1] && <figcaption>{m[1]}</figcaption>}
+                    </div>
+                  ))}
+                </figure>
+              );
+            }
+            // 소제목: 한 줄짜리 문단이 "## " 로 시작하면
+            if (lines.length === 1 && lines[0].startsWith("## ")) {
+              return <h2 className="post-h" key={i}>{lines[0].slice(3)}</h2>;
+            }
+            return (
+              <p key={i}>
+                {lines.map((line, j) => (
+                  <span key={j}>
+                    {j > 0 && <br />}
+                    {line}
+                  </span>
+                ))}
+              </p>
+            );
+          })}
         </div>
 
         {post.permalink && (
